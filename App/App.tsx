@@ -13,11 +13,11 @@ function AppLoading() {
 
 const styles = StyleSheet.create({
   button: {
-    margin: 20,
+    margin: 15,
     padding: 10,
   },
   text: {
-    fontSize: 60,
+    fontSize: 50,
     color: '#FFC900',
     textAlign: 'center',
     fontFamily: 'Breamcatcher',
@@ -33,28 +33,24 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     alignItems: 'center',
-    paddingTop: 130,
+    paddingTop: 100,
   },
   bg_main: {
     width: '100%',
-    height: 1000,
+    height: 900,
     position: 'absolute',
-    top: 0,
+    top: -20,
   },
   topLeftImage: {
     position: 'absolute',
-    top: 40,
+    top: 30,
     left: 20,
-    width: 70,  // Ajustez la largeur selon vos besoins
-    height: 70, // Ajustez la hauteur selon vos besoins
     resizeMode: 'contain',
   },
   topRightImage: {
     position: 'absolute',
-    top: 40,
+    top: 30,
     right: 20,
-    width: 70,  // Ajustez la largeur selon vos besoins
-    height: 70, // Ajustez la hauteur selon vos besoins
     resizeMode: 'contain',
   },
 });
@@ -92,7 +88,7 @@ function ChallengeImage() {
     >
       <Image
         source={require('./assets/challenge_logo.png')}
-        style={{ width: 70, height: 70, resizeMode: 'contain' }}
+        style={{ width: 60, height: 60, resizeMode: 'contain' }}
       />
     </TouchableHighlight>
   );
@@ -107,7 +103,7 @@ function OptionsImage() {
     >
       <Image
         source={require('./assets/options_logo.png')}
-        style={{ width: 70, height: 70, resizeMode: 'contain' }}
+        style={{ width: 60, height: 60, resizeMode: 'contain' }}
       />
     </TouchableHighlight>
   );
@@ -115,7 +111,7 @@ function OptionsImage() {
 
 function Image1() {
   return (
-    <Image source={require('./assets/logo_cailloux.png')} style={{ width: 270, height: 270 }} />
+    <Image source={require('./assets/logo_cailloux.png')} style={{ width: 240, height: 240 }} />
   );
 }
 
