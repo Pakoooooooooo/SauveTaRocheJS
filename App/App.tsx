@@ -19,6 +19,11 @@ enableScreens();
 import GameActivity from './GameActivity';
 import DataActivity from './DataActivity';
 import ChallengeActivity from './ChallengeActivity';
+// Import Data sub-screens
+import DataCurrent from './DataCurrent';
+import Data50 from './Data50';
+import Data100 from './Data100';
+import Data200 from './Data200';
 
 const Stack = createNativeStackNavigator();
 
@@ -41,7 +46,7 @@ const styles = StyleSheet.create({
   topRightImage: { position: 'absolute', top: 30, right: 20 },
 });
 
-function ButtonGame({ navigation }: any) {
+function ButtonGame({ navigation }: { navigation: any }) {
   return (
     <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Game')}>
       <Text style={styles.text}>Jeu</Text>
@@ -49,7 +54,7 @@ function ButtonGame({ navigation }: any) {
   );
 }
 
-function ButtonChallenge({ navigation }: any) {
+function ButtonChallenge({ navigation }: { navigation: any }) {
   return (
     <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Challenge')}>
       <Text style={styles.text}>Défi</Text>
@@ -57,7 +62,7 @@ function ButtonChallenge({ navigation }: any) {
   );
 }
 
-function ButtonData({ navigation }: any) {
+function ButtonData({ navigation }: { navigation: any }) {
   return (
     <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Data')}>
       <Text style={styles.text}>Données</Text>
@@ -86,13 +91,31 @@ const levelImages = {
   6: require('./assets/levels_main/lev6.png'),
   7: require('./assets/levels_main/lev7.png'),
   8: require('./assets/levels_main/lev8.png'),
-} as const;
+};
 
+// Ligne 96 - Ajouter le type pour level
 function ImageLevel({ level }: { level: keyof typeof levelImages }) {
   return <Image source={levelImages[level]} style={styles.bg_main} />;
 }
 
-function HomeScreen({ navigation }: any) {
+// Ligne 100 - Ajouter le type pour navigation
+
+type RootStackParamList = {
+  Home: undefined;
+  Game: undefined;
+  Data: undefined;
+  Challenge: undefined;
+  DataCurrent: undefined;
+  Data50: undefined;
+  Data100: undefined;
+  Data200: undefined;
+};
+
+import type { NativeStackScreenProps } from '@react-navigation/native-stack';
+
+type HomeScreenProps = NativeStackScreenProps<RootStackParamList, 'Home'>;
+
+function HomeScreen({ navigation }: { navigation: any }) {
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.contentContainer}>
@@ -133,6 +156,11 @@ export default function App() {
         <Stack.Screen name="Game" component={GameActivity} />
         <Stack.Screen name="Data" component={DataActivity} />
         <Stack.Screen name="Challenge" component={ChallengeActivity} />
+        {/* Data sub-screens */}
+        <Stack.Screen name="DataCurrent" component={DataCurrent} />
+        <Stack.Screen name="Data50" component={Data50} />
+        <Stack.Screen name="Data100" component={Data100} />
+        <Stack.Screen name="Data200" component={Data200} />
       </Stack.Navigator>
     </NavigationContainer>
   );
