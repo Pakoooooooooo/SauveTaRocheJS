@@ -19,6 +19,8 @@ type RootStackParamList = {
   Data50: undefined;
   Data100: undefined;
   Data200: undefined;
+  GameL1Activity: undefined;
+  GameL2Activity: undefined;
 };
 
 type DataActivityNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Data'>;

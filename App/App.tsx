@@ -20,10 +20,10 @@ import GameActivity from './GameActivity';
 import DataActivity from './DataActivity';
 import ChallengeActivity from './ChallengeActivity';
 // Import Data sub-screens
-import DataCurrent from './DataCurrent';
-import Data50 from './Data50';
-import Data100 from './Data100';
-import Data200 from './Data200';
+import DataCurrent from './CurrentDataActivity';
+import Data50 from './50DataActivity';
+import Data100 from './100DataActivity';
+import Data200 from './200DataAcivity';
 
 const Stack = createNativeStackNavigator();
 
@@ -109,9 +109,13 @@ type RootStackParamList = {
   Data50: undefined;
   Data100: undefined;
   Data200: undefined;
+  GameL1Activity: undefined;
+  GameL2Activity: undefined;
 };
 
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
+import GameL1Activity from './GameL1Activity';
+import GameL2Activity from './GameL2Activity';
 
 type HomeScreenProps = NativeStackScreenProps<RootStackParamList, 'Home'>;
 
@@ -156,11 +160,12 @@ export default function App() {
         <Stack.Screen name="Game" component={GameActivity} />
         <Stack.Screen name="Data" component={DataActivity} />
         <Stack.Screen name="Challenge" component={ChallengeActivity} />
-        {/* Data sub-screens */}
         <Stack.Screen name="DataCurrent" component={DataCurrent} />
         <Stack.Screen name="Data50" component={Data50} />
         <Stack.Screen name="Data100" component={Data100} />
         <Stack.Screen name="Data200" component={Data200} />
+        <Stack.Screen name="GameL1Activity" component={GameL1Activity} />
+        <Stack.Screen name="GameL2Activity" component={GameL2Activity} />
       </Stack.Navigator>
     </NavigationContainer>
   );
