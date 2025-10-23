@@ -173,7 +173,7 @@ function Reps({
   correctRep: number;
 }) {
   return (
-    <View style={{ flexDirection: 'column', marginTop: 100 }}>
+    <View style={{ flexDirection: 'column', marginTop: 70 }}>
       <View style={{ flexDirection: 'row' }}>
         <ButtonRep txt={txt1} style={styles.buttonRep} index={1} onSelect={onSelect} selectedRep={selectedRep} correctRep={correctRep} />
         <ButtonRep txt={txt2} style={styles.buttonRep} index={2} onSelect={onSelect} selectedRep={selectedRep} correctRep={correctRep} />
@@ -247,8 +247,8 @@ const styles = StyleSheet.create({
   },
   topLeftImage: { position: 'absolute', top: 30, left: 20 },
   buttonRep: {
-    height: 100,
-    width: 170,
+    height: 90,
+    width: 150,
     margin: 10,
     borderRadius: 8,
     justifyContent: 'center',
@@ -256,22 +256,22 @@ const styles = StyleSheet.create({
     padding: 15,
   },
   repText: {
-    fontSize: 15,
+    fontSize: 18,
     color: '#FFFFFF',
     textAlign: 'center',
-    fontFamily: 'Breamcatcher',
+    fontFamily: 'Gloucester',
   },
   text: {
     fontSize: 25,
     color: '#070A28',
     textAlign: 'center',
-    fontFamily: 'Breamcatcher',
+    fontFamily: 'Gloucester',
   },
   subtext: {
     fontSize: 15,
     color: '#070A28',
     textAlign: 'center',
-    fontFamily: 'Breamcatcher',
+    fontFamily: 'Gloucester',
   },
   question: {
     padding: 20,
@@ -281,14 +281,14 @@ const styles = StyleSheet.create({
     fontSize: 50,
     color: '#FFC900',
     textAlign: 'center',
-    fontFamily: 'Breamcatcher',
+    fontFamily: 'Gloucester',
     marginTop: 10,
   },
   commentLoses: {
     fontSize: 50,
     color: '#4a4a4a',
     textAlign: 'center',
-    fontFamily: 'Breamcatcher',
+    fontFamily: 'Gloucester',
     marginTop: 10,
   }
 });

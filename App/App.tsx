@@ -1,5 +1,6 @@
 import * as Font from 'expo-font';
 import { StatusBar } from 'expo-status-bar';
+import * as NavigationBar from 'expo-navigation-bar';
 import React, { useState, useEffect } from 'react';
 import {
   View,
@@ -11,6 +12,7 @@ import {
   ScrollView,
   TouchableHighlight,
   Alert,
+  Platform,
 } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -93,12 +95,9 @@ const levelImages = {
   8: require('./assets/levels_main/lev8.png'),
 };
 
-// Ligne 96 - Ajouter le type pour level
 function ImageLevel({ level }: { level: keyof typeof levelImages }) {
   return <Image source={levelImages[level]} style={styles.bg_main} />;
 }
-
-// Ligne 100 - Ajouter le type pour navigation
 
 type RootStackParamList = {
   Home: undefined;
@@ -143,10 +142,20 @@ export default function App() {
   useEffect(() => {
     (async () => {
       try {
-        await Font.loadAsync({ Breamcatcher: require('./assets/fonts/breamcatcher.otf') });
+        await Font.loadAsync({ 
+          Breamcatcher: require('./assets/fonts/breamcatcher.otf'), 
+          Gloucester: require('./assets/fonts/gloucester.ttf') 
+        });
+        
+        // Configurer la barre de navigation Android en semi-transparent
+        if (Platform.OS === 'android') {
+          await NavigationBar.setPositionAsync('absolute');
+          await NavigationBar.setBackgroundColorAsync('#00000000');
+        }
+        
         setFontsLoaded(true);
       } catch (e) {
-        console.warn('Erreur lors du chargement de la police : ', e);
+        console.warn('Erreur lors du chargement : ', e);
       }
     })();
   }, []);
