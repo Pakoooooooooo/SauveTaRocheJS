@@ -1,6 +1,8 @@
 import React from 'react';
 import { StyleSheet, TouchableHighlight, TouchableOpacity, Image, View, Text } from 'react-native';
 
+const tileSize = 25
+
 const map = [["sea","sea","sea","sea","sea","sea","grass","grass","grass","grass","grass","grass","grass","grass"],
              ["sea","sea","sea","sea","sea","sea","grass","grass","grass","grass","grass","grass","grass","grass"],
              ["sea","sea","sea","sea","sea","sea","stone","grass","grass","grass","grass","grass","grass","grass"],
@@ -84,7 +86,7 @@ const TILE_IMAGES = {
 function Tiles({ type }: { type: keyof typeof TILE_IMAGES }) {
   return (
     <TouchableHighlight>
-      <Image source={TILE_IMAGES[type]} style={{ width: 23, height: 23 }} />
+      <Image source={TILE_IMAGES[type]} style={{ width: tileSize, height: tileSize }} />
     </TouchableHighlight>
   );
 }
@@ -187,7 +189,7 @@ function isServed(
       const ni = i + di, nj = j + dj;
       if (ni >= 0 && ni < rows && nj >= 0 && nj < cols &&
           overLayMap[ni][nj] === 'p') {
-        const portHasRoad = checkPlantRoadAccess(overLayMap, ni, nj);
+        const portHasRoad = checkPortRoadAccess(overLayMap, ni, nj);
         if (portHasRoad) {
           return true;
         }
@@ -206,12 +208,11 @@ function isServed(
   return false;
 }
 
-// Helper function to check if power plant has road access WITHOUT checking power lines
-function checkPlantRoadAccess(overLayMap: string[][], i: number, j: number): boolean {
+// Check si les ports ont un acces route sans check les lignes maritimes
+function checkPortRoadAccess(overLayMap: string[][], i: number, j: number): boolean {
   const rows = overLayMap.length;
   const cols = overLayMap[0].length;
   
-  // Check adjacent cells (8 directions)
   for (let di = -1; di <= 1; di++) {
     for (let dj = -1; dj <= 1; dj++) {
       if (di === 0 && dj === 0) continue;
@@ -225,7 +226,6 @@ function checkPlantRoadAccess(overLayMap: string[][], i: number, j: number): boo
     }
   }
   
-  // Check distance 2 (cardinal directions)
   const dist2 = [[-2, 0], [2, 0], [0, -2], [0, 2]];
   for (const [di, dj] of dist2) {
     const ni = i + di, nj = j + dj;
@@ -317,11 +317,34 @@ function Grid(): JSX.Element {
 }
 
 let budget = 1000;
+const months = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Aout", "Spetembre", "Octobre", "Novembre", "Décembre"]
+let monthIndex = 4
+let year = 2026
+const caracters = ["Secrétaire", "Scientifique", "Habitant", "Gardien de Port", "Commerçant"]
+let currentCaracterIndex = 0
 
 function Budget(){
   return (
     <Text style={styles.budgetText}>{budget} €</Text>
   );
+}
+
+function Date(){
+  return (
+    <Text style={styles.budgetText}>{months[monthIndex]} {year}</Text>
+  )
+}
+
+function SeparationLine(){
+  return (
+    <Image style={styles.separationLine} source={require('./assets/separation_line.png')} />
+  )
+}
+
+function CaracterName(){
+  return (
+    <Text style={styles.caracterName}>{caracters[currentCaracterIndex]} :</Text>
+  )
 }
 
 type NavigationProps = {
@@ -342,22 +365,23 @@ export default function GameL1Activity({ navigation }: NavigationProps) {
   return (
     <View style={styles.container}>
       <ButtonBack navigation={navigation} />
-        <View style={styles.mapovercontainer}>
           <View style={styles.mapcontainer}>
             <Budget />
             <View style={styles.fullmapcontainer}>
-            <View style={styles.grid}>
-              <Grid />
+              <View style={styles.grid}>
+                <Grid />
+              </View>
+              <View style={styles.showGrid}>
+                <ShowGrid />
+              </View>
+              <View style={styles.overlayGrid}>
+                <OverlayGrid />
+              </View>
             </View>
-            <View style={styles.showGrid}>
-              <ShowGrid />
-            </View>
-            <View style={styles.overlayGrid}>
-              <OverlayGrid />
-            </View>
+            <Date />
           </View>
-          </View>
-        </View>
+          <SeparationLine />
+          <CaracterName />
     </View>
   );
 }
@@ -366,21 +390,14 @@ export default function GameL1Activity({ navigation }: NavigationProps) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#fff',
-  },
-  mapovercontainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 50,
+    backgroundColor: '#fff'
   },
   mapcontainer: {
-    flex: 1,
+    width: map.length*tileSize,
+    marginTop: 60,
     justifyContent: 'flex-start',
     alignItems: 'center', // Centré pour éviter que Budget ne soit trop à droite
-    padding: 10,
   },
   budgetText: {
     fontSize: 24,
@@ -391,25 +408,17 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   fullmapcontainer: {
-    flex: 1,
-    position: 'relative',
   },
   overlayGrid: {
     position: 'absolute',
-    width: '100%',
-    height: '100%',
     zIndex: 3,
   },
   showGrid: {
     position: 'absolute',
-    width: '100%',
-    height: '100%',
     zIndex: 2,
   },
   grid: {
     position: 'relative',
-    width: '100%',
-    height: '100%',
     zIndex: 0,
   },
   topLeftImage: {
@@ -417,4 +426,19 @@ const styles = StyleSheet.create({
     top: 30,
     left: 20,
   },
+  separationLine: {
+    width: 380,
+    height: '0.3%',
+    resizeMode: 'stretch',
+  },
+  caracterName: {
+    fontSize: 30,
+    margin: 10,
+    marginStart: 100,
+    fontFamily: 'Gloucester',
+    color: '#070A28',
+    textAlign: 'left',
+    width: '100%',
+    textDecorationLine: 'underline',
+  }
 });
