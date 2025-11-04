@@ -44,7 +44,7 @@ const overLayMap = [["","","","","","","","","","","","","",""],
                     ["","","","","","","","","h","r","r","r","r","r"],
                     ["","","","","","","r","r","r","r","","","",""],
                     ["","","","","","r","r","","","","","","",""],
-                    ["","","","","h","","","","","","","","",""]];
+                    ["","","","","h","","","","","","","","","h"]];
 
 // Import all tile images with correct relative paths
 const TILE_IMAGES = {
@@ -89,7 +89,7 @@ function Tiles({ type }: { type: keyof typeof TILE_IMAGES }) {
   );
 }
 
-function isServedR(
+function isServed(
   overLayMap: string[][],
   i: number,
   j: number,
@@ -98,61 +98,146 @@ function isServedR(
   const rows = overLayMap.length;
   if (rows === 0) return false;
   const cols = overLayMap[0].length;
-
-  if (i < 0 || i >= rows || j < 0 || j >= cols || overLayMap[i][j] !== 'r') {
+  
+  if (i < 0 || i >= rows || j < 0 || j >= cols) {
     return false;
   }
-
+  const cellType = overLayMap[i][j];
   const key = `${i},${j}`;
-  if (visited.has(key)) {
+
+  // Routes
+  if (cellType === 'r') {
+    if (visited.has(key)) return false;
+    visited.add(key);
+    
+    // elle est adjacente au bord de la map ?
+    if (i === 0 || i === rows - 1 || j === 0 || j === cols - 1) {
+      return true;
+    }
+    
+    // elle est adjacente à une route desservie ?
+    const directions = [[-1, 0], [1, 0], [0, -1], [0, 1]];
+    return directions.some(([di, dj]) => {
+      const ni = i + di, nj = j + dj;
+      return ni >= 0 && ni < rows && nj >= 0 && nj < cols &&
+             overLayMap[ni][nj] === 'r' && 
+             isServed(overLayMap, ni, nj, visited);
+    });
+  }
+  
+  // Batiments (maison, commerce, port)
+  else if (cellType === 'h' || cellType === 'c' || cellType === 'p') {
+    // il est se trouve à deux case ou moins par adjacence à une route desservie ?
+    for (let di = -1; di <= 1; di++) {
+      for (let dj = -1; dj <= 1; dj++) {
+        if (di === 0 && dj === 0) continue;
+        
+        const ni = i + di, nj = j + dj;
+        if (ni >= 0 && ni < rows && nj >= 0 && nj < cols &&
+            overLayMap[ni][nj] === 'r' && 
+            isServed(overLayMap, ni, nj, new Set())) {
+          return true;
+        }
+      }
+    }
+    const dist2 = [[-2, 0], [2, 0], [0, -2], [0, 2]];
+    for (const [di, dj] of dist2) {
+      const ni = i + di, nj = j + dj;
+      if (ni >= 0 && ni < rows && nj >= 0 && nj < cols &&
+          overLayMap[ni][nj] === 'r' && 
+          isServed(overLayMap, ni, nj, new Set())) {
+        return true;
+      }
+    }
+    
+    // Ports
+    if (cellType === 'p') {
+      //il est adjacent à une ligne desservie ?
+      const directions = [[-1, 0], [1, 0], [0, -1], [0, 1]];
+      for (const [di, dj] of directions) {
+        const ni = i + di, nj = j + dj;
+        if (ni >= 0 && ni < rows && nj >= 0 && nj < cols &&
+            overLayMap[ni][nj] === 'l' && 
+            isServed(overLayMap, ni, nj, new Set())) {
+          return true;
+        }
+      }
+    } else {
+      //il est adjacent à un port desservi ?
+      const directions = [[-1, 0], [1, 0], [0, -1], [0, 1]];
+      return directions.some(([di, dj]) => {
+        const ni = i + di, nj = j + dj;
+        return ni >= 0 && ni < rows && nj >= 0 && nj < cols &&
+              overLayMap[ni][nj] === 'p' && 
+              isServed(overLayMap, ni, nj, visited);
+      });
+    }
+    
     return false;
   }
-  visited.add(key);
-
-  if (i === 0 || j === 0 || j === cols - 1 || i === rows - 1) {
-    return true;
+  
+  // Lignes
+  else if (cellType === 'l') {
+    if (visited.has(key)) return false;
+    visited.add(key);
+    
+    // elle est adjacente à un port desservi ?
+    const directions = [[-1, 0], [1, 0], [0, -1], [0, 1]];
+    for (const [di, dj] of directions) {
+      const ni = i + di, nj = j + dj;
+      if (ni >= 0 && ni < rows && nj >= 0 && nj < cols &&
+          overLayMap[ni][nj] === 'p') {
+        const portHasRoad = checkPlantRoadAccess(overLayMap, ni, nj);
+        if (portHasRoad) {
+          return true;
+        }
+      }
+    }
+    
+    // elle est adjacente à une ligne desservie ?
+    return directions.some(([di, dj]) => {
+      const ni = i + di, nj = j + dj;
+      return ni >= 0 && ni < rows && nj >= 0 && nj < cols &&
+             overLayMap[ni][nj] === 'l' && 
+             isServed(overLayMap, ni, nj, visited);
+    });
   }
-
-  return (
-    isServedR(overLayMap, i - 1, j, visited) ||
-    isServedR(overLayMap, i + 1, j, visited) ||
-    isServedR(overLayMap, i, j - 1, visited) ||
-    isServedR(overLayMap, i, j + 1, visited)
-  );
+  
+  return false;
 }
 
-function isServedL(
-  overLayMap: string[][],
-  i: number,
-  j: number,
-  visited: Set<string> = new Set<string>()
-): boolean {
+// Helper function to check if power plant has road access WITHOUT checking power lines
+function checkPlantRoadAccess(overLayMap: string[][], i: number, j: number): boolean {
   const rows = overLayMap.length;
-  if (rows === 0) return false;
   const cols = overLayMap[0].length;
-
-  if (i < 0 || i >= rows || j < 0 || j >= cols || overLayMap[i][j] !== 'l') {
-    return false;
+  
+  // Check adjacent cells (8 directions)
+  for (let di = -1; di <= 1; di++) {
+    for (let dj = -1; dj <= 1; dj++) {
+      if (di === 0 && dj === 0) continue;
+      
+      const ni = i + di, nj = j + dj;
+      if (ni >= 0 && ni < rows && nj >= 0 && nj < cols &&
+          overLayMap[ni][nj] === 'r' && 
+          isServed(overLayMap, ni, nj, new Set())) {
+        return true;
+      }
+    }
   }
-
-  const key = `${i},${j}`;
-  if (visited.has(key)) {
-    return false;
+  
+  // Check distance 2 (cardinal directions)
+  const dist2 = [[-2, 0], [2, 0], [0, -2], [0, 2]];
+  for (const [di, dj] of dist2) {
+    const ni = i + di, nj = j + dj;
+    if (ni >= 0 && ni < rows && nj >= 0 && nj < cols &&
+        overLayMap[ni][nj] === 'r' && 
+        isServed(overLayMap, ni, nj, new Set())) {
+      return true;
+    }
   }
-  visited.add(key);
-
-  if (overLayMap[i+1][j] === 'p' || overLayMap[i-1][j] === 'p' || overLayMap[i][j+1] === 'p' || overLayMap[i][j-1] === 'p') {
-    return true;
-  }
-
-  return (
-    isServedL(overLayMap, i - 1, j, visited) ||
-    isServedL(overLayMap, i + 1, j, visited) ||
-    isServedL(overLayMap, i, j - 1, visited) ||
-    isServedL(overLayMap, i, j + 1, visited)
-  );
+  
+  return false;
 }
-
 
 function ShowGrid(): JSX.Element {
   const rows = overLayMap.length;
@@ -161,7 +246,7 @@ function ShowGrid(): JSX.Element {
   for (let i = 0; i < rows; i++) {
     const row = [];
     for (let j = 0; j < cols; j++) {
-      if ((overLayMap[i][j] === 'r' && !isServedR(overLayMap,i,j))||(overLayMap[i][j] === 'l' && !isServedL(overLayMap,i,j))){
+      if (overLayMap[i][j] !== '' && !isServed(overLayMap,i,j)){
           row.push(<Tiles key={`${i}-${j}`} type={`red` as keyof typeof TILE_IMAGES}/>)
       } else {
         row.push(<Tiles key={`${i}-${j}`} type={'empty' as keyof typeof TILE_IMAGES} />);
