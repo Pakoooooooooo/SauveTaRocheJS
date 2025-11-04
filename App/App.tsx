@@ -115,6 +115,7 @@ type RootStackParamList = {
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import GameL1Activity from './GameL1Activity';
 import GameL2Activity from './GameL2Activity';
+import GameContextL1Activity from './GameContextL1Activity'
 
 type HomeScreenProps = NativeStackScreenProps<RootStackParamList, 'Home'>;
 
@@ -175,6 +176,7 @@ export default function App() {
         <Stack.Screen name="Data200" component={Data200} />
         <Stack.Screen name="GameL1Activity" component={GameL1Activity} />
         <Stack.Screen name="GameL2Activity" component={GameL2Activity} />
+        <Stack.Screen name="GameContextL1Activity" component={GameContextL1Activity} />
       </Stack.Navigator>
     </NavigationContainer>
   );
