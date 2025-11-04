@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, TouchableHighlight, TouchableOpacity, Image, View, Text } from 'react-native';
 
-const tileSize = 25
+const tileSize = 24
 
 const map = [["sea","sea","sea","sea","sea","sea","grass","grass","grass","grass","grass","grass","grass","grass"],
              ["sea","sea","sea","sea","sea","sea","grass","grass","grass","grass","grass","grass","grass","grass"],
@@ -45,8 +45,8 @@ const overLayMap = [["","","","","","","","","","","","","",""],
                     ["","","","","","","","","","h","c","r","",""],
                     ["","","","","","","","","h","r","r","r","r","r"],
                     ["","","","","","","r","r","r","r","","","",""],
-                    ["","","","","","r","r","","","","","","",""],
-                    ["","","","","h","","","","","","","","","h"]];
+                    ["","l","","l","","r","r","","","","r","r","r",""],
+                    ["","","","l","h","","","","","","","","","h"]];
 
 // Import all tile images with correct relative paths
 const TILE_IMAGES = {
@@ -70,6 +70,7 @@ const TILE_IMAGES = {
   road0011: require('./assets/overlayTiles/road0011.png'),
   road0010: require('./assets/overlayTiles/road0010.png'),
   road0001: require('./assets/overlayTiles/road0001.png'),
+  road0000: require('./assets/overlayTiles/road0000.png'),
   line0011: require('./assets/overlayTiles/line0011.png'),
   line0101: require('./assets/overlayTiles/line0101.png'),
   line0110: require('./assets/overlayTiles/line0110.png'),
@@ -77,6 +78,11 @@ const TILE_IMAGES = {
   line1010: require('./assets/overlayTiles/line1010.png'),
   line1100: require('./assets/overlayTiles/line1100.png'),
   line1111: require('./assets/overlayTiles/line1111.png'),
+  line1000: require('./assets/overlayTiles/line1000.png'),
+  line0100: require('./assets/overlayTiles/line0100.png'),
+  line0010: require('./assets/overlayTiles/line0010.png'),
+  line0001: require('./assets/overlayTiles/line0001.png'),
+  line0000: require('./assets/overlayTiles/line0000.png'),
   empty: require('./assets/overlayTiles/empty.png'),
   house: require('./assets/overlayTiles/house.png'),
   commerce: require('./assets/overlayTiles/commerce.png'),
@@ -427,7 +433,7 @@ const styles = StyleSheet.create({
     left: 20,
   },
   separationLine: {
-    width: 380,
+    width: 350,
     height: '0.3%',
     resizeMode: 'stretch',
   },
