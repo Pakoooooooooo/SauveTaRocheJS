@@ -22,35 +22,10 @@ SAUVETAROCHE est une application mobile interactive compatible <strong>Android</
 
 <p>Le projet est divisé en deux parties principales :
 - `App/` : le front-end mobile développé avec **React Native** et **Expo**
-- `Server/` : le back-end développé avec **Node.js**
-
-SauveTaRocheJS/
-├── App/                         # Front-end mobile (React Native + Expo)
-│   ├── assets/                  # Images, sons, polices utilisées dans l'app
-│   ├── build/                   # Fichiers générés (UI ou builds)
-│   ├── .gitignore               # Fichiers à exclure du versioning Git
-│   ├── App.tsx                  # Point d’entrée principal de l’application
-│   ├── index.ts                 # Entrée secondaire (navigation ou registre)
-│   ├── app.json                 # Configuration Expo (nom, icône, version, etc.)
-│   ├── eas.json                 # Configuration EAS (Expo Application Services)
-│   ├── package.json             # Dépendances et scripts npm
-│   ├── tsconfig.json            # Configuration TypeScript
-│   ├── ReadMe                   # Fichier de documentation et expication des principes du code
-│   ├── *.tsx                    # Tous les écrans de l'appli (Main, GameActivity, ChallengeActivity)
-├── Server/                      # Back-end Node.js pour l’API et la logique serveur
-│   ├── controllers/             # Logique métier (gestion des requêtes)
-│   ├── data/                    # Données statiques ou JSON
-│   ├── middlewares/             # Fonctions intermédiaires (authentification, logs, etc.)
-│   ├── models/                  # Schémas de données (ex: Mongoose, validation)
-│   ├── routes/                  # Définition des endpoints API
-│   ├── utils/                   # Fonctions utilitaires réutilisables
-│   ├── index.js                 # Point d’entrée du serveur Node.js
-│   ├── package.json             # Dépendances et scripts npm du serveur
-│   ├── package-lock.json        # Verrouillage des versions des packages 
-
+- `Server/` : le back-end développé avec **Node.js** pour l'API et la logique serveur
 
 - **SauveTaRocheJS/** 
-  - **App/** : Front-end mobile (React Native + Expo)
+  - **App/** :
     - `assets/` : Images, sons, polices utilisées dans l'app
     - `build/` : Fichiers générés (UI ou builds)
     - `.gitignore` : Fichiers à exclure du versioning Git
@@ -62,7 +37,7 @@ SauveTaRocheJS/
     - `tsconfig.json` : Configuration TypeScript
     - `ReadMe` : Fichier de documentation et d'explication des principes utilisés dans le code
     - `*.tsx` : Tous les écrans de l'application ( GameActivity, ChallengeActiviy, DataActivity, ...)
-  - **Server/** : Back-end Node.js pour l’API et la logique serveur
+  - **Server/** : 
     - `controllers/` : Logique métier (gestion des requêtes)
     - `data/` : Données statiques ou JSON
     - `middlewares/` : Fonctions intermédiaires (authentification, logs, etc.)
