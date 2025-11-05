@@ -21,8 +21,8 @@ SAUVETAROCHE est une application mobile interactive compatible <strong>Android</
 <p>Voici l'organisation des fichiers du projet :</p>
 
 <p>Le projet est divisé en deux parties principales :
-- `App/` : le front-end mobile développé avec **React Native** et **Expo**
-- `Server/` : le back-end développé avec **Node.js** pour l'API et la logique serveur
+<strong>App</strong> : le front-end mobile développé avec <strong>React Native</strong> et <strong>Expo</strong>
+<strong>Server</strong> : le back-end développé avec <strong>Node.js</strong> pour l'API et la logique serveur
 
 - **SauveTaRocheJS/** 
   - **App/** :
