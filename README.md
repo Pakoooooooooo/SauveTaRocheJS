@@ -21,6 +21,45 @@ SAUVETAROCHE est une application mobile interactive compatible <strong>Android</
 <p>Voici l'organisation des fichiers du projet :</p>
 <img src="URL_DE_TON_IMAGE_ARBORESCENCE" alt="Arborescence du projet" width="600">
 
+<p>Le projet est divisé en deux parties principales :
+- `App/` : le front-end mobile développé avec **React Native** et **Expo**
+- `Server/` : le back-end développé avec **Node.js**
+
+SauveTaRocheJS/
+├── App/                         # 📱 Front-end mobile (React Native + Expo)
+│   ├── assets/                  # 🎨 Images, sons, polices utilisées dans l'app
+│   ├── build/                   # 🛠️ Fichiers générés (UI ou builds)
+│   ├── .gitignore               # 🚫 Fichiers à exclure du versioning Git
+│   ├── App.tsx                  # 🚀 Point d’entrée principal de l’application
+│   ├── index.ts                 # 🔗 Entrée secondaire (navigation ou registre)
+│   ├── app.json                 # ⚙️ Configuration Expo (nom, icône, version, etc.)
+│   ├── eas.json                 # 📦 Configuration EAS (Expo Application Services)
+│   ├── package.json             # 📋 Dépendances et scripts npm
+│   ├── tsconfig.json            # 🧠 Configuration TypeScript
+│   ├── ReadMe                   # 📄 Fichier de documentation
+│   ├── 50DataActivity.tsx       # 📊 Écran de données prévisionnelles à +50 ans
+│   ├── 100DataActivity.tsx      # 📊 Écran de données prévisionnelles à +100 ans
+│   ├── 200DataActivity.tsx      # 📊 Écran de données prévisionnelles à +200 ans
+│   ├── CurrentDataActivity.tsx  # 📊 Écran de données actuelles
+│   ├── DataActivity.tsx         # 📊 Composant principal pour les données
+│   ├── ChallengeActivity.tsx    # 🎯 Écran des défis interactifs
+│   ├── GameActivity.tsx         # 🎮 Composant principal du jeu
+│   ├── GameContextL1Activity.tsx# 🧩 Contexte du niveau 1 du jeu
+│   ├── GameL1Activity.tsx       # 🎮 Écran du niveau 1 du jeu
+│   ├── GameL2Activity.tsx       # 🎮 Écran du niveau 2 du jeu
+
+├── Server/                      # 🌐 Back-end Node.js pour l’API et la logique serveur
+│   ├── controllers/             # 🧠 Logique métier (gestion des requêtes)
+│   ├── data/                    # 📂 Données statiques ou JSON
+│   ├── middlewares/            # 🛡️ Fonctions intermédiaires (authentification, logs, etc.)
+│   ├── models/                  # 🧬 Schémas de données (ex: Mongoose, validation)
+│   ├── routes/                  # 🚏 Définition des endpoints API
+│   ├── utils/                   # 🧰 Fonctions utilitaires réutilisables
+│   ├── index.js                 # 🚀 Point d’entrée du serveur Node.js
+│   ├── package.json             # 📋 Dépendances et scripts npm du serveur
+│   ├── package-lock.json        # 🔒 Verrouillage des versions des packages </p>
+
+
 <h2> Installation et lancement</h2>
 <p>Pour initialiser le projet, suivez les étapes suivantes :</p>
 <ul>
