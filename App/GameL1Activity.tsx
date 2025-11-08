@@ -44,6 +44,18 @@ const TILE_IMAGES = {
   port: require('./assets/overlayTiles/port.png'),
 };
 
+type CharacterImages = {
+  [key: string]: any;
+};
+
+const CARACTER_IMAGES: CharacterImages = {
+  Secrétaire: require('./assets/Secrétaire.png'),
+  Scientifique: require('./assets/Scientifique.png'),
+  Habitant : require('./assets/Habitant.png'),
+  Gardien_de_Port : require('./assets/Gardien_de_Port.png'),
+  Commerçant : require('./assets/Commerçant.png')
+};
+
 type NavigationProps = {
   navigation: {
     goBack: () => void;
@@ -302,10 +314,19 @@ const SeparationLine = React.memo(() => {
   );
 });
 
+const caracters = ['Secrétaire', 'Scientifique', 'Habitant', 'Gardien_de_Port', 'Commerçant'];
+
 const CaracterName = React.memo(({currentCaracterIndex}: {currentCaracterIndex: number}) => {
-  const caracters = ["Secrétaire", "Scientifique", "Habitant", "Gardien de Port", "Commerçant"];
   return (
     <Text style={styles.caracterName}>{caracters[currentCaracterIndex]} :</Text>
+  );
+});
+
+const CaracterImage = React.memo(({currentCaracterIndex}: {currentCaracterIndex: number}) => {
+  return (
+    <TouchableHighlight>
+      <Image source={CARACTER_IMAGES[caracters[currentCaracterIndex]]} style={styles.caracterImage}/>
+    </TouchableHighlight>
   );
 });
 
@@ -368,7 +389,7 @@ export default function GameL1Activity({ navigation }: NavigationProps) {
   const [charges, setCharges] = useState(0);
   const [monthIndex] = useState(4);
   const [year] = useState(2026);
-  const [currentCaracterIndex] = useState(0);
+  const [currentCaracterIndex, setCurrentCaracterIndex] = useState(1);
 
   // Cache des calculs isServed - recalculé uniquement quand overLayMap change
   const servedCache = useMemo(() => {
@@ -382,7 +403,7 @@ export default function GameL1Activity({ navigation }: NavigationProps) {
   }, [overLayMap]);
 
   // Utilisation de useCallback pour mémoriser les fonctions
-  const ChangeMapBox = useCallback((i: number, j: number, type: string) => {
+  const setMapTile = useCallback((i: number, j: number, type: string) => {
     setMap(prevMap => {
       const newMap = prevMap.map(row => [...row]);
       newMap[i][j] = type;
@@ -401,13 +422,31 @@ export default function GameL1Activity({ navigation }: NavigationProps) {
     });
   }, []);
 
-  const ChangeOverlayBox = useCallback((i: number, j: number, type: string) => {
+  const setOverlayTile = useCallback((i: number, j: number, type: string) => {
     setOverLayMap(prevOverLayMap => {
       const newOverLayMap = prevOverLayMap.map(row => [...row]);
       newOverLayMap[i][j] = type;
       return newOverLayMap;
     });
   }, []);
+
+  function ChangeMapTile (i: number, j: number, type: string){
+    setMapTile(i, j, type)
+    if (type === "sea" && overLayMap[i][j] !== 'l'){
+      setOverlayTile(i,j,'')
+    }
+    else if (type !== "sea" && overLayMap[i][j] === 'l'){
+      setOverlayTile(i,j,'')
+    }
+  }
+
+  function ChangeOverlayTile (i: number, j: number, type: string){
+    if (map[i][j] === "sea" && type === 'l'){
+      setOverlayTile(i,j,type)
+    } else if (map[i][j] !== "sea" && type !== 'l'){
+      setOverlayTile(i,j,type)
+    }
+  }
 
   const ChangeBudget = useCallback((incr: number) => {
     setBudget(prevBudget => prevBudget + incr);
@@ -417,23 +456,27 @@ export default function GameL1Activity({ navigation }: NavigationProps) {
     ChangeBudget(charges);
   }, [charges, ChangeBudget]);
 
+  const NextCaracter = useCallback(() => {
+    setCurrentCaracterIndex((currentCaracterIndex+1)%caracters.length)
+  })
+
   const TestMapBtn = useCallback(() => {
     return (
       <Button 
         title="Change Map"
-        onPress={() => ChangeMapBox(0, 0, 'sand')}
+        onPress={() => ChangeMapTile(0, 0, 'sand')}
       />
     );
-  }, [ChangeMapBox]);
+  }, [ChangeMapTile]);
 
   const TestOverLayBtn = useCallback(() => {
     return (
       <Button 
         title="Change Overlay"
-        onPress={() => ChangeOverlayBox(0, 0, 'h')}
+        onPress={() => ChangeOverlayTile(0, 0, 'h')}
       />
     );
-  }, [ChangeOverlayBox]);
+  }, [ChangeOverlayTile]);
 
   const TestBudgetBtn = useCallback(() => {
     return (
@@ -470,6 +513,14 @@ export default function GameL1Activity({ navigation }: NavigationProps) {
     );
   }, [ApplyCharges]);
 
+  const TestNextCaracterBtn = useCallback(() => {
+    return (
+      <Button
+        title="Next Caracter"
+        onPress={() => NextCaracter()}/>
+    );
+  }, [NextCaracter]);
+
   return (
     <View style={styles.container}>
       <ButtonBack navigation={navigation} />
@@ -490,11 +541,13 @@ export default function GameL1Activity({ navigation }: NavigationProps) {
       </View>
       <SeparationLine />
       <CaracterName currentCaracterIndex={currentCaracterIndex} />
+      <CaracterImage currentCaracterIndex={currentCaracterIndex} />
       <TestMapBtn />
       <TestOverLayBtn />
       <TestBudgetBtn />
       <TestInputCharges />
       <TestChargesBtn />
+      <TestNextCaracterBtn />
     </View>
   );
 }
@@ -552,5 +605,14 @@ const styles = StyleSheet.create({
     textAlign: 'left',
     width: '100%',
     textDecorationLine: 'underline',
+  },
+  caracterImage: {
+    position: 'absolute',
+    alignSelf: 'flex-end',
+    left: -330,
+    top: -80,
+    width: 100*4,
+    height: 140*4,
+    resizeMode: 'stretch',
   }
 });
