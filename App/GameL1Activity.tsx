@@ -1,52 +1,7 @@
-import React from 'react';
-import { StyleSheet, TouchableHighlight, TouchableOpacity, Image, View, Text } from 'react-native';
+import React, { useState, useMemo, useCallback } from 'react';
+import { StyleSheet, TouchableHighlight, TouchableOpacity, Image, View, Text, Button, TextInput } from 'react-native';
 
 const tileSize = 24
-
-const map = [["sea","sea","sea","sea","sea","sea","grass","grass","grass","grass","grass","grass","grass","grass"],
-             ["sea","sea","sea","sea","sea","sea","grass","grass","grass","grass","grass","grass","grass","grass"],
-             ["sea","sea","sea","sea","sea","sea","stone","grass","grass","grass","grass","grass","grass","grass"],
-             ["sea","sea","sea","sea","sea","stone","stone","grass","grass","grass","grass","grass","grass","grass"],
-             ["sea","sea","sea","sea","sea","stone","stone","grass","grass","grass","grass","grass","grass","grass"],
-             ["sea","sea","sea","sea","sea","sea","stone","sand","grass","grass","grass","grass","grass","grass"],
-             ["sea","sea","sea","stone","sea","sea","sea","sand","sand","grass","grass","grass","grass","grass"],
-             ["sea","sea","sea","stone","sea","sea","sea","sand","sand","grass","grass","grass","grass","grass"],
-              ["sea","sea","sea","sea","sea","sea","sea","sand","sand","grass","grass","grass","grass","grass"],
-              ["sea","sea","sea","sea","sea","sea","sea","sand","sand","grass","grass","grass","grass","grass"],
-              ["sea","sea","sea","sea","sea","sea","sand","sand","grass","grass","grass","grass","grass","grass"],
-              ["sea","sea","sea","sea","sea","sea","grass","grass","grass","grass","grass","grass","grass","grass"],
-              ["sea","sea","sea","sea","sea","grass","grass","grass","grass","grass","grass","grass","grass","grass"],
-              ["sea","sea","sea","sea","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass"]];
-
-const showMap = [["","","","","","","","","","","","","",""],
-                    ["","","","","","","","","","","","","",""],
-                    ["","","","","","","","","","","","","",""],
-                    ["","","","","","","","","","","","","",""],
-                    ["","","","","","","","","","","","","",""],
-                    ["","","","","","","","","","","","","",""],
-                    ["","","","","","","","","","","","","",""],
-                    ["","","","","","","","","","","","","",""],
-                    ["","","","","","","","","","","","","",""],
-                    ["","","","","","","","","","","","","",""],
-                    ["","","","","","","","","","","","","",""],
-                    ["","","","","","","","","","","","","",""],
-                    ["","","","","","","","","","","","","",""],
-                    ["","","","","","","","","","","","","",""]];
-
-const overLayMap = [["","","","","","","","","","","","","",""],
-                    ["","","","","","","","","","c","h","","",""],
-                    ["","","","","","","","","","r","h","h","",""],
-                    ["","","","","","","","","","r","","","",""],
-                    ["","","","","","","h","r","r","r","","","",""],
-                    ["","","","","","l","p","","","r","","","",""],
-                    ["","","","p","l","l","","","h","r","r","r","",""],
-                    ["","","","h","","","","","","c","","r","",""],
-                    ["","","","","","","","","","h","","r","",""],
-                    ["","","","","","","","","","h","c","r","",""],
-                    ["","","","","","","","","h","r","r","r","r","r"],
-                    ["","","","","","","r","r","r","r","","","",""],
-                    ["","l","","l","","r","r","","","","r","r","r",""],
-                    ["","","","l","h","","","","","","","","","h"]];
 
 // Import all tile images with correct relative paths
 const TILE_IMAGES = {
@@ -89,14 +44,22 @@ const TILE_IMAGES = {
   port: require('./assets/overlayTiles/port.png'),
 };
 
-function Tiles({ type }: { type: keyof typeof TILE_IMAGES }) {
+type NavigationProps = {
+  navigation: {
+    goBack: () => void;
+  };
+};
+
+// Composant Tiles mémorisé
+const Tiles = React.memo(({ type }: { type: keyof typeof TILE_IMAGES }) => {
   return (
     <TouchableHighlight>
       <Image source={TILE_IMAGES[type]} style={{ width: tileSize, height: tileSize }} />
     </TouchableHighlight>
   );
-}
+});
 
+// Fonction isServed extraite pour être utilisée dans useMemo
 function isServed(
   overLayMap: string[][],
   i: number,
@@ -118,24 +81,21 @@ function isServed(
     if (visited.has(key)) return false;
     visited.add(key);
     
-    // elle est adjacente au bord de la map ?
     if (i === 0 || i === rows - 1 || j === 0 || j === cols - 1) {
       return true;
     }
     
-    // elle est adjacente à une route desservie ?
     const directions = [[-1, 0], [1, 0], [0, -1], [0, 1]];
     return directions.some(([di, dj]) => {
       const ni = i + di, nj = j + dj;
       return ni >= 0 && ni < rows && nj >= 0 && nj < cols &&
-             overLayMap[ni][nj] === 'r' && 
-             isServed(overLayMap, ni, nj, visited);
+            overLayMap[ni][nj] === 'r' && 
+            isServed(overLayMap, ni, nj, visited);
     });
   }
   
   // Batiments (maison, commerce, port)
   else if (cellType === 'h' || cellType === 'c' || cellType === 'p') {
-    // il est se trouve à deux case ou moins par adjacence à une route desservie ?
     for (let di = -1; di <= 1; di++) {
       for (let dj = -1; dj <= 1; dj++) {
         if (di === 0 && dj === 0) continue;
@@ -160,7 +120,6 @@ function isServed(
     
     // Ports
     if (cellType === 'p') {
-      //il est adjacent à une ligne desservie ?
       const directions = [[-1, 0], [1, 0], [0, -1], [0, 1]];
       for (const [di, dj] of directions) {
         const ni = i + di, nj = j + dj;
@@ -171,7 +130,6 @@ function isServed(
         }
       }
     } else {
-      //il est adjacent à un port desservi ?
       const directions = [[-1, 0], [1, 0], [0, -1], [0, 1]];
       return directions.some(([di, dj]) => {
         const ni = i + di, nj = j + dj;
@@ -189,7 +147,6 @@ function isServed(
     if (visited.has(key)) return false;
     visited.add(key);
     
-    // elle est adjacente à un port desservi ?
     const directions = [[-1, 0], [1, 0], [0, -1], [0, 1]];
     for (const [di, dj] of directions) {
       const ni = i + di, nj = j + dj;
@@ -202,12 +159,11 @@ function isServed(
       }
     }
     
-    // elle est adjacente à une ligne desservie ?
     return directions.some(([di, dj]) => {
       const ni = i + di, nj = j + dj;
       return ni >= 0 && ni < rows && nj >= 0 && nj < cols &&
-             overLayMap[ni][nj] === 'l' && 
-             isServed(overLayMap, ni, nj, visited);
+            overLayMap[ni][nj] === 'l' && 
+            isServed(overLayMap, ni, nj, visited);
     });
   }
   
@@ -245,15 +201,17 @@ function checkPortRoadAccess(overLayMap: string[][], i: number, j: number): bool
   return false;
 }
 
-function ShowGrid(): JSX.Element {
+// Composant ShowGrid mémorisé
+const ShowGrid = React.memo(({showMap, overLayMap, servedCache}: {showMap: string[][], overLayMap: string[][], servedCache: {[key: string]: boolean}}) => {
   const rows = overLayMap.length;
   const cols = overLayMap[0].length;
   const grid = [];
+  
   for (let i = 0; i < rows; i++) {
     const row = [];
     for (let j = 0; j < cols; j++) {
-      if (overLayMap[i][j] !== '' && !isServed(overLayMap,i,j)){
-          row.push(<Tiles key={`${i}-${j}`} type={`red` as keyof typeof TILE_IMAGES}/>)
+      if (overLayMap[i][j] !== '' && !servedCache[`${i}-${j}`]){
+        row.push(<Tiles key={`${i}-${j}`} type={`red` as keyof typeof TILE_IMAGES}/>)
       } else {
         row.push(<Tiles key={`${i}-${j}`} type={'empty' as keyof typeof TILE_IMAGES} />);
       }
@@ -261,13 +219,14 @@ function ShowGrid(): JSX.Element {
     grid.push(<View key={i} style={{ flexDirection: 'row' }}>{row}</View>);
   }
   return <View style={styles.showGrid}>{grid}</View>;
-}
+});
 
-
-function OverlayGrid(): JSX.Element {
+// Composant OverlayGrid mémorisé
+const OverlayGrid = React.memo(({overLayMap}:{overLayMap : string[][]}) => {
   const rows = overLayMap.length;
   const cols = overLayMap[0].length;
   const grid = [];
+  
   for (let i = 0; i < rows; i++) {
     const row = [];
     for (let j = 0; j < cols; j++) {
@@ -306,12 +265,14 @@ function OverlayGrid(): JSX.Element {
     grid.push(<View key={i} style={{ flexDirection: 'row' }}>{row}</View>);
   }
   return <View style={styles.grid}>{grid}</View>;
-}
+});
 
-function Grid(): JSX.Element {
+// Composant Grid mémorisé
+const Grid = React.memo(({ map }: { map: string[][] }) => {
   const rows = map.length;
   const cols = map[0].length;
   const grid = [];
+  
   for (let i = 0; i < rows; i++) {
     const row = [];
     for (let j = 0; j < cols; j++) {
@@ -320,78 +281,223 @@ function Grid(): JSX.Element {
     grid.push(<View key={i} style={{ flexDirection: 'row' }}>{row}</View>);
   }
   return <View>{grid}</View>;
-}
+});
 
-let budget = 1000;
-const months = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Aout", "Spetembre", "Octobre", "Novembre", "Décembre"]
-let monthIndex = 4
-let year = 2026
-const caracters = ["Secrétaire", "Scientifique", "Habitant", "Gardien de Port", "Commerçant"]
-let currentCaracterIndex = 0
-
-function Budget(){
+const Budget = React.memo(({budget}: {budget: number}) => {
   return (
     <Text style={styles.budgetText}>{budget} €</Text>
   );
-}
+});
 
-function Date(){
+const DateDisplay = React.memo(({monthIndex, year}: {monthIndex: number, year: number}) => {
+  const months = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Aout", "Spetembre", "Octobre", "Novembre", "Décembre"];
   return (
     <Text style={styles.budgetText}>{months[monthIndex]} {year}</Text>
-  )
-}
+  );
+});
 
-function SeparationLine(){
+const SeparationLine = React.memo(() => {
   return (
     <Image style={styles.separationLine} source={require('./assets/separation_line.png')} />
-  )
-}
+  );
+});
 
-function CaracterName(){
+const CaracterName = React.memo(({currentCaracterIndex}: {currentCaracterIndex: number}) => {
+  const caracters = ["Secrétaire", "Scientifique", "Habitant", "Gardien de Port", "Commerçant"];
   return (
     <Text style={styles.caracterName}>{caracters[currentCaracterIndex]} :</Text>
-  )
-}
+  );
+});
 
-type NavigationProps = {
-  navigation: {
-    goBack: () => void;
-  };
-};
-
-function ButtonBack({ navigation }: NavigationProps) {
+const ButtonBack = React.memo(({ navigation }: NavigationProps) => {
   return (
     <TouchableOpacity style={styles.topLeftImage} onPress={() => navigation.goBack()}>
       <Image source={require('./assets/fleche.png')} style={{ width: 60, height: 60 }} resizeMode="contain" />
     </TouchableOpacity>
   );
-}
+});
 
 export default function GameL1Activity({ navigation }: NavigationProps) {
+
+  const [map, setMap] = useState([["sea","sea","sea","sea","sea","sea","grass","grass","grass","grass","grass","grass","grass","grass"],
+             ["sea","sea","sea","sea","sea","sea","grass","grass","grass","grass","grass","grass","grass","grass"],
+             ["sea","sea","sea","sea","sea","sea","stone","grass","grass","grass","grass","grass","grass","grass"],
+             ["sea","sea","sea","sea","sea","stone","stone","grass","grass","grass","grass","grass","grass","grass"],
+             ["sea","sea","sea","sea","sea","stone","stone","grass","grass","grass","grass","grass","grass","grass"],
+             ["sea","sea","sea","sea","sea","sea","stone","sand","grass","grass","grass","grass","grass","grass"],
+             ["sea","sea","sea","stone","sea","sea","sea","sand","sand","grass","grass","grass","grass","grass"],
+             ["sea","sea","sea","stone","sea","sea","sea","sand","sand","grass","grass","grass","grass","grass"],
+              ["sea","sea","sea","sea","sea","sea","sea","sand","sand","grass","grass","grass","grass","grass"],
+              ["sea","sea","sea","sea","sea","sea","sea","sand","sand","grass","grass","grass","grass","grass"],
+              ["sea","sea","sea","sea","sea","sea","sand","sand","grass","grass","grass","grass","grass","grass"],
+              ["sea","sea","sea","sea","sea","sea","grass","grass","grass","grass","grass","grass","grass","grass"],
+              ["sea","sea","sea","sea","sea","grass","grass","grass","grass","grass","grass","grass","grass","grass"],
+              ["sea","sea","sea","sea","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass"]]);
+
+  const [showMap, setShowMap] = useState([["","","","","","","","","","","","","",""],
+                      ["","","","","","","","","","","","","",""],
+                      ["","","","","","","","","","","","","",""],
+                      ["","","","","","","","","","","","","",""],
+                      ["","","","","","","","","","","","","",""],
+                      ["","","","","","","","","","","","","",""],
+                      ["","","","","","","","","","","","","",""],
+                      ["","","","","","","","","","","","","",""],
+                      ["","","","","","","","","","","","","",""],
+                      ["","","","","","","","","","","","","",""],
+                      ["","","","","","","","","","","","","",""],
+                      ["","","","","","","","","","","","","",""],
+                      ["","","","","","","","","","","","","",""],
+                      ["","","","","","","","","","","","","",""]]);
+
+  const [overLayMap, setOverLayMap] = useState([["","","","","","","","","","","","","",""],
+                      ["","","","","","","","","","c","h","","",""],
+                      ["","","","","","","","","","r","h","h","",""],
+                      ["","","","","","","","","","r","","","",""],
+                      ["","","","","","","h","r","r","r","","","",""],
+                      ["","","","","","l","p","","","r","","","",""],
+                      ["","","","p","l","l","","","h","r","r","r","",""],
+                      ["","","","h","","","","","","c","","r","",""],
+                      ["","","","","","","","","","h","","r","",""],
+                      ["","","","","","","","","","h","c","r","",""],
+                      ["","","","","","","","","h","r","r","r","r","r"],
+                      ["","","","","","","r","r","r","r","","","",""],
+                      ["","l","","l","","r","r","","","","r","r","r",""],
+                      ["","","","l","h","","","","","","","","","h"]]);
+
+  const [budget, setBudget] = useState(1000);
+  const [charges, setCharges] = useState(0);
+  const [monthIndex] = useState(4);
+  const [year] = useState(2026);
+  const [currentCaracterIndex] = useState(0);
+
+  // Cache des calculs isServed - recalculé uniquement quand overLayMap change
+  const servedCache = useMemo(() => {
+    const cache: { [key: string]: boolean } = {};
+    for (let i = 0; i < overLayMap.length; i++) {
+      for (let j = 0; j < overLayMap[0].length; j++) {
+        cache[`${i}-${j}`] = isServed(overLayMap, i, j);
+      }
+    }
+    return cache;
+  }, [overLayMap]);
+
+  // Utilisation de useCallback pour mémoriser les fonctions
+  const ChangeMapBox = useCallback((i: number, j: number, type: string) => {
+    setMap(prevMap => {
+      const newMap = prevMap.map(row => [...row]);
+      newMap[i][j] = type;
+      return newMap;
+    });
+    
+    setOverLayMap(prevOverLayMap => {
+      const newOverLayMap = prevOverLayMap.map(row => [...row]);
+      if (type === 'sea' && prevOverLayMap[i][j] !== 'l'){
+        newOverLayMap[i][j] = '';
+      }
+      if (type !== 'sea' && prevOverLayMap[i][j] === 'l'){
+        newOverLayMap[i][j] = '';
+      }
+      return newOverLayMap;
+    });
+  }, []);
+
+  const ChangeOverlayBox = useCallback((i: number, j: number, type: string) => {
+    setOverLayMap(prevOverLayMap => {
+      const newOverLayMap = prevOverLayMap.map(row => [...row]);
+      newOverLayMap[i][j] = type;
+      return newOverLayMap;
+    });
+  }, []);
+
+  const ChangeBudget = useCallback((incr: number) => {
+    setBudget(prevBudget => prevBudget + incr);
+  }, []);
+
+  const ApplyCharges = useCallback(() => {
+    ChangeBudget(charges);
+  }, [charges, ChangeBudget]);
+
+  const TestMapBtn = useCallback(() => {
+    return (
+      <Button 
+        title="Change Map"
+        onPress={() => ChangeMapBox(0, 0, 'sand')}
+      />
+    );
+  }, [ChangeMapBox]);
+
+  const TestOverLayBtn = useCallback(() => {
+    return (
+      <Button 
+        title="Change Overlay"
+        onPress={() => ChangeOverlayBox(0, 0, 'h')}
+      />
+    );
+  }, [ChangeOverlayBox]);
+
+  const TestBudgetBtn = useCallback(() => {
+    return (
+      <Button 
+        title="Change Budget"
+        onPress={() => ChangeBudget(100)}
+      />
+    );
+  }, [ChangeBudget]);
+
+  const TestInputCharges = useCallback(() => {
+    return (
+      <TextInput
+        keyboardType="numeric"
+        value={charges.toString()}
+        onChangeText={(text) => setCharges(Number(text))}
+        placeholder="Entrez une charge numérique..."
+        style={{
+          borderWidth: 1,
+          borderColor: "gray",
+          padding: 8,
+          margin: 10,
+          borderRadius: 5,
+        }}
+      />
+    );
+  }, [charges]);
+
+  const TestChargesBtn = useCallback(() => {
+    return (
+      <Button
+        title="Apply Charges"
+        onPress={() => ApplyCharges()}/>
+    );
+  }, [ApplyCharges]);
+
   return (
     <View style={styles.container}>
       <ButtonBack navigation={navigation} />
-          <View style={styles.mapcontainer}>
-            <Budget />
-            <View style={styles.fullmapcontainer}>
-              <View style={styles.grid}>
-                <Grid />
-              </View>
-              <View style={styles.showGrid}>
-                <ShowGrid />
-              </View>
-              <View style={styles.overlayGrid}>
-                <OverlayGrid />
-              </View>
-            </View>
-            <Date />
+      <View style={styles.mapcontainer}>
+        <Budget budget={budget}/>
+        <View style={styles.fullmapcontainer}>
+          <View style={styles.grid}>
+            <Grid map={map} />
           </View>
-          <SeparationLine />
-          <CaracterName />
+          <View style={styles.showGrid}>
+            <ShowGrid showMap={showMap} overLayMap={overLayMap} servedCache={servedCache}/>
+          </View>
+          <View style={styles.overlayGrid}>
+            <OverlayGrid overLayMap={overLayMap}/>
+          </View>
+        </View>
+        <DateDisplay monthIndex={monthIndex} year={year} />
+      </View>
+      <SeparationLine />
+      <CaracterName currentCaracterIndex={currentCaracterIndex} />
+      <TestMapBtn />
+      <TestOverLayBtn />
+      <TestBudgetBtn />
+      <TestInputCharges />
+      <TestChargesBtn />
     </View>
   );
 }
-
 
 const styles = StyleSheet.create({
   container: {
@@ -400,10 +506,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff'
   },
   mapcontainer: {
-    width: map.length*tileSize,
+    width: 14*tileSize,
     marginTop: 60,
     justifyContent: 'flex-start',
-    alignItems: 'center', // Centré pour éviter que Budget ne soit trop à droite
+    alignItems: 'center',
   },
   budgetText: {
     fontSize: 24,
