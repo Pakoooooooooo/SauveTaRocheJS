@@ -478,15 +478,6 @@ export default function GameL1Activity({ navigation }: NavigationProps) {
     );
   }, [ChangeOverlayTile]);
 
-  const TestBudgetBtn = useCallback(() => {
-    return (
-      <Button 
-        title="Change Budget"
-        onPress={() => ChangeBudget(100)}
-      />
-    );
-  }, [ChangeBudget]);
-
   const TestInputCharges = useCallback(() => {
     return (
       <TextInput
@@ -544,7 +535,6 @@ export default function GameL1Activity({ navigation }: NavigationProps) {
       <CaracterImage currentCaracterIndex={currentCaracterIndex} />
       <TestMapBtn />
       <TestOverLayBtn />
-      <TestBudgetBtn />
       <TestInputCharges />
       <TestChargesBtn />
       <TestNextCaracterBtn />
