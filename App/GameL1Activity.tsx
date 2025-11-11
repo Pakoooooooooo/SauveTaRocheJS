@@ -389,7 +389,7 @@ export default function GameL1Activity({ navigation }: NavigationProps) {
   const [charges, setCharges] = useState(0);
   const [monthIndex] = useState(4);
   const [year] = useState(2026);
-  const [currentCaracterIndex, setCurrentCaracterIndex] = useState(1);
+  const [currentCaracterIndex, setCurrentCaracterIndex] = useState(0);
 
   // Cache des calculs isServed - recalculé uniquement quand overLayMap change
   const servedCache = useMemo(() => {
@@ -458,7 +458,8 @@ export default function GameL1Activity({ navigation }: NavigationProps) {
 
   const NextCaracter = useCallback(() => {
     setCurrentCaracterIndex((currentCaracterIndex+1)%caracters.length)
-  }, [])
+    console.log(currentCaracterIndex)
+  }, [currentCaracterIndex])
 
   const TestMapBtn = useCallback(() => {
     return (
