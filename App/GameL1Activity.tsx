@@ -458,7 +458,7 @@ export default function GameL1Activity({ navigation }: NavigationProps) {
 
   const NextCaracter = useCallback(() => {
     setCurrentCaracterIndex((currentCaracterIndex+1)%caracters.length)
-  })
+  }, [])
 
   const TestMapBtn = useCallback(() => {
     return (
