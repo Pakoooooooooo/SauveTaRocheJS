@@ -1,0 +1,19 @@
+
+Grandes Règles de Desservissement (fonction isServed) :
+
+    - Route : une route est desservie si elle respecte un des critères suivants :
+        - elle est adjacente au bord de la map
+        - elle est adjacente à une route desservie
+        - elle est adjacente à un port desservi
+    
+    - Ligne : une ligne est desservie si elle respecte un des critères suivants :
+        - elle est adjacente à un port desservi
+        - elle est adjacente à une ligne desservie
+    
+    - Maisons et Commerce : un de ces batiments est desservi si il respecte un des critères suivants :
+        - il est se trouve à deux case ou moins par adjacence à une route desservie
+        - il est adjacent à un port desservi
+    
+    - Port : un port est desservi si il respecte un des critères suivants :
+        - il est se trouve à deux case ou moins par adjacence à une route desservie
+        - il est adjacent à une ligne desservie
