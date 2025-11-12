@@ -1,6 +1,8 @@
 import React, { useState, useMemo, useCallback } from 'react';
 import { StyleSheet, TouchableHighlight, TouchableOpacity, Image, View, Text, Button, TextInput } from 'react-native';
 
+
+
 const tileSize = 24
 
 // Import all tile images with correct relative paths
@@ -55,6 +57,18 @@ const CARACTER_IMAGES: CharacterImages = {
   Gardien_de_Port : require('./assets/Gardien_de_Port.png'),
   Commerçant : require('./assets/Commerçant.png')
 };
+
+type JaugeImages = {
+  [key: string]: any;
+};
+
+const JAUGE_IAMGES: JaugeImages = {
+  Jauge: require('./assets/jauge.png')
+}
+
+const months = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Aout", "Spetembre", "Octobre", "Novembre", "Décembre"];
+
+const caracters = ['Secrétaire', 'Scientifique', 'Habitant', 'Gardien_de_Port', 'Commerçant'];
 
 type NavigationProps = {
   navigation: {
@@ -302,7 +316,6 @@ const Budget = React.memo(({budget}: {budget: number}) => {
 });
 
 const DateDisplay = React.memo(({monthIndex, year}: {monthIndex: number, year: number}) => {
-  const months = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Aout", "Spetembre", "Octobre", "Novembre", "Décembre"];
   return (
     <Text style={styles.budgetText}>{months[monthIndex]} {year}</Text>
   );
@@ -314,11 +327,25 @@ const SeparationLine = React.memo(() => {
   );
 });
 
-const caracters = ['Secrétaire', 'Scientifique', 'Habitant', 'Gardien_de_Port', 'Commerçant'];
-
 const CaracterName = React.memo(({currentCaracterIndex}: {currentCaracterIndex: number}) => {
+  let name = ""
+  for (let i = 0; i < caracters[currentCaracterIndex].length; i++){
+    if (caracters[currentCaracterIndex][i] === "_"){
+      name += " "
+    } else {
+      name += caracters[currentCaracterIndex][i]
+    }
+  }
   return (
-    <Text style={styles.caracterName}>{caracters[currentCaracterIndex]} :</Text>
+    <Text style={styles.caracterName}>{name} :</Text>
+  );
+});
+
+const JaugeImage = React.memo(() => {
+  return (
+    <TouchableHighlight>
+      <Image source={JAUGE_IAMGES["Jauge"]} style={styles.jaugeImage}/>
+    </TouchableHighlight>
   );
 });
 
@@ -338,58 +365,84 @@ const ButtonBack = React.memo(({ navigation }: NavigationProps) => {
   );
 });
 
+const Speech = React.memo(({txt}: {txt: string}) => {
+  return (
+    <Text style={styles.speech}>{txt}</Text>
+  );
+});
+
+const txt1 = "Rep 1"
+const txt2 = "Rep 2"
+const txt3 = "Rep 3"
+const txt4 = "Rep 4"
+const correctRep = 3;
+
 export default function GameL1Activity({ navigation }: NavigationProps) {
 
-  const [map, setMap] = useState([["sea","sea","sea","sea","sea","sea","grass","grass","grass","grass","grass","grass","grass","grass"],
-             ["sea","sea","sea","sea","sea","sea","grass","grass","grass","grass","grass","grass","grass","grass"],
-             ["sea","sea","sea","sea","sea","sea","stone","grass","grass","grass","grass","grass","grass","grass"],
-             ["sea","sea","sea","sea","sea","stone","stone","grass","grass","grass","grass","grass","grass","grass"],
-             ["sea","sea","sea","sea","sea","stone","stone","grass","grass","grass","grass","grass","grass","grass"],
-             ["sea","sea","sea","sea","sea","sea","stone","sand","grass","grass","grass","grass","grass","grass"],
-             ["sea","sea","sea","stone","sea","sea","sea","sand","sand","grass","grass","grass","grass","grass"],
-             ["sea","sea","sea","stone","sea","sea","sea","sand","sand","grass","grass","grass","grass","grass"],
-              ["sea","sea","sea","sea","sea","sea","sea","sand","sand","grass","grass","grass","grass","grass"],
-              ["sea","sea","sea","sea","sea","sea","sea","sand","sand","grass","grass","grass","grass","grass"],
-              ["sea","sea","sea","sea","sea","sea","sand","sand","grass","grass","grass","grass","grass","grass"],
-              ["sea","sea","sea","sea","sea","sea","grass","grass","grass","grass","grass","grass","grass","grass"],
-              ["sea","sea","sea","sea","sea","grass","grass","grass","grass","grass","grass","grass","grass","grass"],
-              ["sea","sea","sea","sea","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass"]]);
+  const [map, setMap] = useState([
+    ["sea","sea","sea","sea","sea","sea","grass","grass","grass","grass","grass","grass","grass","grass"],
+    ["sea","sea","sea","sea","sea","sea","grass","grass","grass","grass","grass","grass","grass","grass"],
+    ["sea","sea","sea","sea","sea","sea","stone","grass","grass","grass","grass","grass","grass","grass"],
+    ["sea","sea","sea","sea","sea","stone","stone","grass","grass","grass","grass","grass","grass","grass"],
+    ["sea","sea","sea","sea","sea","stone","stone","grass","grass","grass","grass","grass","grass","grass"],
+    ["sea","sea","sea","sea","sea","sea","stone","sand","grass","grass","grass","grass","grass","grass"],
+    ["sea","sea","sea","stone","sea","sea","sea","sand","sand","grass","grass","grass","grass","grass"],
+    ["sea","sea","sea","stone","sea","sea","sea","sand","sand","grass","grass","grass","grass","grass"],
+    ["sea","sea","sea","sea","sea","sea","sea","sand","sand","grass","grass","grass","grass","grass"],
+    ["sea","sea","sea","sea","sea","sea","sea","sand","sand","grass","grass","grass","grass","grass"],
+    ["sea","sea","sea","sea","sea","sea","sand","sand","grass","grass","grass","grass","grass","grass"],
+    ["sea","sea","sea","sea","sea","sea","grass","grass","grass","grass","grass","grass","grass","grass"],
+    ["sea","sea","sea","sea","sea","grass","grass","grass","grass","grass","grass","grass","grass","grass"],
+    ["sea","sea","sea","sea","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass"]
+  ]);
 
-  const [showMap, setShowMap] = useState([["","","","","","","","","","","","","",""],
-                      ["","","","","","","","","","","","","",""],
-                      ["","","","","","","","","","","","","",""],
-                      ["","","","","","","","","","","","","",""],
-                      ["","","","","","","","","","","","","",""],
-                      ["","","","","","","","","","","","","",""],
-                      ["","","","","","","","","","","","","",""],
-                      ["","","","","","","","","","","","","",""],
-                      ["","","","","","","","","","","","","",""],
-                      ["","","","","","","","","","","","","",""],
-                      ["","","","","","","","","","","","","",""],
-                      ["","","","","","","","","","","","","",""],
-                      ["","","","","","","","","","","","","",""],
-                      ["","","","","","","","","","","","","",""]]);
+  const [showMap, setShowMap] = useState([
+    ["","","","","","","","","","","","","",""],
+    ["","","","","","","","","","","","","",""],
+    ["","","","","","","","","","","","","",""],
+    ["","","","","","","","","","","","","",""],
+    ["","","","","","","","","","","","","",""],
+    ["","","","","","","","","","","","","",""],
+    ["","","","","","","","","","","","","",""],
+    ["","","","","","","","","","","","","",""],
+    ["","","","","","","","","","","","","",""],
+    ["","","","","","","","","","","","","",""],
+    ["","","","","","","","","","","","","",""],
+    ["","","","","","","","","","","","","",""],
+    ["","","","","","","","","","","","","",""],
+    ["","","","","","","","","","","","","",""]
+  ]);
 
-  const [overLayMap, setOverLayMap] = useState([["","","","","","","","","","","","","",""],
-                      ["","","","","","","","","","c","h","","",""],
-                      ["","","","","","","","","","r","h","h","",""],
-                      ["","","","","","","","","","r","","","",""],
-                      ["","","","","","","h","r","r","r","","","",""],
-                      ["","","","","","l","p","","","r","","","",""],
-                      ["","","","p","l","l","","","h","r","r","r","",""],
-                      ["","","","h","","","","","","c","","r","",""],
-                      ["","","","","","","","","","h","","r","",""],
-                      ["","","","","","","","","","h","c","r","",""],
-                      ["","","","","","","","","h","r","r","r","r","r"],
-                      ["","","","","","","r","r","r","r","","","",""],
-                      ["","l","","l","","r","r","","","","r","r","r",""],
-                      ["","","","l","h","","","","","","","","","h"]]);
+  const [overLayMap, setOverLayMap] = useState([
+    ["","","","","","","","","","","","","",""],
+    ["","","","","","","","","","c","h","","",""],
+    ["","","","","","","","","","r","h","h","",""],
+    ["","","","","","","","","","r","","","",""],
+    ["","","","","","","h","r","r","r","","","",""],
+    ["","","","","","l","p","","","r","","","",""],
+    ["","","","p","l","l","","","h","r","r","r","",""],
+    ["","","","h","","","","","","c","","r","",""],
+    ["","","","","","","","","","h","","r","",""],
+    ["","","","","","","","","","h","c","r","",""],
+    ["","","","","","","","","h","r","r","r","r","r"],
+    ["","","","","","","r","r","r","r","","","",""],
+    ["","","","","","r","r","","","","","","",""],
+    ["","","","","h","","","","","","","","",""]
+  ]);
 
   const [budget, setBudget] = useState(1000);
-  const [charges, setCharges] = useState(0);
-  const [monthIndex] = useState(4);
-  const [year] = useState(2026);
+  const [charges, setCharges] = useState(1000);
+  const [monthIndex, setMonthIndex] = useState(4);
+  const [year, setYear] = useState(2026);
   const [currentCaracterIndex, setCurrentCaracterIndex] = useState(0);
+  const [selectedRep, setSelectedRep] = useState<number | null>(null);
+
+  // Définir les textes des réponses
+  const [txt1] = useState("Option 1 - Coût: 200€");
+  const [txt2] = useState("Option 2 - Rien faire");
+  const [txt3] = useState("Option 3 - Coût: 500€");
+  const [txt4] = useState("Option 4 - Coût: 300€");
+  const [correctRep] = useState(1); // Définir quelle est la bonne réponse
 
   // Cache des calculs isServed - recalculé uniquement quand overLayMap change
   const servedCache = useMemo(() => {
@@ -430,23 +483,23 @@ export default function GameL1Activity({ navigation }: NavigationProps) {
     });
   }, []);
 
-  function ChangeMapTile (i: number, j: number, type: string){
-    setMapTile(i, j, type)
+  const ChangeMapTile = useCallback((i: number, j: number, type: string) => {
+    setMapTile(i, j, type);
     if (type === "sea" && overLayMap[i][j] !== 'l'){
-      setOverlayTile(i,j,'')
+      setOverlayTile(i, j, '');
     }
     else if (type !== "sea" && overLayMap[i][j] === 'l'){
-      setOverlayTile(i,j,'')
+      setOverlayTile(i, j, '');
     }
-  }
+  }, [setMapTile, overLayMap]);
 
-  function ChangeOverlayTile (i: number, j: number, type: string){
+  const ChangeOverlayTile = useCallback((i: number, j: number, type: string) => {
     if (map[i][j] === "sea" && type === 'l'){
-      setOverlayTile(i,j,type)
+      setOverlayTile(i, j, type);
     } else if (map[i][j] !== "sea" && type !== 'l'){
-      setOverlayTile(i,j,type)
+      setOverlayTile(i, j, type);
     }
-  }
+  }, [map, setOverlayTile]);
 
   const ChangeBudget = useCallback((incr: number) => {
     setBudget(prevBudget => prevBudget + incr);
@@ -457,61 +510,94 @@ export default function GameL1Activity({ navigation }: NavigationProps) {
   }, [charges, ChangeBudget]);
 
   const NextCaracter = useCallback(() => {
-    setCurrentCaracterIndex((currentCaracterIndex+1)%caracters.length)
-    console.log(currentCaracterIndex)
-  }, [currentCaracterIndex])
+    setCurrentCaracterIndex(prev => (prev + 1) % caracters.length);
+  }, []);
 
-  const TestMapBtn = useCallback(() => {
-    return (
-      <Button 
-        title="Change Map"
-        onPress={() => ChangeMapTile(0, 0, 'sand')}
-      />
-    );
-  }, [ChangeMapTile]);
+  const NextMonth = useCallback(() => {
+    setMonthIndex(prev => {
+      if (prev < months.length - 1) {
+        return prev + 1;
+      } else {
+        setYear(y => y + 1);
+        return 0;
+      }
+    });
+  }, []);
 
-  const TestOverLayBtn = useCallback(() => {
-    return (
-      <Button 
-        title="Change Overlay"
-        onPress={() => ChangeOverlayTile(0, 0, 'h')}
-      />
-    );
-  }, [ChangeOverlayTile]);
+  // Fonction pour gérer la sélection d'une réponse
+  const handleSelectRep = useCallback((index: number) => {
+    if (selectedRep !== null) return; // Empêcher les sélections multiples
+    
+    setSelectedRep(index);
+    NextCaracter();
+    NextMonth();
+    
+    if (index === 1) {
+      ApplyCharges();
+      ChangeMapTile(0, 0, 'sand');
+      ChangeOverlayTile(0, 0, 'h');
+      ChangeBudget(-200);
+    } else if (index === 2) {
+      ApplyCharges();
+    } else if (index === 3) {
+      ApplyCharges();
+      ChangeMapTile(0, 0, 'sand');
+      ChangeMapTile(1, 0, 'sand');
+      ChangeMapTile(1, 1, 'sand');
+      ChangeOverlayTile(0, 0, 'h');
+      ChangeBudget(-500);
+    } else {
+      ApplyCharges();
+      ChangeMapTile(0, 0, 'sand');
+      ChangeMapTile(1, 0, 'sand');
+      ChangeMapTile(1, 1, 'sand');
+      ChangeBudget(-300);
+    }
+    setSelectedRep(null)
+  }, [selectedRep, NextCaracter, NextMonth, ApplyCharges, ChangeMapTile, ChangeOverlayTile, ChangeBudget]);
 
-  const TestInputCharges = useCallback(() => {
-    return (
-      <TextInput
-        keyboardType="numeric"
-        value={charges.toString()}
-        onChangeText={(text) => setCharges(Number(text))}
-        placeholder="Entrez une charge numérique..."
-        style={{
-          borderWidth: 1,
-          borderColor: "gray",
-          padding: 8,
-          margin: 10,
-          borderRadius: 5,
-        }}
-      />
-    );
-  }, [charges]);
+  const ButtonRep = useCallback(({txt, style, index, onSelect, selectedRep, correctRep}: 
+    {txt?: string; style?: object; index: number; onSelect: (index: number) => void; selectedRep: number | null; correctRep: number;}) => {
+    let bg = '#070A28'; // couleur neutre de base
+    let txtcolor = '#FFFFFF';
 
-  const TestChargesBtn = useCallback(() => {
-    return (
-      <Button
-        title="Apply Charges"
-        onPress={() => ApplyCharges()}/>
-    );
-  }, [ApplyCharges]);
+    // Jugement des couleurs - appliqué à tous les boutons après sélection
+    if (selectedRep !== null) {
+      if (index === selectedRep) {
+        bg = '#FFC900'; // réponse sélectionnée : blanc
+        txtcolor = '#070A28';
+      } else {
+        bg = '#4a4a4a'; // autres réponses : gris foncé
+        txtcolor = '#FFFFFF';
+      }
+    }
 
-  const TestNextCaracterBtn = useCallback(() => {
     return (
-      <Button
-        title="Next Caracter"
-        onPress={() => NextCaracter()}/>
+      <TouchableOpacity
+        style={[style, { backgroundColor: bg }]}
+        onPress={() => onSelect(index)}
+        disabled={selectedRep !== null} // empêche de recliquer après réponse
+      >
+        <Text style={[styles.repText, { color: txtcolor }]}>{txt}</Text>
+      </TouchableOpacity>
     );
-  }, [NextCaracter]);
+  }, []);
+
+  const Reps = React.memo(({txt1 = '', txt2 = '', txt3 = '', txt4 = '', onSelect, selectedRep, correctRep}:
+    {txt1?: string; txt2?: string; txt3?: string; txt4?: string; onSelect: (index: number) => void; selectedRep: number | null; correctRep: number;}) => {
+    return (
+      <View style={{ flexDirection: 'column' }}>
+        <View style={{ flexDirection: 'row' }}>
+          <ButtonRep txt={txt1} style={styles.buttonRep} index={1} onSelect={onSelect} selectedRep={selectedRep} correctRep={correctRep} />
+          <ButtonRep txt={txt2} style={styles.buttonRep} index={2} onSelect={onSelect} selectedRep={selectedRep} correctRep={correctRep} />
+        </View>
+        <View style={{ flexDirection: 'row' }}>
+          <ButtonRep txt={txt3} style={styles.buttonRep} index={3} onSelect={onSelect} selectedRep={selectedRep} correctRep={correctRep} />
+          <ButtonRep txt={txt4} style={styles.buttonRep} index={4} onSelect={onSelect} selectedRep={selectedRep} correctRep={correctRep} />
+        </View>
+      </View>
+    );
+  });
 
   return (
     <View style={styles.container}>
@@ -532,13 +618,25 @@ export default function GameL1Activity({ navigation }: NavigationProps) {
         <DateDisplay monthIndex={monthIndex} year={year} />
       </View>
       <SeparationLine />
-      <CaracterName currentCaracterIndex={currentCaracterIndex} />
-      <CaracterImage currentCaracterIndex={currentCaracterIndex} />
-      <TestMapBtn />
-      <TestOverLayBtn />
-      <TestInputCharges />
-      <TestChargesBtn />
-      <TestNextCaracterBtn />
+      <View style={styles.bottomScreen}>
+        <CaracterName currentCaracterIndex={currentCaracterIndex} />
+        <View style={styles.infoDisplay}>
+          <CaracterImage currentCaracterIndex={currentCaracterIndex} />
+          <View >
+            <Speech txt="Question question question  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  ?"/>
+            <Reps
+              txt1={txt1}
+              txt2={txt2}
+              txt3={txt3}
+              txt4={txt4}
+              onSelect={handleSelectRep}
+              selectedRep={selectedRep}
+              correctRep={correctRep}
+            />
+          </View>
+          <JaugeImage />
+        </View>
+      </View>
     </View>
   );
 }
@@ -589,21 +687,58 @@ const styles = StyleSheet.create({
   },
   caracterName: {
     fontSize: 30,
-    margin: 10,
-    marginStart: 100,
+    margin: 0,
+    marginStart: 20,
     fontFamily: 'Gloucester',
     color: '#070A28',
-    textAlign: 'left',
     width: '100%',
     textDecorationLine: 'underline',
   },
+  speech: {
+    fontSize: 20,
+    margin: 5,
+    fontFamily: 'Gloucester',
+    color: '#070A28',
+    width: 220,
+  },
   caracterImage: {
-    position: 'absolute',
     alignSelf: 'flex-end',
-    left: -330,
-    top: -80,
-    width: 100*4,
-    height: 140*4,
+    margin: -20,
+    marginEnd: -200,
+    left: -110,
+    top: -25,
+    width: 100*3,
+    height: 140*3,
     resizeMode: 'stretch',
+  },
+  bottomScreen: {
+    marginVertical: 5,
+    marginHorizontal: -10,
+  },
+  infoDisplay: {
+    justifyContent: 'center',
+    flexDirection: 'row'
+  },
+  repText: {
+    fontSize: 13,
+    color: '#FFFFFF',
+    textAlign: 'center',
+    fontFamily: 'Gloucester',
+  },
+  buttonRep: {
+    height: 60,
+    width: 100,
+    margin: 3,
+    borderRadius: 8,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 5,
+  },
+  jaugeImage: {
+    position: 'relative',
+    marginEnd: -10,
+    marginTop: -20,
+    height: 270,
+    width: 30
   }
 });
