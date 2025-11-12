@@ -1,9 +1,19 @@
 import React, { useState, useMemo, useCallback } from 'react';
-import { StyleSheet, TouchableHighlight, TouchableOpacity, Image, View, Text, Button, TextInput } from 'react-native';
+import { StyleSheet, TouchableHighlight, TouchableOpacity, Image, View, Text, Dimensions } from 'react-native';
 
+const { width, height } = Dimensions.get('window');
 
+const p = 0.2
 
-const tileSize = 24
+// Par exemple : on base la taille sur la plus petite dimension
+const tileSize = Math.floor((Math.min(width, height)**(p*4))/5);
+const lineLength = Math.floor((Math.min(width, height)**(p*4))*3);
+const textSize = Math.floor((Math.min(width, height)**p)*p*40);
+const smallTextSize = Math.floor((Math.min(width, height)**(p*4))*p/1.5);
+const speechWidth = Math.floor(Math.min(width, height) / 1.8);
+const btnWidth = Math.floor(Math.min(width, height) / 3.6);
+const caracterScale = (Math.min(width, height)**(p*2)*p/2.1);
+const scaleHeight = (Math.min(width, height)**(p*3)*p*41);
 
 // Import all tile images with correct relative paths
 const TILE_IMAGES = {
@@ -654,7 +664,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   budgetText: {
-    fontSize: 24,
+    fontSize: textSize,
     margin: 10,
     fontFamily: 'Gloucester',
     color: '#070A28',
@@ -681,12 +691,12 @@ const styles = StyleSheet.create({
     left: 20,
   },
   separationLine: {
-    width: 350,
+    width: lineLength,
     height: '0.3%',
     resizeMode: 'stretch',
   },
   caracterName: {
-    fontSize: 30,
+    fontSize: textSize*1.2,
     margin: 0,
     marginStart: 20,
     fontFamily: 'Gloucester',
@@ -695,11 +705,11 @@ const styles = StyleSheet.create({
     textDecorationLine: 'underline',
   },
   speech: {
-    fontSize: 20,
+    fontSize: smallTextSize*1.5,
     margin: 5,
     fontFamily: 'Gloucester',
     color: '#070A28',
-    width: 220,
+    width: speechWidth,
   },
   caracterImage: {
     alignSelf: 'flex-end',
@@ -707,8 +717,8 @@ const styles = StyleSheet.create({
     marginEnd: -200,
     left: -110,
     top: -25,
-    width: 100*3,
-    height: 140*3,
+    width: 100*3*caracterScale,
+    height: 140*3*caracterScale,
     resizeMode: 'stretch',
   },
   bottomScreen: {
@@ -720,15 +730,15 @@ const styles = StyleSheet.create({
     flexDirection: 'row'
   },
   repText: {
-    fontSize: 13,
+    fontSize: smallTextSize,
     color: '#FFFFFF',
     textAlign: 'center',
     fontFamily: 'Gloucester',
   },
   buttonRep: {
-    height: 60,
-    width: 100,
-    margin: 3,
+    height: btnWidth/1.7,
+    width: btnWidth,
+    margin: btnWidth/30,
     borderRadius: 8,
     justifyContent: 'center',
     alignItems: 'center',
@@ -737,8 +747,9 @@ const styles = StyleSheet.create({
   jaugeImage: {
     position: 'relative',
     marginEnd: -10,
+    marginStart: 10,
     marginTop: -20,
-    height: 270,
+    height: scaleHeight,
     width: 30
   }
 });
