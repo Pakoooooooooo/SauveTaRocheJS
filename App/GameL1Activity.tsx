@@ -13,7 +13,15 @@ const smallTextSize = Math.floor((Math.min(width, height)**(p*4))*p/1.5);
 const speechWidth = Math.floor(Math.min(width, height) / 1.8);
 const btnWidth = Math.floor(Math.min(width, height) / 3.6);
 const caracterScale = (Math.min(width, height)**(p*2)*p/2.1);
-const scaleHeight = (Math.min(width, height)**(p*3)*p*41);
+const scaleHeight = (Math.min(width, height)**(p*3)*p*44);
+
+function ToString(i: number): string{
+  let rep = i.toString()
+  while (rep.length < 2) {
+    rep = "0"+rep
+  }
+  return rep
+} 
 
 // Import all tile images with correct relative paths
 const TILE_IMAGES = {
@@ -73,7 +81,106 @@ type JaugeImages = {
 };
 
 const JAUGE_IAMGES: JaugeImages = {
-  Jauge: require('./assets/jauge.png')
+    frame_00: require('./assets/jauge_frames/frame_00000.png'),
+  frame_01: require('./assets/jauge_frames/frame_00001.png'),
+  frame_02: require('./assets/jauge_frames/frame_00002.png'),
+  frame_03: require('./assets/jauge_frames/frame_00003.png'),
+  frame_04: require('./assets/jauge_frames/frame_00004.png'),
+  frame_05: require('./assets/jauge_frames/frame_00005.png'),
+  frame_06: require('./assets/jauge_frames/frame_00006.png'),
+  frame_07: require('./assets/jauge_frames/frame_00007.png'),
+  frame_08: require('./assets/jauge_frames/frame_00008.png'),
+  frame_09: require('./assets/jauge_frames/frame_00009.png'),
+  frame_10: require('./assets/jauge_frames/frame_00010.png'),
+  frame_11: require('./assets/jauge_frames/frame_00011.png'),
+  frame_12: require('./assets/jauge_frames/frame_00012.png'),
+  frame_13: require('./assets/jauge_frames/frame_00013.png'),
+  frame_14: require('./assets/jauge_frames/frame_00014.png'),
+  frame_15: require('./assets/jauge_frames/frame_00015.png'),
+  frame_16: require('./assets/jauge_frames/frame_00016.png'),
+  frame_17: require('./assets/jauge_frames/frame_00017.png'),
+  frame_18: require('./assets/jauge_frames/frame_00018.png'),
+  frame_19: require('./assets/jauge_frames/frame_00019.png'),
+  frame_20: require('./assets/jauge_frames/frame_00020.png'),
+  frame_21: require('./assets/jauge_frames/frame_00021.png'),
+  frame_22: require('./assets/jauge_frames/frame_00022.png'),
+  frame_23: require('./assets/jauge_frames/frame_00023.png'),
+  frame_24: require('./assets/jauge_frames/frame_00024.png'),
+  frame_25: require('./assets/jauge_frames/frame_00025.png'),
+  frame_26: require('./assets/jauge_frames/frame_00026.png'),
+  frame_27: require('./assets/jauge_frames/frame_00027.png'),
+  frame_28: require('./assets/jauge_frames/frame_00028.png'),
+  frame_29: require('./assets/jauge_frames/frame_00029.png'),
+  frame_30: require('./assets/jauge_frames/frame_00030.png'),
+  frame_31: require('./assets/jauge_frames/frame_00031.png'),
+  frame_32: require('./assets/jauge_frames/frame_00032.png'),
+  frame_33: require('./assets/jauge_frames/frame_00033.png'),
+  frame_34: require('./assets/jauge_frames/frame_00034.png'),
+  frame_35: require('./assets/jauge_frames/frame_00035.png'),
+  frame_36: require('./assets/jauge_frames/frame_00036.png'),
+  frame_37: require('./assets/jauge_frames/frame_00037.png'),
+  frame_38: require('./assets/jauge_frames/frame_00038.png'),
+  frame_39: require('./assets/jauge_frames/frame_00039.png'),
+  frame_40: require('./assets/jauge_frames/frame_00040.png'),
+  frame_41: require('./assets/jauge_frames/frame_00041.png'),
+  frame_42: require('./assets/jauge_frames/frame_00042.png'),
+  frame_43: require('./assets/jauge_frames/frame_00043.png'),
+  frame_44: require('./assets/jauge_frames/frame_00044.png'),
+  frame_45: require('./assets/jauge_frames/frame_00045.png'),
+  frame_46: require('./assets/jauge_frames/frame_00046.png'),
+  frame_47: require('./assets/jauge_frames/frame_00047.png'),
+  frame_48: require('./assets/jauge_frames/frame_00048.png'),
+  frame_49: require('./assets/jauge_frames/frame_00049.png'),
+  frame_50: require('./assets/jauge_frames/frame_00050.png'),
+  frame_51: require('./assets/jauge_frames/frame_00051.png'),
+  frame_52: require('./assets/jauge_frames/frame_00052.png'),
+  frame_53: require('./assets/jauge_frames/frame_00053.png'),
+  frame_54: require('./assets/jauge_frames/frame_00054.png'),
+  frame_55: require('./assets/jauge_frames/frame_00055.png'),
+  frame_56: require('./assets/jauge_frames/frame_00056.png'),
+  frame_57: require('./assets/jauge_frames/frame_00057.png'),
+  frame_58: require('./assets/jauge_frames/frame_00058.png'),
+  frame_59: require('./assets/jauge_frames/frame_00059.png'),
+  frame_60: require('./assets/jauge_frames/frame_00060.png'),
+  frame_61: require('./assets/jauge_frames/frame_00061.png'),
+  frame_62: require('./assets/jauge_frames/frame_00062.png'),
+  frame_63: require('./assets/jauge_frames/frame_00063.png'),
+  frame_64: require('./assets/jauge_frames/frame_00064.png'),
+  frame_65: require('./assets/jauge_frames/frame_00065.png'),
+  frame_66: require('./assets/jauge_frames/frame_00066.png'),
+  frame_67: require('./assets/jauge_frames/frame_00067.png'),
+  frame_68: require('./assets/jauge_frames/frame_00068.png'),
+  frame_69: require('./assets/jauge_frames/frame_00069.png'),
+  frame_70: require('./assets/jauge_frames/frame_00070.png'),
+  frame_71: require('./assets/jauge_frames/frame_00071.png'),
+  frame_72: require('./assets/jauge_frames/frame_00072.png'),
+  frame_73: require('./assets/jauge_frames/frame_00073.png'),
+  frame_74: require('./assets/jauge_frames/frame_00074.png'),
+  frame_75: require('./assets/jauge_frames/frame_00075.png'),
+  frame_76: require('./assets/jauge_frames/frame_00076.png'),
+  frame_77: require('./assets/jauge_frames/frame_00077.png'),
+  frame_78: require('./assets/jauge_frames/frame_00078.png'),
+  frame_79: require('./assets/jauge_frames/frame_00079.png'),
+  frame_80: require('./assets/jauge_frames/frame_00080.png'),
+  frame_81: require('./assets/jauge_frames/frame_00081.png'),
+  frame_82: require('./assets/jauge_frames/frame_00082.png'),
+  frame_83: require('./assets/jauge_frames/frame_00083.png'),
+  frame_84: require('./assets/jauge_frames/frame_00084.png'),
+  frame_85: require('./assets/jauge_frames/frame_00085.png'),
+  frame_86: require('./assets/jauge_frames/frame_00086.png'),
+  frame_87: require('./assets/jauge_frames/frame_00087.png'),
+  frame_88: require('./assets/jauge_frames/frame_00088.png'),
+  frame_89: require('./assets/jauge_frames/frame_00089.png'),
+  frame_90: require('./assets/jauge_frames/frame_00090.png'),
+  frame_91: require('./assets/jauge_frames/frame_00091.png'),
+  frame_92: require('./assets/jauge_frames/frame_00092.png'),
+  frame_93: require('./assets/jauge_frames/frame_00093.png'),
+  frame_94: require('./assets/jauge_frames/frame_00094.png'),
+  frame_95: require('./assets/jauge_frames/frame_00095.png'),
+  frame_96: require('./assets/jauge_frames/frame_00096.png'),
+  frame_97: require('./assets/jauge_frames/frame_00097.png'),
+  frame_98: require('./assets/jauge_frames/frame_00098.png'),
+  frame_99: require('./assets/jauge_frames/frame_00099.png')
 }
 
 const months = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Aout", "Spetembre", "Octobre", "Novembre", "Décembre"];
@@ -351,10 +458,10 @@ const CaracterName = React.memo(({currentCaracterIndex}: {currentCaracterIndex: 
   );
 });
 
-const JaugeImage = React.memo(() => {
+const JaugeImage = React.memo(({happiness}: {happiness: number}) => {
   return (
     <TouchableHighlight>
-      <Image source={JAUGE_IAMGES["Jauge"]} style={styles.jaugeImage}/>
+      <Image source={JAUGE_IAMGES["frame_"+ToString(happiness)]} style={styles.jaugeImage}/>
     </TouchableHighlight>
   );
 });
@@ -444,6 +551,7 @@ export default function GameL1Activity({ navigation }: NavigationProps) {
   const [charges, setCharges] = useState(1000);
   const [monthIndex, setMonthIndex] = useState(4);
   const [year, setYear] = useState(2026);
+  const [happiness, setHappiness] = useState(50);
   const [currentCaracterIndex, setCurrentCaracterIndex] = useState(0);
   const [selectedRep, setSelectedRep] = useState<number | null>(null);
 
@@ -515,6 +623,15 @@ export default function GameL1Activity({ navigation }: NavigationProps) {
     setBudget(prevBudget => prevBudget + incr);
   }, []);
 
+  const ChangeHappiness = useCallback((incr: number) => {
+  setHappiness(prev => {
+    const newValue = prev + incr;
+    if (newValue >= 99) return 99;
+    if (newValue < 0) return 0;
+    return newValue;
+  });
+}, []);
+
   const ApplyCharges = useCallback(() => {
     ChangeBudget(charges);
   }, [charges, ChangeBudget]);
@@ -547,8 +664,10 @@ export default function GameL1Activity({ navigation }: NavigationProps) {
       ChangeMapTile(0, 0, 'sand');
       ChangeOverlayTile(0, 0, 'h');
       ChangeBudget(-200);
+      ChangeHappiness(58);
     } else if (index === 2) {
       ApplyCharges();
+      ChangeHappiness(-20);
     } else if (index === 3) {
       ApplyCharges();
       ChangeMapTile(0, 0, 'sand');
@@ -556,12 +675,14 @@ export default function GameL1Activity({ navigation }: NavigationProps) {
       ChangeMapTile(1, 1, 'sand');
       ChangeOverlayTile(0, 0, 'h');
       ChangeBudget(-500);
+      ChangeHappiness(10);
     } else {
       ApplyCharges();
       ChangeMapTile(0, 0, 'sand');
       ChangeMapTile(1, 0, 'sand');
       ChangeMapTile(1, 1, 'sand');
       ChangeBudget(-300);
+      ChangeHappiness(30);
     }
     setSelectedRep(null)
   }, [selectedRep, NextCaracter, NextMonth, ApplyCharges, ChangeMapTile, ChangeOverlayTile, ChangeBudget]);
@@ -644,7 +765,7 @@ export default function GameL1Activity({ navigation }: NavigationProps) {
               correctRep={correctRep}
             />
           </View>
-          <JaugeImage />
+          <JaugeImage happiness={happiness}/>
         </View>
       </View>
     </View>
@@ -750,6 +871,6 @@ const styles = StyleSheet.create({
     marginStart: 10,
     marginTop: -20,
     height: scaleHeight,
-    width: 30
+    width: scaleHeight/12
   }
 });
