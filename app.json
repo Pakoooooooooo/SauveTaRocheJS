@@ -14,7 +14,7 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.anonymous.App",
+      "bundleIdentifier": "com.Rachidjunior.App",
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false
       }
@@ -24,15 +24,18 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.anonymous.App"
+      "package": "com.Rachidjunior.App"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "extra": {
       "eas": {
-        "projectId": ""
+        "projectId": "e40a88ec-e768-40db-a2d2-09b15530d394"
       }
-    }
+    },
+    "plugins": [
+      "expo-build-properties"
+    ]
   }
 }
