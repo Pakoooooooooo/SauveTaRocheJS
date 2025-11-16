@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, TouchableOpacity, Image, Alert, Platform } from 'react-native';
-import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
+import React, { useState } from 'react';
+import { View, StyleSheet, TouchableOpacity, Image, Platform } from 'react-native';
+import MapView, { Marker, PROVIDER_GOOGLE, PROVIDER_DEFAULT } from 'react-native-maps';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 /* Types de navigation */
@@ -56,7 +56,6 @@ export default function CurrentDataActivity({ navigation }: NavigationProps) {
       title: 'Plouzané',
       description: 'Ma position actuelle'
     },
-    // Tu peux ajouter d'autres marqueurs ici
   ]);
 
   // Fonction pour ajouter un marqueur au clic sur la carte
@@ -77,7 +76,8 @@ export default function CurrentDataActivity({ navigation }: NavigationProps) {
       
       <MapView
         style={styles.map}
-        provider={PROVIDER_GOOGLE}
+        // Utilise Google Maps sur Android, Apple Maps sur iOS
+        provider={Platform.OS === 'android' ? PROVIDER_GOOGLE : PROVIDER_DEFAULT}
         initialRegion={region}
         onRegionChangeComplete={setRegion}
         showsUserLocation={true}
@@ -85,7 +85,7 @@ export default function CurrentDataActivity({ navigation }: NavigationProps) {
         showsCompass={true}
         showsScale={true}
         onPress={handleMapPress}
-        mapType="standard" // Options: 'standard', 'satellite', 'hybrid', 'terrain'
+        mapType="standard"
       >
         {markers.map((marker) => (
           <Marker
@@ -93,29 +93,10 @@ export default function CurrentDataActivity({ navigation }: NavigationProps) {
             coordinate={marker.coordinate}
             title={marker.title}
             description={marker.description}
-            pinColor="#FFC900" // Couleur jaune de ton thème
+            pinColor="#FFC900"
           />
         ))}
       </MapView>
-
-      {/* Boutons de contrôle optionnels (tu peux les retirer si tu veux) */}
-      <View style={styles.controlsContainer}>
-        <TouchableOpacity 
-          style={styles.controlButton}
-          onPress={() => setRegion({
-            latitude: 48.4084,
-            longitude: -4.6147,
-            latitudeDelta: 0.05,
-            longitudeDelta: 0.05,
-          })}
-        >
-          <Image 
-            source={require('./assets/fleche.png')} // Utilise une icône de localisation si tu en as
-            style={styles.controlIcon}
-            resizeMode="contain"
-          />
-        </TouchableOpacity>
-      </View>
     </View>
   );
 }
@@ -147,30 +128,5 @@ const styles = StyleSheet.create({
   backIcon: {
     width: 40,
     height: 40,
-  },
-  controlsContainer: {
-    position: 'absolute',
-    bottom: 30,
-    right: 20,
-    zIndex: 998,
-  },
-  controlButton: {
-    backgroundColor: '#FFC900',
-    width: 50,
-    height: 50,
-    borderRadius: 25,
-    justifyContent: 'center',
-    alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
-    marginBottom: 10,
-  },
-  controlIcon: {
-    width: 25,
-    height: 25,
-    tintColor: '#000',
   },
 });
