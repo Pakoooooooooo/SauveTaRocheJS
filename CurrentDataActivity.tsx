@@ -45,8 +45,8 @@ export default function CurrentDataActivity({ navigation }: NavigationProps) {
   const [region, setRegion] = useState({
     latitude: 48.4084,  // Plouzané, Bretagne
     longitude: -4.6147,
-    latitudeDelta: 0.05,
-    longitudeDelta: 0.05,
+    latitudeDelta: 0.03,   // ✅ réduit pour zoom initial
+    longitudeDelta: 0.03,
   });
 
   const [markers, setMarkers] = useState([
@@ -76,7 +76,6 @@ export default function CurrentDataActivity({ navigation }: NavigationProps) {
       
       <MapView
         style={styles.map}
-        // Utilise Google Maps sur Android, Apple Maps sur iOS
         provider={Platform.OS === 'android' ? PROVIDER_GOOGLE : PROVIDER_DEFAULT}
         initialRegion={region}
         onRegionChangeComplete={setRegion}
@@ -86,6 +85,8 @@ export default function CurrentDataActivity({ navigation }: NavigationProps) {
         showsScale={true}
         onPress={handleMapPress}
         mapType="standard"
+        zoomEnabled={true}          // ✅ pinch-to-zoom activé
+        zoomControlEnabled={true}   // ✅ boutons de zoom (Android uniquement)
       >
         {markers.map((marker) => (
           <Marker
