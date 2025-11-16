@@ -1,8 +1,8 @@
 {
   "expo": {
     "name": "App",
-    "slug": "App",
-    "owner": "Rachidjunior",
+    "slug": "comrachidjuniorapp",
+    "owner": "rachidjunior",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -24,7 +24,12 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.Rachidjunior.App"
+      "package": "com.Rachidjunior.App",
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyCYQ0N5I3MugaQRZxK8h9loepEVpLb2jgg"
+        }
+      }
     },
     "web": {
       "favicon": "./assets/favicon.png"
