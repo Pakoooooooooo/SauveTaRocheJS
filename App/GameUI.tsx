@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, TouchableHighlight, TouchableOpacity, Image, View, Text, Dimensions } from 'react-native';
+import * as Q from './GameQuestions';
 
 /*GameUI répertorie les constantes communes à tous les niveaux et l'aspect du l'IHM du jeu*/
 
@@ -22,7 +23,19 @@ export function ToString(i: number): string{
     rep = "0"+rep
   }
   return rep
-} 
+}
+
+export function respects(Quest: Q.GameQuestionData, ListQuest: Q.GameQuestionData[], ListRep: number[]): boolean{
+  for (const q of Quest.prevQuestCondition) {
+    const i = Quest.prevQuestCondition.indexOf(q);
+    if (!ListQuest.includes(q)){
+      return false
+    } else if (ListRep[i] !== Quest.prevRepCondition[i]) {
+      return false
+    }
+  }
+  return true
+}
 
 // Import all tile images with correct relative paths
 export const TILE_IMAGES = {
@@ -185,7 +198,7 @@ export const JAUGE_IAMGES: JaugeImages = {
   frame_99: require('./assets/jauge_frames/frame_00099.png')
 }
 // Banque des mois de l'anné
-export const months = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Aout", "Spetembre", "Octobre", "Novembre", "Décembre"];
+export const months = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Aout", "Septembre", "Octobre", "Novembre", "Décembre"];
 // Banque de types de personnages
 export const caracters = ['Secrétaire', 'Scientifique', 'Habitant', 'Gardien_de_Port', 'Commerçant'];
 // Méthode de navigation
