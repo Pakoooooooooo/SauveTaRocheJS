@@ -55,7 +55,7 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
     ["","","","","","l","p","","","r","","","",""],
     ["","","","p","l","l","","","h","r","r","r","",""],
     ["","","","h","","","","","","c","","r","",""],
-    ["","","","","","","","","","h","","r","",""],
+    ["","","","","","","","s","","h","","r","",""],
     ["","","","","","","","","","h","c","r","",""],
     ["","","","","","","","","h","r","r","r","r","r"],
     ["","","","","","","r","r","r","r","","","",""],
@@ -90,6 +90,7 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
   }, [overLayMap]);
 
   // Utilisation de useCallback pour mémoriser les fonctions
+  // Change le type de la case sol (i,j) en 'type'
   const setMapTile = useCallback((i: number, j: number, type: string) => {
     setMap(prevMap => {
       const newMap = prevMap.map(row => [...row]);
@@ -108,7 +109,7 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
       return newOverLayMap;
     });
   }, []);
-
+  // Change le type de la case batiment (i,j) en 'type'
   const setOverlayTile = useCallback((i: number, j: number, type: string) => {
     setOverLayMap(prevOverLayMap => {
       const newOverLayMap = prevOverLayMap.map(row => [...row]);
@@ -116,7 +117,7 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
       return newOverLayMap;
     });
   }, []);
-
+  // Change le type de la case sol (i,j) en 'type' et adapte les batiments en fonction
   const ChangeMapTile = useCallback((i: number, j: number, type: string) => {
     setMapTile(i, j, type);
     if (type === "sea" && overLayMap[i][j] !== 'l'){
@@ -126,7 +127,7 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
       setOverlayTile(i, j, '');
     }
   }, [setMapTile, overLayMap]);
-
+  // Change le type de la case batiment (i,j) en 'type' si possible en fonction de la carte sol
   const ChangeOverlayTile = useCallback((i: number, j: number, type: string) => {
     if (map[i][j] === "sea" && type === 'l'){
       setOverlayTile(i, j, type);
@@ -134,11 +135,11 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
       setOverlayTile(i, j, type);
     }
   }, [map, setOverlayTile]);
-
+  // Ajoute incr au budget
   const ChangeBudget = useCallback((incr: number) => {
     setBudget(prevBudget => prevBudget + incr);
   }, []);
-
+  // Ajoute incr à la jauge de satisfaction
   const ChangeHappiness = useCallback((incr: number) => {
   setHappiness(prev => {
     const newValue = prev + incr;
@@ -147,15 +148,15 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
     return newValue;
   });
 }, []);
-
+  // Ajoute les charges mensuelles/annuelles au budget
   const ApplyCharges = useCallback(() => {
     ChangeBudget(charges);
   }, [charges, ChangeBudget]);
-
+  // Passe au personnage suivant
   const NextCaracter = useCallback(() => {
     setCurrentCaracterIndex(prev => (prev + 1) % G.caracters.length);
   }, []);
-
+  // Passe au mois suivant
   const NextMonth = useCallback(() => {
     setMonthIndex(prev => {
       if (prev < G.months.length - 1) {
@@ -202,9 +203,9 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
     }
     setSelectedRep(null)
   }, [selectedRep, NextCaracter, NextMonth, ApplyCharges, ChangeMapTile, ChangeOverlayTile, ChangeBudget]);
-
-  const ButtonRep = useCallback(({txt, style, index, onSelect, selectedRep, correctRep}: 
-    {txt?: string; style?: object; index: number; onSelect: (index: number) => void; selectedRep: number | null; correctRep: number;}) => {
+  // Affichage d'un bouton de réponse aux questions
+  const ButtonRep = useCallback(({txt, style, index, onSelect, selectedRep}: 
+    {txt?: string; style?: object; index: number; onSelect: (index: number) => void; selectedRep: number | null;}) => {
     let bg = '#070A28'; // couleur neutre de base
     let txtcolor = '#FFFFFF';
 
@@ -229,18 +230,18 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
       </TouchableOpacity>
     );
   }, []);
-
-  const Reps = React.memo(({txt1 = '', txt2 = '', txt3 = '', txt4 = '', onSelect, selectedRep, correctRep}:
-    {txt1?: string; txt2?: string; txt3?: string; txt4?: string; onSelect: (index: number) => void; selectedRep: number | null; correctRep: number;}) => {
+  // Affichage des boutons de réponse aux questions
+  const Reps = React.memo(({txt1 = '', txt2 = '', txt3 = '', txt4 = '', onSelect, selectedRep}:
+    {txt1?: string; txt2?: string; txt3?: string; txt4?: string; onSelect: (index: number) => void; selectedRep: number | null;}) => {
     return (
       <View style={{ flexDirection: 'column' }}>
         <View style={{ flexDirection: 'row' }}>
-          <ButtonRep txt={txt1} style={G.styles.buttonRep} index={1} onSelect={onSelect} selectedRep={selectedRep} correctRep={correctRep} />
-          <ButtonRep txt={txt2} style={G.styles.buttonRep} index={2} onSelect={onSelect} selectedRep={selectedRep} correctRep={correctRep} />
+          <ButtonRep txt={txt1} style={G.styles.buttonRep} index={1} onSelect={onSelect} selectedRep={selectedRep} />
+          <ButtonRep txt={txt2} style={G.styles.buttonRep} index={2} onSelect={onSelect} selectedRep={selectedRep}/>
         </View>
         <View style={{ flexDirection: 'row' }}>
-          <ButtonRep txt={txt3} style={G.styles.buttonRep} index={3} onSelect={onSelect} selectedRep={selectedRep} correctRep={correctRep} />
-          <ButtonRep txt={txt4} style={G.styles.buttonRep} index={4} onSelect={onSelect} selectedRep={selectedRep} correctRep={correctRep} />
+          <ButtonRep txt={txt3} style={G.styles.buttonRep} index={3} onSelect={onSelect} selectedRep={selectedRep}/>
+          <ButtonRep txt={txt4} style={G.styles.buttonRep} index={4} onSelect={onSelect} selectedRep={selectedRep}/>
         </View>
       </View>
     );
@@ -278,7 +279,6 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
               txt4={txt4}
               onSelect={handleSelectRep}
               selectedRep={selectedRep}
-              correctRep={correctRep}
             />
           </View>
           <G.JaugeImage happiness={happiness}/>

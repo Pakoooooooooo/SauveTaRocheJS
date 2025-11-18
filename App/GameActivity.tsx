@@ -23,7 +23,7 @@ interface NavigationProps {
 }
 
 const { height } = Dimensions.get('window');
-
+// Un bouton pour chaque niveaux (1 seul d'affiché pour l'instant)
 function ButtonLevel1({ navigation }: NavigationProps) {
   return (
     <TouchableOpacity
@@ -33,7 +33,7 @@ function ButtonLevel1({ navigation }: NavigationProps) {
     </TouchableOpacity>
   );
 }
-
+// Pas utilisé pour l'instant
 function ButtonLevel2({ navigation }: NavigationProps) {
   return (
     <TouchableOpacity
@@ -43,7 +43,7 @@ function ButtonLevel2({ navigation }: NavigationProps) {
     </TouchableOpacity>
   );
 }
-
+// Bouton de retour
 function ButtonBack({ navigation }: NavigationProps) {
   return (
     <TouchableOpacity 
@@ -74,7 +74,6 @@ export default function GameActivity({ navigation }: NavigationProps) {
 
           <View style={styles.levelsContainer}>
             <ButtonLevel1 navigation={navigation} />
-            <ButtonLevel2 navigation={navigation} />
           </View>
         </View>
       </View>

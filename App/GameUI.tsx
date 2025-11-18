@@ -63,6 +63,7 @@ export const TILE_IMAGES = {
   house: require('./assets/overlayTiles/house.png'),
   commerce: require('./assets/overlayTiles/commerce.png'),
   port: require('./assets/overlayTiles/port.png'),
+  sign: require('./assets/overlayTiles/sign.png'),
 };
 // On explicite le type de la banque d'image pour les personnages
 export type CharacterImages = {
@@ -354,7 +355,7 @@ export const ShowGrid = React.memo(({showMap, overLayMap, servedCache}: {showMap
   for (let i = 0; i < rows; i++) {
     const row = [];
     for (let j = 0; j < cols; j++) {
-      if (overLayMap[i][j] !== '' && !servedCache[`${i}-${j}`]){
+      if (overLayMap[i][j] !== '' && overLayMap[i][j] !== 's' && !servedCache[`${i}-${j}`]){
         row.push(<Tiles key={`${i}-${j}`} type={`red` as keyof typeof TILE_IMAGES}/>)
       } else {
         row.push(<Tiles key={`${i}-${j}`} type={'empty' as keyof typeof TILE_IMAGES} />);
@@ -402,6 +403,8 @@ export const OverlayGrid = React.memo(({overLayMap}:{overLayMap : string[][]}) =
         row.push(<Tiles key={`${i}-${j}`} type={'commerce' as keyof typeof TILE_IMAGES} />);
       } else if (overLayMap[i][j] === "p") {
         row.push(<Tiles key={`${i}-${j}`} type={'port' as keyof typeof TILE_IMAGES} />);
+      } else if (overLayMap[i][j] === "s") {
+        row.push(<Tiles key={`${i}-${j}`} type={'sign' as keyof typeof TILE_IMAGES} />);
       } else {
         row.push(<Tiles key={`${i}-${j}`} type={'empty' as keyof typeof TILE_IMAGES} />);
       }

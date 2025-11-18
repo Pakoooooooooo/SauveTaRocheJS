@@ -22,8 +22,8 @@ interface NavigationProps {
 }
 
 const { height } = Dimensions.get('window');
-
-function ButtonLevel1({ navigation }: NavigationProps) {
+// Bouton suivant
+function ButtonNext({ navigation }: NavigationProps) {
   return (
     <TouchableOpacity
       style={styles.levelButton}
@@ -63,7 +63,7 @@ export default function GameContextL1Activity({ navigation }: NavigationProps) {
           </Text>
 
           <View style={styles.levelsContainer}>
-            <ButtonLevel1 navigation={navigation} />
+            <ButtonNext navigation={navigation} />
           </View>
         </View>
       </View>

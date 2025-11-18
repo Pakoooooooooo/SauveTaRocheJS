@@ -3,6 +3,8 @@ import { View, Text, StyleSheet, Dimensions } from 'react-native';
 
 const { height } = Dimensions.get('window');
 
+/* Cette activité est vide pour l'instant*/
+
 export default function GameActivity() {
   const [showLevels, setShowLevels] = useState(false);
 
