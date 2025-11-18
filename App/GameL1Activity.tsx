@@ -7,7 +7,7 @@ const Questions = [new Q.GameQuestionData(
   "Question 1 question question  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  ?",
   [],
   [],
-  0,
+  1,
   new Q.GameRepData("Option 1 - Coût: 200€", 200, 58, [new Q.MapChangeData(0, 0, 'sand')], [new Q.MapChangeData(0, 0, 'h')], 0),
   new Q.GameRepData("Option 2 - Rien faire", 0, -20, [], [], 0),
   new Q.GameRepData("Option 3 - Coût: 500€", 500, 10, [new Q.MapChangeData(0, 0, 'sand'), new Q.MapChangeData(1, 0, 'sand'), new Q.MapChangeData(1, 1, 'sand')], [new Q.MapChangeData(0, 0, 'h')], 0),
@@ -19,6 +19,16 @@ new Q.GameQuestionData(
   [],
   3,
   new Q.GameRepData("Option 1 - Coût: 300€", 300, 58, [new Q.MapChangeData(0, 0, 'sand')], [new Q.MapChangeData(0, 0, 'h')], 0),
+  new Q.GameRepData("Option 2 - Rien faire 10€", 10, -20, [], [], 0),
+  new Q.GameRepData("Option 3 - Coût: 1000€", 1000, 10, [new Q.MapChangeData(0, 0, 'stone'), new Q.MapChangeData(1, 0, 'stone'), new Q.MapChangeData(1, 1, 'stone')], [new Q.MapChangeData(0, 0, 'h')], 0),
+  new Q.GameRepData("Option 4 - Coût: 200€", 200, 30, [new Q.MapChangeData(0, 0, 'sand'), new Q.MapChangeData(1, 0, 'sand'), new Q.MapChangeData(1, 1, 'sand')], [], 0)
+),
+new Q.GameQuestionData(
+  "Evênement!!  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  ?",
+  [],
+  [],
+  0,
+  new Q.GameRepData("D'accord", 0, 0, [new Q.MapChangeData(1, 0, 'water')], [], 0),
   new Q.GameRepData("Option 2 - Rien faire 10€", 10, -20, [], [], 0),
   new Q.GameRepData("Option 3 - Coût: 1000€", 1000, 10, [new Q.MapChangeData(0, 0, 'stone'), new Q.MapChangeData(1, 0, 'stone'), new Q.MapChangeData(1, 1, 'stone')], [new Q.MapChangeData(0, 0, 'h')], 0),
   new Q.GameRepData("Option 4 - Coût: 200€", 200, 30, [new Q.MapChangeData(0, 0, 'sand'), new Q.MapChangeData(1, 0, 'sand'), new Q.MapChangeData(1, 1, 'sand')], [], 0)
@@ -85,7 +95,7 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
   const [monthIndex, setMonthIndex] = useState(4);
   const [year, setYear] = useState(2026);
   const [happiness, setHappiness] = useState(50);
-  const [currentCaracterIndex, setCurrentCaracterIndex] = useState(0);
+  const [currentCaracterIndex, setCurrentCaracterIndex] = useState(1);
   const [selectedRep, setSelectedRep] = useState<number | null>(null);
   const [currentQindex, setCurrentQindex] = useState(0);
   const [memQuestions, setMemQuestion] = useState<Q.GameQuestionData[]>([]);
@@ -283,12 +293,12 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
     return (
       <View style={{ flexDirection: 'column' }}>
         <View style={{ flexDirection: 'row' }}>
-          <ButtonRep txt={txt1} style={G.styles.buttonRep} index={1} onSelect={onSelect} selectedRep={selectedRep} />
-          <ButtonRep txt={txt2} style={G.styles.buttonRep} index={2} onSelect={onSelect} selectedRep={selectedRep}/>
+          <ButtonRep txt={txt1} style={G.styles.buttonRep} index={1} onSelect={onSelect} selectedRep={selectedRep}/>
+          <ButtonRep txt={txt2} style={[G.styles.buttonRep, { display: (currentCaracterIndex!==0) ? 'flex' : 'none' }]} index={2} onSelect={onSelect} selectedRep={selectedRep}/>
         </View>
         <View style={{ flexDirection: 'row' }}>
-          <ButtonRep txt={txt3} style={G.styles.buttonRep} index={3} onSelect={onSelect} selectedRep={selectedRep}/>
-          <ButtonRep txt={txt4} style={G.styles.buttonRep} index={4} onSelect={onSelect} selectedRep={selectedRep}/>
+          <ButtonRep txt={txt3} style={[G.styles.buttonRep, { display: (currentCaracterIndex!==0) ? 'flex' : 'none' }]} index={3} onSelect={onSelect} selectedRep={selectedRep}/>
+          <ButtonRep txt={txt4} style={[G.styles.buttonRep, { display: (currentCaracterIndex!==0) ? 'flex' : 'none' }]} index={4} onSelect={onSelect} selectedRep={selectedRep}/>
         </View>
       </View>
     );
