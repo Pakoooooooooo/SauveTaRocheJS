@@ -9,15 +9,10 @@
     "web": "expo start --web"
   },
   "dependencies": {
-    "@expo/prebuild-config": "7.0.9",
     "@react-navigation/native": "^6.1.9",
     "@react-navigation/native-stack": "^6.9.17",
-    "ansi-escapes": "^7.2.0",
     "expo": "~51.0.0",
-    "expo-build-properties": "^1.0.9",
-    "expo-dev-client": "~4.0.29",
     "expo-font": "~12.0.9",
-    "expo-modules-autolinking": "1.11.3",
     "expo-navigation-bar": "~3.0.7",
     "expo-status-bar": "~1.12.1",
     "react": "18.2.0",
@@ -28,7 +23,6 @@
   },
   "devDependencies": {
     "@babel/core": "^7.24.0",
-    "@expo/cli": "^0.18.31",
     "@types/react": "~18.2.45",
     "typescript": "~5.3.3"
   },
