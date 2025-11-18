@@ -1,12 +1,39 @@
-import React, { useState, useMemo, useCallback } from 'react';
-import { StyleSheet, TouchableHighlight, TouchableOpacity, Image, View, Text, Dimensions } from 'react-native';
+import React, { useRef, useState, useMemo, useCallback } from 'react';
+import { StyleSheet, TouchableOpacity, Image, View, Text, Dimensions } from 'react-native';
 import * as G from './GameUI';
+import * as Q from './GameQuestions';
 
-const txt1 = "Rep 1"
-const txt2 = "Rep 2"
-const txt3 = "Rep 3"
-const txt4 = "Rep 4"
-const correctRep = 3;
+const Questions = [new Q.GameQuestionData(
+  "Question 1 question question  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  ?",
+  [],
+  [],
+  1,
+  new Q.GameRepData("Option 1 - Coût: 200€", 200, 58, [new Q.MapChangeData(0, 0, 'sand')], [new Q.MapChangeData(0, 0, 'h')], 0),
+  new Q.GameRepData("Option 2 - Rien faire", 0, -20, [], [], 0),
+  new Q.GameRepData("Option 3 - Coût: 500€", 500, 10, [new Q.MapChangeData(0, 0, 'sand'), new Q.MapChangeData(1, 0, 'sand'), new Q.MapChangeData(1, 1, 'sand')], [new Q.MapChangeData(0, 0, 'h')], 0),
+  new Q.GameRepData("Option 4 - Coût: 300€", 300, 30, [new Q.MapChangeData(0, 0, 'sand'), new Q.MapChangeData(1, 0, 'sand'), new Q.MapChangeData(1, 1, 'sand')], [], 0)
+),
+new Q.GameQuestionData(
+  "Question 2 question question  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  ?",
+  [],
+  [],
+  3,
+  new Q.GameRepData("Option 1 - Coût: 300€", 300, 58, [new Q.MapChangeData(0, 0, 'sand')], [new Q.MapChangeData(0, 0, 'h')], 0),
+  new Q.GameRepData("Option 2 - Rien faire 10€", 10, -20, [], [], 0),
+  new Q.GameRepData("Option 3 - Coût: 1000€", 1000, 10, [new Q.MapChangeData(0, 0, 'stone'), new Q.MapChangeData(1, 0, 'stone'), new Q.MapChangeData(1, 1, 'stone')], [new Q.MapChangeData(0, 0, 'h')], 0),
+  new Q.GameRepData("Option 4 - Coût: 200€", 200, 30, [new Q.MapChangeData(0, 0, 'sand'), new Q.MapChangeData(1, 0, 'sand'), new Q.MapChangeData(1, 1, 'sand')], [], 0)
+),
+new Q.GameQuestionData(
+  "Evênement!!  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  ?",
+  [],
+  [],
+  0,
+  new Q.GameRepData("D'accord", 0, 0, [new Q.MapChangeData(1, 0, 'water')], [], 0),
+  new Q.GameRepData("", 0, 0, [], [], 0),
+  new Q.GameRepData("", 0, 0, [], [], 0),
+  new Q.GameRepData("", 0, 0, [], [], 0)
+)
+]
 
 export default function GameL1Activity({ navigation }: G.NavigationProps) {
 
@@ -68,15 +95,18 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
   const [monthIndex, setMonthIndex] = useState(4);
   const [year, setYear] = useState(2026);
   const [happiness, setHappiness] = useState(50);
-  const [currentCaracterIndex, setCurrentCaracterIndex] = useState(0);
+  const [currentCaracterIndex, setCurrentCaracterIndex] = useState(1);
   const [selectedRep, setSelectedRep] = useState<number | null>(null);
+  const [currentQindex, setCurrentQindex] = useState(0);
+  const [memQuestions, setMemQuestion] = useState<Q.GameQuestionData[]>([]);
+  const [memResponses, setMemResponses] = useState<number[]>([]);
 
   // Définir les textes des réponses
-  const [txt1] = useState("Option 1 - Coût: 200€");
-  const [txt2] = useState("Option 2 - Rien faire");
-  const [txt3] = useState("Option 3 - Coût: 500€");
-  const [txt4] = useState("Option 4 - Coût: 300€");
-  const [correctRep] = useState(1); // Définir quelle est la bonne réponse
+  const [txt1, setText1] = useState(Questions[currentQindex].rep1.repText);
+  const [txt2, setText2] = useState(Questions[currentQindex].rep2.repText);
+  const [txt3, setText3] = useState(Questions[currentQindex].rep3.repText);
+  const [txt4, setText4] = useState(Questions[currentQindex].rep4.repText);
+  const [SpeechText, setSpeechText] = useState(Questions[currentQindex].questionText); // Définir quelle est la bonne réponse
 
   // Cache des calculs isServed - recalculé uniquement quand overLayMap change
   const servedCache = useMemo(() => {
@@ -153,8 +183,8 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
     ChangeBudget(charges);
   }, [charges, ChangeBudget]);
   // Passe au personnage suivant
-  const NextCaracter = useCallback(() => {
-    setCurrentCaracterIndex(prev => (prev + 1) % G.caracters.length);
+  const setCaracter = useCallback((id: number) => {
+    setCurrentCaracterIndex((id) % G.caracters.length);
   }, []);
   // Passe au mois suivant
   const NextMonth = useCallback(() => {
@@ -168,41 +198,67 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
     });
   }, []);
 
+  const isProcessingRef = useRef(false);
   // Fonction pour gérer la sélection d'une réponse
   const handleSelectRep = useCallback((index: number) => {
-    if (selectedRep !== null) return; // Empêcher les sélections multiples
+    if (isProcessingRef.current) return; // Utiliser une ref
+    isProcessingRef.current = true;
     
     setSelectedRep(index);
-    NextCaracter();
     NextMonth();
-    
+    let rep = Questions[currentQindex].rep1
     if (index === 1) {
-      ApplyCharges();
-      ChangeMapTile(0, 0, 'sand');
-      ChangeOverlayTile(0, 0, 'h');
-      ChangeBudget(-200);
-      ChangeHappiness(58);
+      rep = Questions[currentQindex].rep1
     } else if (index === 2) {
-      ApplyCharges();
-      ChangeHappiness(-20);
+      rep = Questions[currentQindex].rep2
     } else if (index === 3) {
-      ApplyCharges();
-      ChangeMapTile(0, 0, 'sand');
-      ChangeMapTile(1, 0, 'sand');
-      ChangeMapTile(1, 1, 'sand');
-      ChangeOverlayTile(0, 0, 'h');
-      ChangeBudget(-500);
-      ChangeHappiness(10);
+      rep = Questions[currentQindex].rep3
     } else {
-      ApplyCharges();
-      ChangeMapTile(0, 0, 'sand');
-      ChangeMapTile(1, 0, 'sand');
-      ChangeMapTile(1, 1, 'sand');
-      ChangeBudget(-300);
-      ChangeHappiness(30);
+      rep = Questions[currentQindex].rep4
     }
-    setSelectedRep(null)
-  }, [selectedRep, NextCaracter, NextMonth, ApplyCharges, ChangeMapTile, ChangeOverlayTile, ChangeBudget]);
+    ApplyCharges();
+    rep.mapChanges.forEach(c => {
+      ChangeMapTile(c.i, c.j, c.newType)
+    });
+    rep.overlayChanges.forEach(c => {
+      ChangeOverlayTile(c.i, c.j, c.newType)
+    });
+    ChangeBudget(-rep.price);
+    ChangeHappiness(rep.happiness);
+    
+    let memRep = [...memResponses, index];
+    setMemResponses(memRep);
+    
+    let memQuest = [...memQuestions, Questions[currentQindex]];
+    setMemQuestion(memQuest);
+    
+    let i = 1;
+    while (currentQindex + i < Questions.length && 
+           !G.respects(Questions[currentQindex + i], memQuest, memRep)) {
+      i += 1;
+    }
+    
+    let newI = currentQindex;
+    if (currentQindex + i < Questions.length) {
+      newI = currentQindex + i;
+      setCurrentQindex(newI);
+    }
+    else {
+      navigation.goBack()
+    }
+    
+    setSpeechText(Questions[newI].questionText);
+    setText1(Questions[newI].rep1.repText);
+    setText2(Questions[newI].rep2.repText);
+    setText3(Questions[newI].rep3.repText);
+    setText4(Questions[newI].rep4.repText);
+    setCaracter(Questions[newI].caracter);
+    setSelectedRep(null);
+    
+    // Réinitialiser le flag à la fin
+    isProcessingRef.current = false;
+  }, [selectedRep, currentQindex, setCaracter, NextMonth, ApplyCharges, ChangeMapTile, ChangeOverlayTile, ChangeBudget, setCurrentQindex, setSpeechText, setText1, setText2, setText3, setText4]);
+
   // Affichage d'un bouton de réponse aux questions
   const ButtonRep = useCallback(({txt, style, index, onSelect, selectedRep}: 
     {txt?: string; style?: object; index: number; onSelect: (index: number) => void; selectedRep: number | null;}) => {
@@ -230,18 +286,19 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
       </TouchableOpacity>
     );
   }, []);
+
   // Affichage des boutons de réponse aux questions
   const Reps = React.memo(({txt1 = '', txt2 = '', txt3 = '', txt4 = '', onSelect, selectedRep}:
     {txt1?: string; txt2?: string; txt3?: string; txt4?: string; onSelect: (index: number) => void; selectedRep: number | null;}) => {
     return (
       <View style={{ flexDirection: 'column' }}>
         <View style={{ flexDirection: 'row' }}>
-          <ButtonRep txt={txt1} style={G.styles.buttonRep} index={1} onSelect={onSelect} selectedRep={selectedRep} />
-          <ButtonRep txt={txt2} style={G.styles.buttonRep} index={2} onSelect={onSelect} selectedRep={selectedRep}/>
+          <ButtonRep txt={txt1} style={G.styles.buttonRep} index={1} onSelect={onSelect} selectedRep={selectedRep}/>
+          <ButtonRep txt={txt2} style={[G.styles.buttonRep, { display: (currentCaracterIndex!==0) ? 'flex' : 'none' }]} index={2} onSelect={onSelect} selectedRep={selectedRep}/>
         </View>
         <View style={{ flexDirection: 'row' }}>
-          <ButtonRep txt={txt3} style={G.styles.buttonRep} index={3} onSelect={onSelect} selectedRep={selectedRep}/>
-          <ButtonRep txt={txt4} style={G.styles.buttonRep} index={4} onSelect={onSelect} selectedRep={selectedRep}/>
+          <ButtonRep txt={txt3} style={[G.styles.buttonRep, { display: (currentCaracterIndex!==0) ? 'flex' : 'none' }]} index={3} onSelect={onSelect} selectedRep={selectedRep}/>
+          <ButtonRep txt={txt4} style={[G.styles.buttonRep, { display: (currentCaracterIndex!==0) ? 'flex' : 'none' }]} index={4} onSelect={onSelect} selectedRep={selectedRep}/>
         </View>
       </View>
     );
@@ -271,7 +328,7 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
         <View style={styles.infoDisplay}>
           <G.CaracterImage currentCaracterIndex={currentCaracterIndex} />
           <View >
-            <G.Speech txt="Question question question  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  ?"/>
+            <G.Speech txt={SpeechText}/>
             <Reps
               txt1={txt1}
               txt2={txt2}
