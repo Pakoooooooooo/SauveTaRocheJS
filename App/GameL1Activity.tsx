@@ -29,9 +29,9 @@ new Q.GameQuestionData(
   [],
   0,
   new Q.GameRepData("D'accord", 0, 0, [new Q.MapChangeData(1, 0, 'water')], [], 0),
-  new Q.GameRepData("Option 2 - Rien faire 10€", 10, -20, [], [], 0),
-  new Q.GameRepData("Option 3 - Coût: 1000€", 1000, 10, [new Q.MapChangeData(0, 0, 'stone'), new Q.MapChangeData(1, 0, 'stone'), new Q.MapChangeData(1, 1, 'stone')], [new Q.MapChangeData(0, 0, 'h')], 0),
-  new Q.GameRepData("Option 4 - Coût: 200€", 200, 30, [new Q.MapChangeData(0, 0, 'sand'), new Q.MapChangeData(1, 0, 'sand'), new Q.MapChangeData(1, 1, 'sand')], [], 0)
+  new Q.GameRepData("", 0, 0, [], [], 0),
+  new Q.GameRepData("", 0, 0, [], [], 0),
+  new Q.GameRepData("", 0, 0, [], [], 0)
 )
 ]
 
