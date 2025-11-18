@@ -110,7 +110,7 @@ export default function Data50Activity({ navigation }: NavigationProps) {
         showsMyLocationButton={true}
         showsCompass={true}
         showsScale={true}
-        mapType="satellite"
+        mapType="standard"
         zoomEnabled={true}
         zoomControlEnabled={true}
       >
