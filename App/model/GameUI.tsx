@@ -203,8 +203,6 @@ export const JAUGE_IAMGES: JaugeImages = {
   frame_98: require('../assets/jauge_frames/frame_00098.png'),
   frame_99: require('../assets/jauge_frames/frame_00099.png')
 }
-// Banque des mois de l'anné
-export const months = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Aout", "Septembre", "Octobre", "Novembre", "Décembre"];
 // Banque de types de personnages
 export const caracters = ['Présentatrice','Secrétaire', 'Scientifique', 'Habitant', 'Gardien_de_Port', 'Commerçant'];
 // Méthode de navigation
@@ -221,7 +219,6 @@ export const Tiles = React.memo(({ type }: { type: keyof typeof TILE_IMAGES }) =
     </TouchableHighlight>
   );
 });
-
 // Calcul si un batiment (maison/route/port...) est déservi par une route ou une ligne maritime
 export function isServed(
   overLayMap: string[][],
@@ -454,9 +451,9 @@ export const Budget = React.memo(({budget}: {budget: number}) => {
   );
 });
 // Affichage de la date en dessous de la carte
-export const DateDisplay = React.memo(({monthIndex, year}: {monthIndex: number, year: number}) => {
+export const DateDisplay = React.memo(({year}: {year: number}) => {
   return (
-    <Text style={styles.budgetText}>{months[monthIndex]} {year}</Text>
+    <Text style={styles.budgetText}>{year}</Text>
   );
 });
 // Affichage de la ligne de séparation entre l'écran superieur (carte+budget+date) et l'écran inferieur (personnage+question/rep+jauge)
