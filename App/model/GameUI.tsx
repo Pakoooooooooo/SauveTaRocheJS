@@ -34,6 +34,12 @@ export function respects(Quest: Q.GameQuestionData, ListQuest: Q.GameQuestionDat
       return false
     }
   }
+  for (const q of Quest.prevQuestNotCondition) {
+    const i = Quest.prevQuestNotCondition.indexOf(q);
+    if (ListQuest.includes(q) && ListRep[i] === Quest.prevRepCondition[i]){
+      return false
+    }
+  }
   return true
 }
 // Import all tile images with correct relative paths
@@ -557,7 +563,7 @@ export const styles = StyleSheet.create({
     textDecorationLine: 'underline',
   },
   speech: {
-    fontSize: smallTextSize*1.5,
+    fontSize: smallTextSize*0.9,
     margin: 5,
     fontFamily: 'Gloucester',
     color: '#070A28',
@@ -582,7 +588,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'row'
   },
   repText: {
-    fontSize: smallTextSize,
+    fontSize: smallTextSize*0.8,
     color: '#FFFFFF',
     textAlign: 'center',
     fontFamily: 'Gloucester',

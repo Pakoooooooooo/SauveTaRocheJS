@@ -2,39 +2,11 @@ import React, { useRef, useState, useMemo, useCallback } from 'react';
 import { StyleSheet, TouchableOpacity, Image, View, Text, Dimensions } from 'react-native';
 import * as G from '../model/GameUI';
 import * as Q from '../model/GameQuestions';
+import * as R from '../model/GameQuestionsRepository';
 
 // Liste des questions qui auront lieu pendant la partie (une question sur deux est en réalité un explication de la question précédente dont la réponse n'a donc pas d'impactsur le jeu)
-const Qu = [new Q.GameQuestionData(
-  "Question 1 question question  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  ?",
-  [],
-  [],
-  1,
-  new Q.GameRepData("Option 1 - Coût: 200€", 200, 58, [new Q.MapChangeData(0, 0, 'sand')], [new Q.MapChangeData(0, 0, 'h')], 0, "Explication 1a"),
-  new Q.GameRepData("Option 2 - Rien faire", 0, -20, [], [], 0, "Explication 1b"),
-  new Q.GameRepData("Option 3 - Coût: 500€", 500, 10, [new Q.MapChangeData(0, 0, 'sand'), new Q.MapChangeData(1, 0, 'sand'), new Q.MapChangeData(1, 1, 'sand')], [new Q.MapChangeData(0, 0, 'h')], 0, "Explication 1c"),
-  new Q.GameRepData("Option 4 - Coût: 300€", 300, 30, [new Q.MapChangeData(0, 0, 'sand'), new Q.MapChangeData(1, 0, 'sand'), new Q.MapChangeData(1, 1, 'sand')], [], 0, "Explication 1d")
-),
-new Q.GameQuestionData(
-  "Question 2 question question  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  ?",
-  [],
-  [],
-  3,
-  new Q.GameRepData("Option 1 - Coût: 300€", 300, 58, [new Q.MapChangeData(0, 0, 'sand')], [new Q.MapChangeData(0, 0, 'h')], 0, "Explication 2a"),
-  new Q.GameRepData("Option 2 - Rien faire 10€", 10, -20, [], [], 0, "Explication 2b"),
-  new Q.GameRepData("Option 3 - Coût: 1000€", 1000, 10, [new Q.MapChangeData(0, 0, 'stone'), new Q.MapChangeData(1, 0, 'stone'), new Q.MapChangeData(1, 1, 'stone')], [new Q.MapChangeData(0, 0, 'h')], 0, "Explication 2c"),
-  new Q.GameRepData("Option 4 - Coût: 200€", 200, 30, [new Q.MapChangeData(0, 0, 'sand'), new Q.MapChangeData(1, 0, 'sand'), new Q.MapChangeData(1, 1, 'sand')], [], 0, "Explication 2d")
-),
-new Q.GameQuestionData(
-  "Evênement!!  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  ?",
-  [],
-  [],
-  0,
-  new Q.GameRepData("D'accord", 0, 0, [new Q.MapChangeData(1, 0, 'water')], [], 0, "Explication évênement"),
-  new Q.GameRepData("", 0, 0, [], [], 0, "Explication 1"),
-  new Q.GameRepData("", 0, 0, [], [], 0, "Explication 1"),
-  new Q.GameRepData("", 0, 0, [], [], 0, "Explication 1")
-)
-]
+const Qu = R.parseGameQuestions()
+
 // Création de la liste de questions alternée d'explications
 const Questions = [... Qu.flatMap((question, index) => 
   index < Qu.length - 1 ? [question, Q.Explication] : [question]
@@ -87,7 +59,7 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
     ["","","","","","l","p","","","r","","","",""],
     ["","","","p","l","l","","","h","r","r","r","",""],
     ["","","","h","","","","","","c","","r","",""],
-    ["","","","","","","","s","","h","","r","",""],
+    ["","","","","","","","","","h","","r","",""],
     ["","","","","","","","","","h","c","r","",""],
     ["","","","","","","","","h","r","r","r","r","r"],
     ["","","","","","","r","r","r","r","","","",""],
@@ -95,11 +67,11 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
     ["","","","","h","","","","","","","","",""]
   ]);
   // autres constantes de départ (useState permet d'associer la variable à la dynamique d'affichage de GameUI) :
-  const [budget, setBudget] = useState(1000);
-  const [charges, setCharges] = useState(1000); // la valeur des charges est enlevée au budget quand la valeur apply charges est appelée
+  const [budget, setBudget] = useState(600000);
+  const [income, setIncome] = useState(10000); // la valeur des revenues est enlevée au budget quand la valeur apply revenus est appelée
   const [monthIndex, setMonthIndex] = useState(4);
   const [year, setYear] = useState(2026);
-  const [happiness, setHappiness] = useState(50);
+  const [happiness, setHappiness] = useState(70);
   const [currentCaracterIndex, setCurrentCaracterIndex] = useState(1);
   const [selectedRep, setSelectedRep] = useState<number | null>(null);
   const [currentQindex, setCurrentQindex] = useState(0);
@@ -173,7 +145,9 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
   }, [map, setOverlayTile]);
   // Ajoute incr au budget
   const ChangeBudget = useCallback((incr: number) => {
-    setBudget(prevBudget => prevBudget + incr);
+    if (budget + incr>=0){
+      setBudget(prevBudget => prevBudget + incr);
+    } else {setBudget(0)}
   }, []);
   // Ajoute incr à la jauge de satisfaction
   const ChangeHappiness = useCallback((incr: number) => {
@@ -184,10 +158,10 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
     return newValue;
   });
 }, []);
-  // Ajoute les charges mensuelles/annuelles au budget
-  const ApplyCharges = useCallback(() => {
-    ChangeBudget(charges);
-  }, [charges, ChangeBudget]);
+  // Ajoute les revenus mensuelles/annuelles au budget
+  const ApplyIncome = useCallback(() => {
+    ChangeBudget(income);
+  }, [income, ChangeBudget]);
   // Passe au personnage suivant
   const setCaracter = useCallback((id: number) => {
     setCurrentCaracterIndex((id) % G.caracters.length);
@@ -199,7 +173,7 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
         return prev + 1;
       } else {
         setYear(y => y + 1);
-        ApplyCharges();
+        ApplyIncome();
         return 0;
       }
     });
@@ -234,7 +208,7 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
         ChangeOverlayTile(c.i, c.j, c.newType)
       });
       // Change le budget en fonction de ce qui est éxplicité dans la question
-      ChangeBudget(-rep.price);
+      ChangeBudget(rep.price);
       // Change la satisfaction en fonction de ce qui est éxplicité dans la question
       ChangeHappiness(rep.happiness);
       // On ajoute l'indice de la réponse à la liste des indices de réponses choisies
@@ -285,7 +259,9 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
       }
       // Affichage de la question suivante
       setSpeechText(Questions[newI].questionText);
-      setText1(Questions[newI].rep1.repText);
+      if (Questions[newI].caracter===0) {
+        setText1("Suivant");
+      }else{setText1(Questions[newI].rep1.repText);}
       setText2(Questions[newI].rep2.repText);
       setText3(Questions[newI].rep3.repText);
       setText4(Questions[newI].rep4.repText);
@@ -296,7 +272,7 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
     
     // Réinitialiser le flag à la fin
     isProcessingRef.current = false;
-  }, [selectedRep, currentQindex, setCaracter, NextMonth, ApplyCharges, ChangeMapTile, ChangeOverlayTile, ChangeBudget, setCurrentQindex, setSpeechText, setText1, setText2, setText3, setText4]);
+  }, [selectedRep, currentQindex, setCaracter, NextMonth, ApplyIncome, ChangeMapTile, ChangeOverlayTile, ChangeBudget, setCurrentQindex, setSpeechText, setText1, setText2, setText3, setText4]);
 
   // Affichage d'un bouton de réponse aux questions
   const ButtonRep = useCallback(({txt, style, index, onSelect, selectedRep}: 

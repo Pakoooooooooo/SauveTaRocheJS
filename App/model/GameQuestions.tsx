@@ -25,7 +25,7 @@ export class GameRepData {
   happiness: number;
   mapChanges: MapChangeData[];
   overlayChanges: MapChangeData[];
-  chargesChange: number;
+  incomeChanges: number;
   explConseq: string;
   constructor(
     repText: string,
@@ -33,7 +33,7 @@ export class GameRepData {
     happiness : number,
     mapChanges: MapChangeData[],
     overlayChanges: MapChangeData[],
-    chargesChanges: number,
+    incomeChanges: number,
     explConseq: string,
   ) {
     this.repText = repText
@@ -41,7 +41,7 @@ export class GameRepData {
     this.happiness = happiness
     this.mapChanges = mapChanges
     this.overlayChanges = overlayChanges
-    this.chargesChange = chargesChanges
+    this.incomeChanges = incomeChanges
     this.explConseq = explConseq
   }
 }
@@ -50,6 +50,8 @@ export class GameQuestionData {
   questionText: string;
   prevQuestCondition: GameQuestionData[];
   prevRepCondition: number[];
+  prevQuestNotCondition: GameQuestionData[];
+  prevRepNotCondition: number[];
   caracter: number;
   rep1: GameRepData;
   rep2: GameRepData;
@@ -60,6 +62,8 @@ export class GameQuestionData {
     questionText: string,
     prevQuestCondition: GameQuestionData[],
     prevRepCondition: number[],
+    prevQuestNotCondition: GameQuestionData[],
+    prevRepNotCondition: number[],
     caracter: number,
     rep1: GameRepData,
     rep2: GameRepData,
@@ -69,6 +73,8 @@ export class GameQuestionData {
     this.questionText = questionText;
     this.prevQuestCondition = prevQuestCondition
     this.prevRepCondition = prevRepCondition
+    this.prevQuestNotCondition = prevQuestNotCondition
+    this.prevRepNotCondition = prevRepNotCondition
     this.caracter = caracter
     this.rep1 = rep1
     this.rep2 = rep2
@@ -77,7 +83,7 @@ export class GameQuestionData {
   }
 }
 
-export const Explication = new  Q.GameQuestionData("",[],[],1,
+export const Explication = new  Q.GameQuestionData("",[],[],[],[],1,
   new Q.GameRepData("", 0, 0, [], [], 0, ""),
   new Q.GameRepData("", 0, 0, [], [], 0, ""),
   new Q.GameRepData("", 0, 0, [], [], 0, ""),

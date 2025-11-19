@@ -1,0 +1,2503 @@
+[
+
+    {
+
+        "questionText": "Notre commune est trs appréciée des touristes et c'est en partie grce  eux que notre économie locale est si dynamique. Cependant depuis quelques années ces touristes détrériorent nos cétes et polluent nos plages. Nous devons donc prendre une décision par rapport au flux touristique de Graniland. Que souhaitez-vous faire ?",
+
+        "prevQuestCondition": [],
+
+        "prevRepCondition": [],
+
+        "prevQuestNotCondition": [],
+
+        "prevRepNotCondition": [],
+
+        "caracter": 5,
+
+        "rep1": {
+
+            "repText": "Limiter le tourisme",
+
+            "price": -20000,
+
+            "happiness": 0,
+
+            "mapChanges": [],
+
+            "overlayChanges": [],
+
+            "incomeChanges": 0,
+
+            "explConseq": "La limitation du tourisme a un impact négatif sur votre activité économique car les touristes dynamisaient votre économie mais leur absence n'affecte pas votre population."
+
+        },
+
+        "rep2": {
+
+            "repText": "Promouvoir le tourisme",
+
+            "price": 75000,
+
+            "happiness": 5,
+
+            "mapChanges": [],
+
+            "overlayChanges": [],
+
+            "incomeChanges": 0,
+
+            "explConseq": "En promouvant le tourisme votre attractivité ainsi que le flux touristique augmentent. Cela devient une source de revenus importante pour vous. Vos habitants sont fiers d'habiter dans une ville si attrractive et dynamique."
+
+        },
+
+        "rep3": {
+
+            "repText": "Organiser des balades sur la céte encadrées par la ville",
+
+            "price": 2000,
+
+            "happiness": -10,
+
+            "mapChanges": [],
+
+            "overlayChanges": [],
+
+            "incomeChanges": 0,
+
+            "explConseq": "L'organisation de balades permet d'attirer de nouveaux touristes donc cela dynamise votre économie mais les itinéraires de la ville passent sur des zones assez reculées qui n'étaient connues que des riverains. Vos habitants ne sont pas satisfaits puisqu'ils ne peuvent plus se balader proche de chez eux sans touristes."
+
+        },
+
+        "rep4": {
+
+            "repText": "Ne rien faire",
+
+            "price": 0,
+
+            "happiness": 0,
+
+            "mapChanges": [],
+
+            "overlayChanges": [],
+
+            "incomeChanges": 0,
+
+            "explConseq": "Cette décision n'a pas impacté votre budget ni la satisfaction de vos habitants."
+
+        }
+
+    },
+
+    {
+
+        "questionText": "De nombreuses personnes cherchent  se mettre au vert et l'emplacement de Graniland est idéal proche de la mer pas trop éloigné des grandes villes : Graniland fait rver ! Vous avez l'opportunité de construire un lotissement avec des maisons traditionnelles et adaptées au territoire que faites-vous ?",
+
+        "prevQuestCondition": [],
+
+        "prevRepCondition": [],
+
+        "prevQuestNotCondition": [],
+
+        "prevRepNotCondition": [],
+
+        "caracter": 3,
+
+        "rep1": {
+
+            "repText": "Construire sur la roche",
+
+            "price": -400000,
+
+            "happiness": 10,
+
+            "mapChanges": [],
+
+            "overlayChanges": [
+
+                {
+
+                    "i": 2,
+
+                    "j": 6,
+
+                    "newType": "h"
+
+                },
+
+                {
+
+                    "i": 3,
+
+                    "j": 6,
+
+                    "newType": "h"
+
+                }
+
+            ],
+
+            "incomeChanges": 2000,
+
+            "explConseq": "La construction sur la roche est assez coéteuse car les terrains sont proches de la mer mais les nouveaux arrivants sont ravis de leur cadre de vie."
+
+        },
+
+        "rep2": {
+
+            "repText": "Construire dans l'arrire pays",
+
+            "price": -250000,
+
+            "happiness": 5,
+
+            "mapChanges": [],
+
+            "overlayChanges": [
+
+                {
+
+                    "i": 11,
+
+                    "j": 13,
+
+                    "newType": "h"
+
+                },
+
+                {
+
+                    "i": 11,
+
+                    "j": 12,
+
+                    "newType": "h"
+
+                }
+
+            ],
+
+            "incomeChanges": 2000,
+
+            "explConseq": "Le nouveau lotissement dans l'arrire pays se situe sur des terrains abandonnés ils sont donc accessibles. Les nouveaux arrivants sont ceux qui recherchent un cadre de vie paisible et centré sur la nature."
+
+        },
+
+        "rep3": {
+
+            "repText": "Ne pas construire",
+
+            "price": 0,
+
+            "happiness": 0,
+
+            "mapChanges": [],
+
+            "overlayChanges": [],
+
+            "incomeChanges": 0,
+
+            "explConseq": "Cette décision n'a pas impacté votre budget ni la satisfaction de vos habitants."
+
+        },
+
+        "rep4": {
+
+            "repText": "Construire proche du noyau villageois",
+
+            "price": -300000,
+
+            "happiness": 5,
+
+            "mapChanges": [],
+
+            "overlayChanges": [
+
+                {
+
+                    "i": 7,
+
+                    "j": 10,
+
+                    "newType": "h"
+
+                },
+
+                {
+
+                    "i": 8,
+
+                    "j": 10,
+
+                    "newType": "h"
+
+                }
+
+            ],
+
+            "incomeChanges": 2000,
+
+            "explConseq": "La construction proche du noyau villageois est coéteuse car les parcelles sont proches des commerces. La zone est attractive pour des personnes en recherche d'un vie calme dans une ville pleine de charme."
+
+        }
+
+    },
+
+    {
+
+        "questionText": "La maison prs de la céte va tre obligatoirement détruite  cause du recul du trait de céte.",
+
+        "prevQuestCondition": [],
+
+        "prevRepCondition": [],
+
+        "prevQuestNotCondition": [],
+
+        "prevRepNotCondition": [],
+
+        "caracter": 0,
+
+        "rep1": {
+
+            "repText": "",
+
+            "price": -50000,
+
+            "happiness": -2,
+
+            "mapChanges": [],
+
+            "overlayChanges": [
+
+                {
+
+                    "i": 13,
+
+                    "j": 4,
+
+                    "newType": ""
+
+                }
+
+            ],
+
+            "incomeChanges": -1000,
+
+            "explConseq": ""
+
+        },
+
+        "rep2": {
+
+            "repText": "",
+
+            "price": 0,
+
+            "happiness": 0,
+
+            "mapChanges": [],
+
+            "overlayChanges": [],
+
+            "incomeChanges": 0,
+
+            "explConseq": ""
+
+        },
+
+        "rep3": {
+
+            "repText": "",
+
+            "price": 0,
+
+            "happiness": 0,
+
+            "mapChanges": [],
+
+            "overlayChanges": [],
+
+            "incomeChanges": 0,
+
+            "explConseq": ""
+
+        },
+
+        "rep4": {
+
+            "repText": "",
+
+            "price": 0,
+
+            "happiness": 0,
+
+            "mapChanges": [],
+
+            "overlayChanges": [],
+
+            "incomeChanges": 0,
+
+            "explConseq": ""
+
+        }
+
+    },
+
+    {
+
+        "questionText": "Le recul du trait de céte devient un problme avéré il faut comprendre le phénomne chercher des solutions potentielles ou sensibiliser les populations. Dans ce cadre qui souhaitez-vous financer ?",
+
+        "prevQuestCondition": [],
+
+        "prevRepCondition": [],
+
+        "prevQuestNotCondition": [],
+
+        "prevRepNotCondition": [],
+
+        "caracter": 2,
+
+        "rep1": {
+
+            "repText": "Laboratoire universitaire ou centre de recherche",
+
+            "price": -10000,
+
+            "happiness": 5,
+
+            "mapChanges": [],
+
+            "overlayChanges": [],
+
+            "incomeChanges": 0,
+
+            "explConseq": "Le financement de laboratoires universitaires fait appel  des acteurs locaux et crédibles cela améliore la confiance de vos habitants en vos décisions."
+
+        },
+
+        "rep2": {
+
+            "repText": "Association scientifique locale",
+
+            "price": -2500,
+
+            "happiness": 2,
+
+            "mapChanges": [],
+
+            "overlayChanges": [],
+
+            "incomeChanges": 0,
+
+            "explConseq": "Le financement des associations est moins coéteux que pour les autres organismes mais les habitants ont moins confiance en des bénévoles que des scientifiques."
+
+        },
+
+        "rep3": {
+
+            "repText": "Bureau dÕétudes spécialisé ou observatoire public technique",
+
+            "price": -15000,
+
+            "happiness": 2,
+
+            "mapChanges": [],
+
+            "overlayChanges": [],
+
+            "incomeChanges": 0,
+
+            "explConseq": "Le financement de bureaux d'études est la solution la plus coéteuse mais les enjeux sont confiés  des organismes nationaux qui sont moins sensibles aux probmématiques locales."
+
+        },
+
+        "rep4": {
+
+            "repText": "Ne rien financer",
+
+            "price": 0,
+
+            "happiness": 0,
+
+            "mapChanges": [],
+
+            "overlayChanges": [],
+
+            "incomeChanges": 0,
+
+            "explConseq": "Cette décision n'a pas impacté votre budget ni la satisfaction de vos habitants."
+
+        }
+
+    },
+
+    {
+
+        "questionText": "Vous sentez que quelque chose se prépare et qu'il faut agir que mettez-vous en place ?",
+
+        "prevQuestCondition": [],
+
+        "prevRepCondition": [],
+
+        "prevQuestNotCondition": [],
+
+        "prevRepNotCondition": [],
+
+        "caracter": 1,
+
+        "rep1": {
+
+            "repText": "Adhésion au programme d'aide de la MTDD",
+
+            "price": -10000,
+
+            "happiness": 0,
+
+            "mapChanges": [],
+
+            "overlayChanges": [],
+
+            "incomeChanges": 5000,
+
+            "explConseq": ""
+
+        },
+
+        "rep2": {
+
+            "repText": "Construction d'une route",
+
+            "price": -30000,
+
+            "happiness": 2,
+
+            "mapChanges": [],
+
+            "overlayChanges": [
+
+                {
+
+                    "i": 3,
+
+                    "j": 13,
+
+                    "newType": "r"
+
+                },
+
+                {
+
+                    "i": 3,
+
+                    "j": 12,
+
+                    "newType": "r"
+
+                },
+
+                {
+
+                    "i": 3,
+
+                    "j": 11,
+
+                    "newType": "r"
+
+                },
+
+                {
+
+                    "i": 3,
+
+                    "j": 10,
+
+                    "newType": "r"
+
+                }
+
+            ],
+
+            "incomeChanges": 0,
+
+            "explConseq": ""
+
+        },
+
+        "rep3": {
+
+            "repText": "Déplacement des maisons cétires sur la roche",
+
+            "price": -300000,
+
+            "happiness": -15,
+
+            "mapChanges": [],
+
+            "overlayChanges": [
+
+                {
+
+                    "i": 7,
+
+                    "j": 8,
+
+                    "newType": ""
+
+                },
+
+                {
+
+                    "i": 10,
+
+                    "j": 8,
+
+                    "newType": ""
+
+                },
+
+                {
+
+                    "i": 3,
+
+                    "j": 5,
+
+                    "newType": "h"
+
+                },
+
+                {
+
+                    "i": 4,
+
+                    "j": 5,
+
+                    "newType": "h"
+
+                }
+
+            ],
+
+            "incomeChanges": 0,
+
+            "explConseq": ""
+
+        },
+
+        "rep4": {
+
+            "repText": "Ne rien faire",
+
+            "price": 0,
+
+            "happiness": 0,
+
+            "mapChanges": [],
+
+            "overlayChanges": [],
+
+            "incomeChanges": 0,
+
+            "explConseq": "Cette décision n'a pas impacté votre budget ni la satisfaction de vos habitants."
+
+        }
+
+    },
+
+    {
+
+        "questionText": "Avec votre développement l'intercommunalité des villes voisines vous propose de les rejoindre. Cela vous permet de recevoir de l'aide en cas de besoin mais également d'en donner lorsque les autres communes en demandent. Cette aide peut tre humaine matérielle ou financire. Que souhaitez-vous faire ?",
+
+        "prevQuestCondition": [0],
+
+        "prevRepCondition": [
+
+            1
+
+        ],
+
+        "prevQuestNotCondition": [],
+
+        "prevRepNotCondition": [],
+
+        "caracter": 1,
+
+        "rep1": {
+
+            "repText": "Rejoindre l'interco sans mise en commun du budget",
+
+            "price": 0,
+
+            "happiness": 0,
+
+            "mapChanges": [],
+
+            "overlayChanges": [],
+
+            "incomeChanges": 0,
+
+            "explConseq": ""
+
+        },
+
+        "rep2": {
+
+            "repText": "Rejoindre l'interco en mettant le budget en commun",
+
+            "price": 0,
+
+            "happiness": 0,
+
+            "mapChanges": [],
+
+            "overlayChanges": [],
+
+            "incomeChanges": -3000,
+
+            "explConseq": ""
+
+        },
+
+        "rep3": {
+
+            "repText": "Ne pas rejoindre l'interco mais rester proche des communes.",
+
+            "price": 0,
+
+            "happiness": 0,
+
+            "mapChanges": [],
+
+            "overlayChanges": [],
+
+            "incomeChanges": 0,
+
+            "explConseq": "Cette décision n'a pas impacté votre budget ni la satisfaction de vos habitants."
+
+        },
+
+        "rep4": {
+
+            "repText": "Ne pas rejoindre l'interco et ne pas garder de contact avec les autres communes.",
+
+            "price": 0,
+
+            "happiness": 0,
+
+            "mapChanges": [],
+
+            "overlayChanges": [],
+
+            "incomeChanges": 0,
+
+            "explConseq": ""
+
+        }
+
+    },
+
+    {
+
+        "questionText": "Graniland a été élue plus belle ville de la région quel succs ! Nos affaires marchent et les prédicitions d'affluence touristique sont trs bonnes l'année  venir promet d'tre intense. Pouvez-vous nous aider  développer les infrastructures ?",
+
+        "prevQuestCondition": [],
+
+        "prevRepCondition": [],
+
+        "prevQuestNotCondition": [0],
+
+        "prevRepNotCondition": [1],
+
+        "caracter": 5,
+
+        "rep1": {
+
+            "repText": "Installer une boutique proches de la plage",
+
+            "price": 30000,
+
+            "happiness": 10,
+
+            "mapChanges": [],
+
+            "overlayChanges": [
+
+                {
+
+                    "i": 5,
+
+                    "j": 8,
+
+                    "newType": "c"
+
+                }
+
+            ],
+
+            "incomeChanges": 0,
+
+            "explConseq": ""
+
+        },
+
+        "rep2": {
+
+            "repText": "Installer une zone commerciale dans l'arrire pays",
+
+            "price": 60000,
+
+            "happiness": 7,
+
+            "mapChanges": [],
+
+            "overlayChanges": [
+
+                {
+
+                    "i": 5,
+
+                    "j": 10,
+
+                    "newType": "c"
+
+                },
+
+                {
+
+                    "i": 5,
+
+                    "j": 11,
+
+                    "newType": "c"
+
+                }
+
+            ],
+
+            "incomeChanges": 0,
+
+            "explConseq": ""
+
+        },
+
+        "rep3": {
+
+            "repText": "Développement d'une ligne de bateau touristique",
+
+            "price": 20000,
+
+            "happiness": 2,
+
+            "mapChanges": [],
+
+            "overlayChanges": [],
+
+            "incomeChanges": 0,
+
+            "explConseq": ""
+
+        },
+
+        "rep4": {
+
+            "repText": "Ne rien faire",
+
+            "price": 0,
+
+            "happiness": 0,
+
+            "mapChanges": [],
+
+            "overlayChanges": [],
+
+            "incomeChanges": 0,
+
+            "explConseq": "Cette décision n'a pas impacté votre budget ni la satisfaction de vos habitants."
+
+        }
+
+    },
+
+    {
+
+        "questionText": "La marée du sicle vient de passer la parcelle en danger s'effondre et les maisons proches de la plage sont innondées.",
+
+        "prevQuestCondition": [],
+
+        "prevRepCondition": [],
+
+        "prevQuestNotCondition": [],
+
+        "prevRepNotCondition": [],
+
+        "caracter": 0,
+
+        "rep1": {
+
+            "repText": "",
+
+            "price": -80000,
+
+            "happiness": -15,
+
+            "mapChanges": [
+
+                {
+
+                    "i": 13,
+
+                    "j": 4,
+
+                    "newType": "sea"
+
+                }
+
+            ],
+
+            "overlayChanges": [],
+
+            "incomeChanges": -1000,
+
+            "explConseq": ""
+
+        },
+
+        "rep2": {
+
+            "repText": "",
+
+            "price": 0,
+
+            "happiness": 0,
+
+            "mapChanges": [],
+
+            "overlayChanges": [],
+
+            "incomeChanges": 0,
+
+            "explConseq": ""
+
+        },
+
+        "rep3": {
+
+            "repText": "",
+
+            "price": 0,
+
+            "happiness": 0,
+
+            "mapChanges": [],
+
+            "overlayChanges": [],
+
+            "incomeChanges": 0,
+
+            "explConseq": ""
+
+        },
+
+        "rep4": {
+
+            "repText": "",
+
+            "price": 0,
+
+            "happiness": 0,
+
+            "mapChanges": [],
+
+            "overlayChanges": [],
+
+            "incomeChanges": 0,
+
+            "explConseq": ""
+
+        }
+
+    },
+
+    {
+
+        "questionText": "Vous constatez que de nombreux concitoyens ne connaissent pas les enjeux liés  l'érosion du trait de céte et une association vous propose un accompagnement sur la sensibilisation. Que faites-vous ?",
+
+        "prevQuestCondition": [],
+
+        "prevRepCondition": [],
+
+        "prevQuestNotCondition": [],
+
+        "prevRepNotCondition": [],
+
+        "caracter": 3,
+
+        "rep1": {
+
+            "repText": "Sensibiliser l'ensemble de la population",
+
+            "price": -10000,
+
+            "happiness": 15,
+
+            "mapChanges": [],
+
+            "overlayChanges": [],
+
+            "incomeChanges": 2000,
+
+            "explConseq": ""
+
+        },
+
+        "rep2": {
+
+            "repText": "Sensibiliser les plus jeunes",
+
+            "price": -5000,
+
+            "happiness": 10,
+
+            "mapChanges": [],
+
+            "overlayChanges": [],
+
+            "incomeChanges": 2000,
+
+            "explConseq": ""
+
+        },
+
+        "rep3": {
+
+            "repText": "Sensibiliser les touristes",
+
+            "price": -2000,
+
+            "happiness": 5,
+
+            "mapChanges": [],
+
+            "overlayChanges": [],
+
+            "incomeChanges": 2000,
+
+            "explConseq": ""
+
+        },
+
+        "rep4": {
+
+            "repText": "Ne pas sensibiliser",
+
+            "price": 0,
+
+            "happiness": 0,
+
+            "mapChanges": [],
+
+            "overlayChanges": [],
+
+            "incomeChanges": 1000,
+
+            "explConseq": "Cette décision n'a pas impacté votre budget ni la satisfaction de vos habitants."
+
+        }
+
+    },
+
+    {
+
+        "questionText": "Votre trait de céte recule de plus en plus et les scientifiques vous conseillent de limiter le piétinement sur les zones sensibles. Quelle décision prenez-vous ?",
+
+        "prevQuestCondition": [],
+
+        "prevRepCondition": [],
+
+        "prevQuestNotCondition": [],
+
+        "prevRepNotCondition": [],
+
+        "caracter": 2,
+
+        "rep1": {
+
+            "repText": "Interdire de marcher sur la plage",
+
+            "price": -75000,
+
+            "happiness": -20,
+
+            "mapChanges": [],
+
+            "overlayChanges": [
+
+                {
+
+                    "i": 5,
+
+                    "j": 7,
+
+                    "newType": "s"
+
+                },
+
+                {
+
+                    "i": 6,
+
+                    "j": 7,
+
+                    "newType": "s"
+
+                },
+
+                {
+
+                    "i": 7,
+
+                    "j": 7,
+
+                    "newType": "s"
+
+                },
+
+                {
+
+                    "i": 8,
+
+                    "j": 7,
+
+                    "newType": "s"
+
+                },
+
+                {
+
+                    "i": 9,
+
+                    "j": 7,
+
+                    "newType": "s"
+
+                },
+
+                {
+
+                    "i": 10,
+
+                    "j": 7,
+
+                    "newType": "s"
+
+                },
+
+                {
+
+                    "i": 10,
+
+                    "j": 6,
+
+                    "newType": "s"
+
+                },
+
+                {
+
+                    "i": 6,
+
+                    "j": 8,
+
+                    "newType": "s"
+
+                },
+
+                {
+
+                    "i": 7,
+
+                    "j": 8,
+
+                    "newType": "s"
+
+                },
+
+                {
+
+                    "i": 8,
+
+                    "j": 8,
+
+                    "newType": "s"
+
+                },
+
+                {
+
+                    "i": 9,
+
+                    "j": 8,
+
+                    "newType": "s"
+
+                }
+
+            ],
+
+            "incomeChanges": 0,
+
+            "explConseq": ""
+
+        },
+
+        "rep2": {
+
+            "repText": "Interdire de marcher sur les cétes",
+
+            "price": -90000,
+
+            "happiness": -15,
+
+            "mapChanges": [],
+
+            "overlayChanges": [
+
+                {
+
+                    "i": 0,
+
+                    "j": 6,
+
+                    "newType": "s"
+
+                },
+
+                {
+
+                    "i": 1,
+
+                    "j": 6,
+
+                    "newType": "s"
+
+                },
+
+                {
+
+                    "i": 13,
+
+                    "j": 5,
+
+                    "newType": "s"
+
+                }
+
+            ],
+
+            "incomeChanges": 0,
+
+            "explConseq": ""
+
+        },
+
+        "rep3": {
+
+            "repText": "Contréler l'accs sur le sentier cétier et sur les plages",
+
+            "price": -30000,
+
+            "happiness": -5,
+
+            "mapChanges": [],
+
+            "overlayChanges": [],
+
+            "incomeChanges": 0,
+
+            "explConseq": ""
+
+        },
+
+        "rep4": {
+
+            "repText": "Ne rien faire",
+
+            "price": 0,
+
+            "happiness": 0,
+
+            "mapChanges": [],
+
+            "overlayChanges": [],
+
+            "incomeChanges": 0,
+
+            "explConseq": "Cette décision n'a pas impacté votre budget ni la satisfaction de vos habitants."
+
+        }
+
+    },
+
+    {
+
+        "questionText": "Le temps a passé un morceau de plage disparat et on aperoit depuis la plage un beluga.",
+
+        "prevQuestCondition": [],
+
+        "prevRepCondition": [],
+
+        "prevQuestNotCondition": [],
+
+        "prevRepNotCondition": [],
+
+        "caracter": 0,
+
+        "rep1": {
+
+            "repText": "",
+
+            "price": 0,
+
+            "happiness": -5,
+
+            "mapChanges": [
+
+                {
+
+                    "i": 6,
+
+                    "j": 7,
+
+                    "newType": "sea"
+
+                },
+
+                {
+
+                    "i": 7,
+
+                    "j": 7,
+
+                    "newType": "sea"
+
+                },
+
+                {
+
+                    "i": 8,
+
+                    "j": 7,
+
+                    "newType": "sea"
+
+                },
+
+                {
+
+                    "i": 9,
+
+                    "j": 7,
+
+                    "newType": "sea"
+
+                }
+
+            ],
+
+            "overlayChanges": [],
+
+            "incomeChanges": 0,
+
+            "explConseq": ""
+
+        },
+
+        "rep2": {
+
+            "repText": "",
+
+            "price": 0,
+
+            "happiness": 0,
+
+            "mapChanges": [],
+
+            "overlayChanges": [],
+
+            "incomeChanges": 0,
+
+            "explConseq": ""
+
+        },
+
+        "rep3": {
+
+            "repText": "",
+
+            "price": 0,
+
+            "happiness": 0,
+
+            "mapChanges": [],
+
+            "overlayChanges": [],
+
+            "incomeChanges": 0,
+
+            "explConseq": ""
+
+        },
+
+        "rep4": {
+
+            "repText": "",
+
+            "price": 0,
+
+            "happiness": 0,
+
+            "mapChanges": [],
+
+            "overlayChanges": [],
+
+            "incomeChanges": 0,
+
+            "explConseq": ""
+
+        }
+
+    },
+
+    {
+
+        "questionText": "La mer se rapproche petit  petit et met en danger certaines infrastructures. Voulez-vous en détruire ?",
+
+        "prevQuestCondition": [],
+
+        "prevRepCondition": [],
+
+        "prevQuestNotCondition": [],
+
+        "prevRepNotCondition": [],
+
+        "caracter": 1,
+
+        "rep1": {
+
+            "repText": "Détruire la maison sur la plage",
+
+            "price": -15000,
+
+            "happiness": -15,
+
+            "mapChanges": [],
+
+            "overlayChanges": [
+
+                {
+
+                    "i": 6,
+
+                    "j": 8,
+
+                    "newType": ""
+
+                }
+
+            ],
+
+            "incomeChanges": -1000,
+
+            "explConseq": ""
+
+        },
+
+        "rep2": {
+
+            "repText": "Ne rien détruire",
+
+            "price": 0,
+
+            "happiness": 0,
+
+            "mapChanges": [],
+
+            "overlayChanges": [],
+
+            "incomeChanges": 0,
+
+            "explConseq": "Cette décision n'a pas impacté votre budget ni la satisfaction de vos habitants."
+
+        },
+
+        "rep3": {
+
+            "repText": "Détruire les maisons et les commerces sur et proches de la plage",
+
+            "price": -120000,
+
+            "happiness": -7,
+
+            "mapChanges": [],
+
+            "overlayChanges": [
+
+                {
+
+                    "i": 10,
+
+                    "j": 8,
+
+                    "newType": ""
+
+                },
+
+                {
+
+                    "i": 6,
+
+                    "j": 8,
+
+                    "newType": "Ê"
+
+                }
+
+            ],
+
+            "incomeChanges": -4000,
+
+            "explConseq": ""
+
+        },
+
+        "rep4": {
+
+            "repText": "Détruire les maisons sur la roche et sur l'le",
+
+            "price": -200000,
+
+            "happiness": -10,
+
+            "mapChanges": [],
+
+            "overlayChanges": [
+
+                {
+
+                    "i": 7,
+
+                    "j": 3,
+
+                    "newType": ""
+
+                },
+
+                {
+
+                    "i": 2,
+
+                    "j": 6,
+
+                    "newType": ""
+
+                },
+
+                {
+
+                    "i": 3,
+
+                    "j": 5,
+
+                    "newType": ""
+
+                },
+
+                {
+
+                    "i": 3,
+
+                    "j": 6,
+
+                    "newType": ""
+
+                },
+
+                {
+
+                    "i": 4,
+
+                    "j": 5,
+
+                    "newType": ""
+
+                },
+
+                {
+
+                    "i": 4,
+
+                    "j": 6,
+
+                    "newType": ""
+
+                }
+
+            ],
+
+            "incomeChanges": -1000,
+
+            "explConseq": ""
+
+        }
+
+    },
+
+    {
+
+        "questionText": "Un habitant de Graniland est un ancien chercheur sur le sujet et il a longtemps étudié les solutions existantes pour ralentir la progression et il vous en propose trois adaptées  la situation. Choisissez-vous d'en installer une ?",
+
+        "prevQuestCondition": [],
+
+        "prevRepCondition": [],
+
+        "prevQuestNotCondition": [],
+
+        "prevRepNotCondition": [],
+
+        "caracter": 2,
+
+        "rep1": {
+
+            "repText": "Installer une dune",
+
+            "price": -10000,
+
+            "happiness": -10,
+
+            "mapChanges": [],
+
+            "overlayChanges": [],
+
+            "incomeChanges": 0,
+
+            "explConseq": ""
+
+        },
+
+        "rep2": {
+
+            "repText": "Restaurer les marais",
+
+            "price": -15000,
+
+            "happiness": -2,
+
+            "mapChanges": [],
+
+            "overlayChanges": [],
+
+            "incomeChanges": 0,
+
+            "explConseq": ""
+
+        },
+
+        "rep3": {
+
+            "repText": "Ne rien faire",
+
+            "price": 0,
+
+            "happiness": 0,
+
+            "mapChanges": [],
+
+            "overlayChanges": [],
+
+            "incomeChanges": 0,
+
+            "explConseq": "Cette décision n'a pas impacté votre budget ni la satisfaction de vos habitants."
+
+        },
+
+        "rep4": {
+
+            "repText": "Mettre en place une fort immergée",
+
+            "price": -20000,
+
+            "happiness": -2,
+
+            "mapChanges": [],
+
+            "overlayChanges": [],
+
+            "incomeChanges": 0,
+
+            "explConseq": ""
+
+        }
+
+    },
+
+    {
+
+        "questionText": "Une grosse tempte frappe Graniland et effraie les habitants : 10 habitants déménagent.",
+
+        "prevQuestCondition": [],
+
+        "prevRepCondition": [],
+
+        "prevQuestNotCondition": [],
+
+        "prevRepNotCondition": [],
+
+        "caracter": 0,
+
+        "rep1": {
+
+            "repText": "",
+
+            "price": -150000,
+
+            "happiness": -15,
+
+            "mapChanges": [],
+
+            "overlayChanges": [],
+
+            "incomeChanges": -1000,
+
+            "explConseq": ""
+
+        },
+
+        "rep2": {
+
+            "repText": "",
+
+            "price": 0,
+
+            "happiness": 0,
+
+            "mapChanges": [],
+
+            "overlayChanges": [],
+
+            "incomeChanges": 0,
+
+            "explConseq": ""
+
+        },
+
+        "rep3": {
+
+            "repText": "",
+
+            "price": 0,
+
+            "happiness": 0,
+
+            "mapChanges": [],
+
+            "overlayChanges": [],
+
+            "incomeChanges": 0,
+
+            "explConseq": ""
+
+        },
+
+        "rep4": {
+
+            "repText": "",
+
+            "price": 0,
+
+            "happiness": 0,
+
+            "mapChanges": [],
+
+            "overlayChanges": [],
+
+            "incomeChanges": 0,
+
+            "explConseq": ""
+
+        }
+
+    },
+
+    {
+
+        "questionText": "Ë la suite des derniers événements plusieurs maisons sont en danger. Décidez-vous d'agir ?",
+
+        "prevQuestCondition": [],
+
+        "prevRepCondition": [],
+
+        "prevQuestNotCondition": [],
+
+        "prevRepNotCondition": [],
+
+        "caracter": 1,
+
+        "rep1": {
+
+            "repText": "Relocaliser les maisons proches de la plage sur la roche",
+
+            "price": -150000,
+
+            "happiness": -10,
+
+            "mapChanges": [],
+
+            "overlayChanges": [
+
+                {
+
+                    "i": 6,
+
+                    "j": 8,
+
+                    "newType": ""
+
+                },
+
+                {
+
+                    "i": 8,
+
+                    "j": 9,
+
+                    "newType": ""
+
+                },
+
+                {
+
+                    "i": 9,
+
+                    "j": 9,
+
+                    "newType": ""
+
+                },
+
+                {
+
+                    "i": 9,
+
+                    "j": 8,
+
+                    "newType": ""
+
+                }
+
+            ],
+
+            "incomeChanges": 0,
+
+            "explConseq": ""
+
+        },
+
+        "rep2": {
+
+            "repText": "Relocaliser l'ensemble des maisons de la commune sur la roche",
+
+            "price": -200000,
+
+            "happiness": -10,
+
+            "mapChanges": [],
+
+            "overlayChanges": [],
+
+            "incomeChanges": 0,
+
+            "explConseq": ""
+
+        },
+
+        "rep3": {
+
+            "repText": "Ne rien faire",
+
+            "price": 0,
+
+            "happiness": 0,
+
+            "mapChanges": [],
+
+            "overlayChanges": [],
+
+            "incomeChanges": 0,
+
+            "explConseq": "Cette décision n'a pas impacté votre budget ni la satisfaction de vos habitants."
+
+        },
+
+        "rep4": {
+
+            "repText": "Relocaliser les maisons proches de la plage sur une autre commune",
+
+            "price": -100000,
+
+            "happiness": -5,
+
+            "mapChanges": [],
+
+            "overlayChanges": [
+
+                {
+
+                    "i": 8,
+
+                    "j": 9,
+
+                    "newType": ""
+
+                },
+
+                {
+
+                    "i": 9,
+
+                    "j": 9,
+
+                    "newType": ""
+
+                },
+
+                {
+
+                    "i": 7,
+
+                    "j": 9,
+
+                    "newType": "Ê"
+
+                }
+
+            ],
+
+            "incomeChanges": -3000,
+
+            "explConseq": ""
+
+        }
+
+    },
+
+    {
+
+        "questionText": "La commune voisine est touchée par l'érosion et 2 maisons sont détruites.",
+
+        "prevQuestCondition": [5],
+
+        "prevRepCondition": [
+
+            1
+
+        ],
+
+        "prevQuestNotCondition": [],
+
+        "prevRepNotCondition": [],
+
+        "caracter": 0,
+
+        "rep1": {
+
+            "repText": "",
+
+            "price": -10000,
+
+            "happiness": 0,
+
+            "mapChanges": [],
+
+            "overlayChanges": [],
+
+            "incomeChanges": -10000,
+
+            "explConseq": ""
+
+        },
+
+        "rep2": {
+
+            "repText": "",
+
+            "price": 0,
+
+            "happiness": 0,
+
+            "mapChanges": [],
+
+            "overlayChanges": [],
+
+            "incomeChanges": 0,
+
+            "explConseq": ""
+
+        },
+
+        "rep3": {
+
+            "repText": "",
+
+            "price": 0,
+
+            "happiness": 0,
+
+            "mapChanges": [],
+
+            "overlayChanges": [],
+
+            "incomeChanges": 0,
+
+            "explConseq": ""
+
+        },
+
+        "rep4": {
+
+            "repText": "",
+
+            "price": 0,
+
+            "happiness": 0,
+
+            "mapChanges": [],
+
+            "overlayChanges": [],
+
+            "incomeChanges": 0,
+
+            "explConseq": ""
+
+        }
+
+    },
+
+    {
+
+        "questionText": "La commune voisine est touchée par l'érosion et 2 maisons sont détruites.",
+
+        "prevQuestCondition": [],
+
+        "prevRepCondition": [],
+
+        "prevQuestNotCondition": [5],
+
+        "prevRepNotCondition": [1],
+
+        "caracter": 0,
+
+        "rep1": {
+
+            "repText": "",
+
+            "price": 0,
+
+            "happiness": 0,
+
+            "mapChanges": [],
+
+            "overlayChanges": [],
+
+            "incomeChanges": 0,
+
+            "explConseq": ""
+
+        },
+
+        "rep2": {
+
+            "repText": "",
+
+            "price": 0,
+
+            "happiness": 0,
+
+            "mapChanges": [],
+
+            "overlayChanges": [],
+
+            "incomeChanges": 0,
+
+            "explConseq": ""
+
+        },
+
+        "rep3": {
+
+            "repText": "",
+
+            "price": 0,
+
+            "happiness": 0,
+
+            "mapChanges": [],
+
+            "overlayChanges": [],
+
+            "incomeChanges": 0,
+
+            "explConseq": ""
+
+        },
+
+        "rep4": {
+
+            "repText": "",
+
+            "price": 0,
+
+            "happiness": 0,
+
+            "mapChanges": [],
+
+            "overlayChanges": [],
+
+            "incomeChanges": 0,
+
+            "explConseq": ""
+
+        }
+
+    },
+
+    {
+
+        "questionText": "La situation devient urgente il faut ralentir au maximum l'érosion du trait de céte avant que d'autres habitants soient touchés. Que souhaitez-vous mettre en place ?",
+
+        "prevQuestCondition": [],
+
+        "prevRepCondition": [],
+
+        "prevQuestNotCondition": [5],
+
+        "prevRepNotCondition": [1],
+
+        "caracter": 2,
+
+        "rep1": {
+
+            "repText": "Digue",
+
+            "price": -55000,
+
+            "happiness": -10,
+
+            "mapChanges": [
+
+                {
+
+                    "i": 8,
+
+                    "j": 3,
+
+                    "newType": "stone"
+
+                },
+
+                {
+
+                    "i": 9,
+
+                    "j": 3,
+
+                    "newType": "stone"
+
+                },
+
+                {
+
+                    "i": 10,
+
+                    "j": 3,
+
+                    "newType": "stone"
+
+                },
+
+                {
+
+                    "i": 10,
+
+                    "j": 4,
+
+                    "newType": "stone"
+
+                },
+
+                {
+
+                    "i": 10,
+
+                    "j": 5,
+
+                    "newType": "stone"
+
+                }
+
+            ],
+
+            "overlayChanges": [],
+
+            "incomeChanges": 0,
+
+            "explConseq": ""
+
+        },
+
+        "rep2": {
+
+            "repText": "Brise lame",
+
+            "price": -30000,
+
+            "happiness": -5,
+
+            "mapChanges": [
+
+                {
+
+                    "i": 8,
+
+                    "j": 4,
+
+                    "newType": "stone"
+
+                },
+
+                {
+
+                    "i": 9,
+
+                    "j": 4,
+
+                    "newType": "stone"
+
+                }
+
+            ],
+
+            "overlayChanges": [],
+
+            "incomeChanges": 0,
+
+            "explConseq": ""
+
+        },
+
+        "rep3": {
+
+            "repText": "Epi",
+
+            "price": -15000,
+
+            "happiness": -5,
+
+            "mapChanges": [
+
+                {
+
+                    "i": 8,
+
+                    "j": 5,
+
+                    "newType": "stone"
+
+                },
+
+                {
+
+                    "i": 9,
+
+                    "j": 5,
+
+                    "newType": "stone"
+
+                }
+
+            ],
+
+            "overlayChanges": [],
+
+            "incomeChanges": 0,
+
+            "explConseq": ""
+
+        },
+
+        "rep4": {
+
+            "repText": "Ne rien faire",
+
+            "price": 0,
+
+            "happiness": 0,
+
+            "mapChanges": [],
+
+            "overlayChanges": [],
+
+            "incomeChanges": 0,
+
+            "explConseq": "Cette décision n'a pas impacté votre budget ni la satisfaction de vos habitants."
+
+        }
+
+    },
+
+    {
+
+        "questionText": "Rien ne fonctionne la roche est maintenant isolée.",
+
+        "prevQuestCondition": [],
+
+        "prevRepCondition": [],
+
+        "prevQuestNotCondition": [],
+
+        "prevRepNotCondition": [],
+
+        "caracter": 0,
+
+        "rep1": {
+
+            "repText": "",
+
+            "price": 0,
+
+            "happiness": -20,
+
+            "mapChanges": [
+
+                {
+
+                    "i": 0,
+
+                    "j": 6,
+
+                    "newType": "sea"
+
+                },
+
+                {
+
+                    "i": 1,
+
+                    "j": 6,
+
+                    "newType": "sea"
+
+                },
+
+                {
+
+                    "i": 2,
+
+                    "j": 7,
+
+                    "newType": "sea"
+
+                },
+
+                {
+
+                    "i": 3,
+
+                    "j": 7,
+
+                    "newType": "sea"
+
+                },
+
+                {
+
+                    "i": 4,
+
+                    "j": 7,
+
+                    "newType": "sea"
+
+                },
+
+                {
+
+                    "i": 5,
+
+                    "j": 7,
+
+                    "newType": "sea"
+
+                }
+
+            ],
+
+            "overlayChanges": [
+
+                {
+
+                    "i": 4,
+
+                    "j": 7,
+
+                    "newType": ""
+
+                }
+
+            ],
+
+            "incomeChanges": -100000,
+
+            "explConseq": ""
+
+        },
+
+        "rep2": {
+
+            "repText": "",
+
+            "price": 0,
+
+            "happiness": 0,
+
+            "mapChanges": [],
+
+            "overlayChanges": [],
+
+            "incomeChanges": -100000,
+
+            "explConseq": ""
+
+        },
+
+        "rep3": {
+
+            "repText": "",
+
+            "price": 0,
+
+            "happiness": 0,
+
+            "mapChanges": [],
+
+            "overlayChanges": [],
+
+            "incomeChanges": -100000,
+
+            "explConseq": ""
+
+        },
+
+        "rep4": {
+
+            "repText": "",
+
+            "price": 0,
+
+            "happiness": 0,
+
+            "mapChanges": [],
+
+            "overlayChanges": [],
+
+            "incomeChanges": -100000,
+
+            "explConseq": ""
+
+        }
+
+    },
+
+    {
+
+        "questionText": "Aucune solution mise en place n'a pu ralentir suffisamment le recul du trait de céte votre ville est maintenant isolée que souhaitez-vous faire ?",
+
+        "prevQuestCondition": [],
+
+        "prevRepCondition": [],
+
+        "prevQuestNotCondition": [],
+
+        "prevRepNotCondition": [],
+
+        "caracter": 1,
+
+        "rep1": {
+
+            "repText": "Rappatrier les habitants",
+
+            "price": -350000,
+
+            "happiness": 10,
+
+            "mapChanges": [],
+
+            "overlayChanges": [],
+
+            "incomeChanges": 0,
+
+            "explConseq": ""
+
+        },
+
+        "rep2": {
+
+            "repText": "Raccorder la roche",
+
+            "price": -400000,
+
+            "happiness": 15,
+
+            "mapChanges": [],
+
+            "overlayChanges": [],
+
+            "incomeChanges": 0,
+
+            "explConseq": ""
+
+        },
+
+        "rep3": {
+
+            "repText": "Vous payez le rappatriment + déménagement de tous les habitants dans une autre commune",
+
+            "price": -1500000,
+
+            "happiness": 35,
+
+            "mapChanges": [],
+
+            "overlayChanges": [],
+
+            "incomeChanges": 0,
+
+            "explConseq": ""
+
+        },
+
+        "rep4": {
+
+            "repText": "Ne rien faire...",
+
+            "price": 0,
+
+            "happiness": -20,
+
+            "mapChanges": [],
+
+            "overlayChanges": [],
+
+            "incomeChanges": 0,
+
+            "explConseq": "Cette décision n'a pas impacté votre budget ni la satisfaction de vos habitants."
+
+        }
+
+    }]
