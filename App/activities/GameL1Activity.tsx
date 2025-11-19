@@ -1,8 +1,9 @@
-import React, { useRef, useState, useMemo, useCallback } from 'react';
+import React, { useRef, useState, useMemo, useCallback, useEffect } from 'react';
 import { StyleSheet, TouchableOpacity, Image, View, Text, Dimensions } from 'react-native';
 import * as G from '../model/GameUI';
 import * as Q from '../model/GameQuestions';
 import * as R from '../model/GameQuestionsRepository';
+import { Audio } from 'expo-av';
 
 // Liste des questions qui auront lieu pendant la partie (une question sur deux est en réalité un explication de la question précédente dont la réponse n'a donc pas d'impactsur le jeu)
 const Qu = R.parseGameQuestions()
@@ -85,6 +86,26 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
   const [txt3, setText3] = useState(Questions[currentQindex].rep3.repText);
   const [txt4, setText4] = useState(Questions[currentQindex].rep4.repText);
   const [SpeechText, setSpeechText] = useState(Questions[currentQindex].questionText); // Définir quelle est la bonne réponse
+
+  const soundRef = useRef<Audio.Sound | null>(null);
+  useEffect(() => {
+    const playMusic = async () => {
+      const { sound } = await Audio.Sound.createAsync(
+        require('../assets/musique_niveau1.mp3'), // ton fichier dans assets
+        { shouldPlay: true, isLooping: true, volume: 1.2 }
+      );
+      soundRef.current = sound;
+    }
+
+    playMusic();
+
+    return () => {
+      // Stop le son quand le composant se démonte
+      if (soundRef.current) {
+        soundRef.current.unloadAsync();
+      }
+    };
+  }, []);
 
   // Cache des calculs isServed - recalculé uniquement quand overLayMap change
   const servedCache = useMemo(() => {
