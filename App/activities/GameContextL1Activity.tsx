@@ -41,7 +41,7 @@ function ButtonBack({ navigation }: NavigationProps) {
       activeOpacity={0.7}
     >
       <Image 
-        source={require('./assets/fleche.png')} 
+        source={require('../assets/fleche.png')} 
         style={styles.backIcon} 
         resizeMode="contain" 
       />
@@ -58,7 +58,7 @@ export default function GameContextL1Activity({ navigation }: NavigationProps) {
       <View style={styles.container}>
         <View style={styles.content}>
           <Text style={styles.text}>
-            Dans ce niveau vous incarnez le maire de Granilande (ville cotière) et vous devrez répondre aux questions des différents habitants pour les satisfaire.
+            Dans ce niveau vous incarnerez le maire de Granilande (ville cotière) et vous devrez répondre aux questions des différents habitants pour les satisfaire.
             Attention à ne pas les décevoir au moment des elections ! Elles ont lieu tous les ans en Mai.
           </Text>
 

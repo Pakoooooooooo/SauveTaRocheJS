@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
-import questionsData from './assets/questions.json';
+import questionsData from '../assets/questions.json';
 
 // retourne la enieme question en fonction de la date du jour
 function getDaysSinceJanuary1st(): number {
@@ -199,7 +199,7 @@ type NavigationProps = {
 function ButtonBack({ navigation }: NavigationProps) {
   return (
     <TouchableOpacity style={styles.topLeftImage} onPress={() => navigation.goBack()}>
-      <Image source={require('./assets/fleche.png')} style={{ width: 60, height: 60 }} resizeMode="contain" />
+      <Image source={require('../assets/fleche.png')} style={{ width: 60, height: 60 }} resizeMode="contain" />
     </TouchableOpacity>
   );
 }

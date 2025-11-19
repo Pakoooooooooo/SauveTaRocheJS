@@ -1,39 +1,44 @@
 import React, { useRef, useState, useMemo, useCallback } from 'react';
 import { StyleSheet, TouchableOpacity, Image, View, Text, Dimensions } from 'react-native';
-import * as G from './GameUI';
-import * as Q from './GameQuestions';
+import * as G from '../model/GameUI';
+import * as Q from '../model/GameQuestions';
 
-const Questions = [new Q.GameQuestionData(
+// Liste des questions qui auront lieu pendant la partie (une question sur deux est en réalité un explication de la question précédente dont la réponse n'a donc pas d'impactsur le jeu)
+const Qu = [new Q.GameQuestionData(
   "Question 1 question question  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  ?",
   [],
   [],
   1,
-  new Q.GameRepData("Option 1 - Coût: 200€", 200, 58, [new Q.MapChangeData(0, 0, 'sand')], [new Q.MapChangeData(0, 0, 'h')], 0),
-  new Q.GameRepData("Option 2 - Rien faire", 0, -20, [], [], 0),
-  new Q.GameRepData("Option 3 - Coût: 500€", 500, 10, [new Q.MapChangeData(0, 0, 'sand'), new Q.MapChangeData(1, 0, 'sand'), new Q.MapChangeData(1, 1, 'sand')], [new Q.MapChangeData(0, 0, 'h')], 0),
-  new Q.GameRepData("Option 4 - Coût: 300€", 300, 30, [new Q.MapChangeData(0, 0, 'sand'), new Q.MapChangeData(1, 0, 'sand'), new Q.MapChangeData(1, 1, 'sand')], [], 0)
+  new Q.GameRepData("Option 1 - Coût: 200€", 200, 58, [new Q.MapChangeData(0, 0, 'sand')], [new Q.MapChangeData(0, 0, 'h')], 0, "Explication 1a"),
+  new Q.GameRepData("Option 2 - Rien faire", 0, -20, [], [], 0, "Explication 1b"),
+  new Q.GameRepData("Option 3 - Coût: 500€", 500, 10, [new Q.MapChangeData(0, 0, 'sand'), new Q.MapChangeData(1, 0, 'sand'), new Q.MapChangeData(1, 1, 'sand')], [new Q.MapChangeData(0, 0, 'h')], 0, "Explication 1c"),
+  new Q.GameRepData("Option 4 - Coût: 300€", 300, 30, [new Q.MapChangeData(0, 0, 'sand'), new Q.MapChangeData(1, 0, 'sand'), new Q.MapChangeData(1, 1, 'sand')], [], 0, "Explication 1d")
 ),
 new Q.GameQuestionData(
   "Question 2 question question  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  ?",
   [],
   [],
   3,
-  new Q.GameRepData("Option 1 - Coût: 300€", 300, 58, [new Q.MapChangeData(0, 0, 'sand')], [new Q.MapChangeData(0, 0, 'h')], 0),
-  new Q.GameRepData("Option 2 - Rien faire 10€", 10, -20, [], [], 0),
-  new Q.GameRepData("Option 3 - Coût: 1000€", 1000, 10, [new Q.MapChangeData(0, 0, 'stone'), new Q.MapChangeData(1, 0, 'stone'), new Q.MapChangeData(1, 1, 'stone')], [new Q.MapChangeData(0, 0, 'h')], 0),
-  new Q.GameRepData("Option 4 - Coût: 200€", 200, 30, [new Q.MapChangeData(0, 0, 'sand'), new Q.MapChangeData(1, 0, 'sand'), new Q.MapChangeData(1, 1, 'sand')], [], 0)
+  new Q.GameRepData("Option 1 - Coût: 300€", 300, 58, [new Q.MapChangeData(0, 0, 'sand')], [new Q.MapChangeData(0, 0, 'h')], 0, "Explication 2a"),
+  new Q.GameRepData("Option 2 - Rien faire 10€", 10, -20, [], [], 0, "Explication 2b"),
+  new Q.GameRepData("Option 3 - Coût: 1000€", 1000, 10, [new Q.MapChangeData(0, 0, 'stone'), new Q.MapChangeData(1, 0, 'stone'), new Q.MapChangeData(1, 1, 'stone')], [new Q.MapChangeData(0, 0, 'h')], 0, "Explication 2c"),
+  new Q.GameRepData("Option 4 - Coût: 200€", 200, 30, [new Q.MapChangeData(0, 0, 'sand'), new Q.MapChangeData(1, 0, 'sand'), new Q.MapChangeData(1, 1, 'sand')], [], 0, "Explication 2d")
 ),
 new Q.GameQuestionData(
   "Evênement!!  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  ?",
   [],
   [],
   0,
-  new Q.GameRepData("D'accord", 0, 0, [new Q.MapChangeData(1, 0, 'water')], [], 0),
-  new Q.GameRepData("", 0, 0, [], [], 0),
-  new Q.GameRepData("", 0, 0, [], [], 0),
-  new Q.GameRepData("", 0, 0, [], [], 0)
+  new Q.GameRepData("D'accord", 0, 0, [new Q.MapChangeData(1, 0, 'water')], [], 0, "Explication évênement"),
+  new Q.GameRepData("", 0, 0, [], [], 0, "Explication 1"),
+  new Q.GameRepData("", 0, 0, [], [], 0, "Explication 1"),
+  new Q.GameRepData("", 0, 0, [], [], 0, "Explication 1")
 )
 ]
+// Création de la liste de questions alternée d'explications
+const Questions = [... Qu.flatMap((question, index) => 
+  index < Qu.length - 1 ? [question, Q.Explication] : [question]
+), Q.Explication]
 
 export default function GameL1Activity({ navigation }: G.NavigationProps) {
 
@@ -91,7 +96,7 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
   ]);
   // autres constantes de départ (useState permet d'associer la variable à la dynamique d'affichage de GameUI) :
   const [budget, setBudget] = useState(1000);
-  const [charges, setCharges] = useState(1000);
+  const [charges, setCharges] = useState(1000); // la valeur des charges est enlevée au budget quand la valeur apply charges est appelée
   const [monthIndex, setMonthIndex] = useState(4);
   const [year, setYear] = useState(2026);
   const [happiness, setHappiness] = useState(50);
@@ -100,6 +105,7 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
   const [currentQindex, setCurrentQindex] = useState(0);
   const [memQuestions, setMemQuestion] = useState<Q.GameQuestionData[]>([]);
   const [memResponses, setMemResponses] = useState<number[]>([]);
+  const [explication, setExplication] = useState(false);
 
   // Définir les textes des réponses
   const [txt1, setText1] = useState(Questions[currentQindex].rep1.repText);
@@ -193,6 +199,7 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
         return prev + 1;
       } else {
         setYear(y => y + 1);
+        ApplyCharges();
         return 0;
       }
     });
@@ -204,56 +211,88 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
     if (isProcessingRef.current) return; // Utiliser une ref
     isProcessingRef.current = true;
     
-    setSelectedRep(index);
-    NextMonth();
-    let rep = Questions[currentQindex].rep1
-    if (index === 1) {
-      rep = Questions[currentQindex].rep1
-    } else if (index === 2) {
-      rep = Questions[currentQindex].rep2
-    } else if (index === 3) {
-      rep = Questions[currentQindex].rep3
-    } else {
-      rep = Questions[currentQindex].rep4
+    // Cas où la question n'est pas une explication
+    if (!explication){
+      setSelectedRep(index); // On enresgistre la réponse de l'utilisateur
+      NextMonth(); // On passe au mois suivant
+      let rep = Questions[currentQindex].rep1 // On prend la réponse à la question selon l'indice enregistré
+      if (index === 1) {
+        rep = Questions[currentQindex].rep1
+      } else if (index === 2) {
+        rep = Questions[currentQindex].rep2
+      } else if (index === 3) {
+        rep = Questions[currentQindex].rep3
+      } else {
+        rep = Questions[currentQindex].rep4
+      }
+      // Change les cases du sol de la carte en fonction de ce qui est éxplicité dans la question
+      rep.mapChanges.forEach(c => {
+        ChangeMapTile(c.i, c.j, c.newType)
+      }); 
+      // Change les cases des batiments de la carte en fonction de ce qui est éxplicité dans la question
+      rep.overlayChanges.forEach(c => {
+        ChangeOverlayTile(c.i, c.j, c.newType)
+      });
+      // Change le budget en fonction de ce qui est éxplicité dans la question
+      ChangeBudget(-rep.price);
+      // Change la satisfaction en fonction de ce qui est éxplicité dans la question
+      ChangeHappiness(rep.happiness);
+      // On ajoute l'indice de la réponse à la liste des indices de réponses choisies
+      let memRep = [...memResponses, index];
+      setMemResponses(memRep);
+      // On ajoute la question à la liste des questions répondues
+      let memQuest = [...memQuestions, Questions[currentQindex]];
+      setMemQuestion(memQuest);
+      // On avance l'indice de la question jusqu'à la prochaine qui respecte les conditions pour être affichée
+      let i = 1;
+      while (currentQindex + i < Questions.length && 
+            !G.respects(Questions[currentQindex + i], memQuestions, memResponses)) {
+        i += 1;
+      }
+      
+      let newI = currentQindex;
+      if (currentQindex + i < Questions.length) {
+        newI = currentQindex + i;
+        setCurrentQindex(newI);
+      }
+      else {
+        navigation.goBack()
+      }
+      // On affiche les informations de l'explication de la question
+      setSpeechText(rep.explConseq);
+      setText1("Suivant");
+      setText2("");
+      setText3("");
+      setText4("");
+      setCaracter(1);
+      setSelectedRep(null);
+      setExplication(true)
+    } else { // Dans le cas ou la question est une explication de question
+      //  Aucune consequence n'est appliquée
+      let i = 1;
+      while (currentQindex + i < Questions.length && 
+            !G.respects(Questions[currentQindex + i], memQuestions, memResponses)) {
+        i += 1;
+      }
+      
+      let newI = currentQindex;
+      if (currentQindex + i < Questions.length) {
+        newI = currentQindex + i;
+        setCurrentQindex(newI);
+      }
+      else {
+        navigation.goBack()
+      }
+      // Affichage de la question suivante
+      setSpeechText(Questions[newI].questionText);
+      setText1(Questions[newI].rep1.repText);
+      setText2(Questions[newI].rep2.repText);
+      setText3(Questions[newI].rep3.repText);
+      setText4(Questions[newI].rep4.repText);
+      setCaracter(Questions[newI].caracter);
+      setSelectedRep(null);
+      setExplication(false)
     }
-    ApplyCharges();
-    rep.mapChanges.forEach(c => {
-      ChangeMapTile(c.i, c.j, c.newType)
-    });
-    rep.overlayChanges.forEach(c => {
-      ChangeOverlayTile(c.i, c.j, c.newType)
-    });
-    ChangeBudget(-rep.price);
-    ChangeHappiness(rep.happiness);
-    
-    let memRep = [...memResponses, index];
-    setMemResponses(memRep);
-    
-    let memQuest = [...memQuestions, Questions[currentQindex]];
-    setMemQuestion(memQuest);
-    
-    let i = 1;
-    while (currentQindex + i < Questions.length && 
-           !G.respects(Questions[currentQindex + i], memQuest, memRep)) {
-      i += 1;
-    }
-    
-    let newI = currentQindex;
-    if (currentQindex + i < Questions.length) {
-      newI = currentQindex + i;
-      setCurrentQindex(newI);
-    }
-    else {
-      navigation.goBack()
-    }
-    
-    setSpeechText(Questions[newI].questionText);
-    setText1(Questions[newI].rep1.repText);
-    setText2(Questions[newI].rep2.repText);
-    setText3(Questions[newI].rep3.repText);
-    setText4(Questions[newI].rep4.repText);
-    setCaracter(Questions[newI].caracter);
-    setSelectedRep(null);
     
     // Réinitialiser le flag à la fin
     isProcessingRef.current = false;
@@ -294,11 +333,11 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
       <View style={{ flexDirection: 'column' }}>
         <View style={{ flexDirection: 'row' }}>
           <ButtonRep txt={txt1} style={G.styles.buttonRep} index={1} onSelect={onSelect} selectedRep={selectedRep}/>
-          <ButtonRep txt={txt2} style={[G.styles.buttonRep, { display: (currentCaracterIndex!==0) ? 'flex' : 'none' }]} index={2} onSelect={onSelect} selectedRep={selectedRep}/>
+          <ButtonRep txt={txt2} style={[G.styles.buttonRep, { display: (currentCaracterIndex!==0 && !explication) ? 'flex' : 'none' }]} index={2} onSelect={onSelect} selectedRep={selectedRep}/>
         </View>
         <View style={{ flexDirection: 'row' }}>
-          <ButtonRep txt={txt3} style={[G.styles.buttonRep, { display: (currentCaracterIndex!==0) ? 'flex' : 'none' }]} index={3} onSelect={onSelect} selectedRep={selectedRep}/>
-          <ButtonRep txt={txt4} style={[G.styles.buttonRep, { display: (currentCaracterIndex!==0) ? 'flex' : 'none' }]} index={4} onSelect={onSelect} selectedRep={selectedRep}/>
+          <ButtonRep txt={txt3} style={[G.styles.buttonRep, { display: (currentCaracterIndex!==0 && !explication) ? 'flex' : 'none' }]} index={3} onSelect={onSelect} selectedRep={selectedRep}/>
+          <ButtonRep txt={txt4} style={[G.styles.buttonRep, { display: (currentCaracterIndex!==0 && !explication) ? 'flex' : 'none' }]} index={4} onSelect={onSelect} selectedRep={selectedRep}/>
         </View>
       </View>
     );

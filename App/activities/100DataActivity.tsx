@@ -31,7 +31,7 @@ function ButtonBack({ navigation }: NavigationProps) {
       activeOpacity={0.7}
     >
       <Image 
-        source={require('./assets/fleche.png')} 
+        source={require('../assets/fleche.png')} 
         style={styles.backIcon} 
         resizeMode="contain" 
       />
@@ -40,7 +40,7 @@ function ButtonBack({ navigation }: NavigationProps) {
 }
 
 
-export default function CurrentDataActivity({ navigation }: NavigationProps) {
+export default function Data100Activity({ navigation }: NavigationProps) {
   const handlePress = () => {
     Alert.alert('Partie lancée !', 'Amuse-toi bien.');
   };
@@ -48,7 +48,7 @@ export default function CurrentDataActivity({ navigation }: NavigationProps) {
   return (
     <View style={styles.container}>
       <ButtonBack navigation={navigation} />
-      <Text style={styles.title}>Current Data Activity</Text>
+      <Text style={styles.title}>Data 100 Activity</Text>
 
       <TouchableOpacity style={styles.button} onPress={handlePress}>
         <Text style={styles.buttonText}>Commencer</Text>

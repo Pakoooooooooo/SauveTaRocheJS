@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, TouchableHighlight, TouchableOpacity, Image, View, Text, Dimensions } from 'react-native';
+import * as Q from './GameQuestions';
 
 /*GameQuestions implémente le format des questions du jeu*/
 
@@ -25,6 +26,7 @@ export class GameRepData {
   mapChanges: MapChangeData[];
   overlayChanges: MapChangeData[];
   chargesChange: number;
+  explConseq: string;
   constructor(
     repText: string,
     price: number,
@@ -32,6 +34,7 @@ export class GameRepData {
     mapChanges: MapChangeData[],
     overlayChanges: MapChangeData[],
     chargesChanges: number,
+    explConseq: string,
   ) {
     this.repText = repText
     this.price = price
@@ -39,6 +42,7 @@ export class GameRepData {
     this.mapChanges = mapChanges
     this.overlayChanges = overlayChanges
     this.chargesChange = chargesChanges
+    this.explConseq = explConseq
   }
 }
 
@@ -72,3 +76,10 @@ export class GameQuestionData {
     this.rep4 = rep4
   }
 }
+
+export const Explication = new  Q.GameQuestionData("",[],[],1,
+  new Q.GameRepData("", 0, 0, [], [], 0, ""),
+  new Q.GameRepData("", 0, 0, [], [], 0, ""),
+  new Q.GameRepData("", 0, 0, [], [], 0, ""),
+  new Q.GameRepData("", 0, 0, [], [], 0, "")
+)

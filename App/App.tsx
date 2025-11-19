@@ -18,14 +18,14 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { enableScreens } from 'react-native-screens';
 enableScreens();
-import GameActivity from './GameActivity';
-import DataActivity from './DataActivity';
-import ChallengeActivity from './ChallengeActivity';
+import GameActivity from './activities/GameActivity';
+import DataActivity from './activities/DataActivity';
+import ChallengeActivity from './activities/ChallengeActivity';
 // Import Data sub-screens
-import DataCurrent from './CurrentDataActivity';
-import Data50 from './50DataActivity';
-import Data100 from './100DataActivity';
-import Data200 from './200DataAcivity';
+import DataCurrent from './activities/CurrentDataActivity';
+import Data50 from './activities/50DataActivity';
+import Data100 from './activities/100DataActivity';
+import Data200 from './activities/200DataAcivity';
 
 // Navigateur
 const Stack = createNativeStackNavigator();
@@ -113,9 +113,9 @@ type RootStackParamList = {
   GameL2Activity: undefined;
 };
 
-import GameL1Activity from './GameL1Activity';
-import GameL2Activity from './GameL2Activity';
-import GameContextL1Activity from './GameContextL1Activity'
+import GameL1Activity from './activities/GameL1Activity';
+import GameL2Activity from './activities/GameL2Activity';
+import GameContextL1Activity from './activities/GameContextL1Activity'
 
 // Affichage de la page d'accueil
 function HomeScreen({ navigation }: { navigation: any }) {
