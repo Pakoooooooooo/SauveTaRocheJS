@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, StyleSheet, TouchableOpacity, Image, Platform, Text, Alert } from 'react-native';
 import MapView, { Polygon, PROVIDER_GOOGLE, PROVIDER_DEFAULT } from 'react-native-maps';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { floodZones } from './data/floodZones100';
+import { floodZones } from '../data/floodZones100';
 
 /* Types de navigation */
 type RootStackParamList = {
@@ -34,7 +34,7 @@ function ButtonBack({ navigation }: NavigationProps) {
       activeOpacity={0.7}
     >
       <Image 
-        source={require('./assets/fleche.png')} 
+        source={require('../assets/fleche.png')} 
         style={styles.backIcon} 
         resizeMode="contain" 
       />

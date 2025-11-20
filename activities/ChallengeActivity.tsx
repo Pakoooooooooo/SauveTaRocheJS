@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Alert, TouchableOpacity, Image } from 'react-native';
-import questionsData from './assets/questions.json';
+import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import questionsData from '../assets/questions.json';
 
+// retourne la enieme question en fonction de la date du jour
 function getDaysSinceJanuary1st(): number {
   const now = new Date();
   const startOfYear = new Date(now.getFullYear(), 0, 1); // 1er janvier de l'année en cours
@@ -12,7 +13,7 @@ function getDaysSinceJanuary1st(): number {
   
   return dayOfYear;
 }
-
+// classe question
 class QuestionData {
   questionText: string;
   rep1: string;
@@ -64,13 +65,13 @@ function loadQuestionsFromJSON(): QuestionData[] {
   
   return questions;
 }
-
+// Liste des question
 const listQuestions: QuestionData[] = loadQuestionsFromJSON();
-
+// Indice de la question du jour
 const Qindex = getDaysSinceJanuary1st();
-
+// Question du jour
 const currentQuestion = listQuestions[Qindex];
-
+// Affichage du texte de la question
 function Question({ questionText }: { questionText: string }) {
   return (
     <View style={styles.question}>
@@ -78,7 +79,7 @@ function Question({ questionText }: { questionText: string }) {
     </View>
   );
 }
-
+// Affichage du commentaire après la réponse à la question
 function Comment({ isAnswered, isCorrect }: { isAnswered: boolean, isCorrect: boolean }) {
   if (!isAnswered) {
     if (isCorrect) {
@@ -90,7 +91,7 @@ function Comment({ isAnswered, isCorrect }: { isAnswered: boolean, isCorrect: bo
     return <Text style={styles.commentLoses}></Text>;
   }
 }
-
+// Affichage de l'explication de la réponse à la question
 function Explaination({ isAnswered, explaination, source }: { isAnswered?: boolean, explaination?: string; source?: string }) {
   if (explaination && !isAnswered) {
     return (
@@ -109,9 +110,7 @@ function Explaination({ isAnswered, explaination, source }: { isAnswered?: boole
         )}
       </View>;
 }
-
-/* Answer Button Components */
-
+// Affichage d'un bouton de réponse
 function ButtonRep({
   txt,
   style,
@@ -154,7 +153,7 @@ function ButtonRep({
     </TouchableOpacity>
   );
 }
-
+// Affichage des quatre boutons de réponse
 function Reps({
   txt1 = '',
   txt2 = '',
@@ -196,15 +195,15 @@ type NavigationProps = {
     goBack: () => void;
   };
 };
-
+// bouton de retour à 'activité principale
 function ButtonBack({ navigation }: NavigationProps) {
   return (
     <TouchableOpacity style={styles.topLeftImage} onPress={() => navigation.goBack()}>
-      <Image source={require('./assets/fleche.png')} style={{ width: 60, height: 60 }} resizeMode="contain" />
+      <Image source={require('../assets/fleche.png')} style={{ width: 60, height: 60 }} resizeMode="contain" />
     </TouchableOpacity>
   );
 }
-
+// Affichage général
 export default function ChallengeActivity({ navigation }: NavigationProps) {
   const [selectedRep, setSelectedRep] = useState<number | null>(null);
   const [bgColor, setBgColor] = useState('#fff');
@@ -212,9 +211,9 @@ export default function ChallengeActivity({ navigation }: NavigationProps) {
   useEffect(() => {
     if (selectedRep === null) return;
     if (selectedRep === currentQuestion.correctRep) {
-      setBgColor('#28a745');
+      setBgColor('#28a745'); //le fond devient vert en cas de bonne rep
     } else {
-      setBgColor('#dc3545');
+      setBgColor('#dc3545'); //le fond devient rouge en cas de mauvaise rep
     }
   }, [selectedRep]);
 

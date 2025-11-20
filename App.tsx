@@ -18,17 +18,18 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { enableScreens } from 'react-native-screens';
 enableScreens();
-import GameActivity from './GameActivity';
-import DataActivity from './DataActivity';
-import ChallengeActivity from './ChallengeActivity';
+import GameActivity from './activities/GameActivity';
+import DataActivity from './activities/DataActivity';
+import ChallengeActivity from './activities/ChallengeActivity';
 // Import Data sub-screens
-import DataCurrent from './CurrentDataActivity';
-import Data50 from './50DataActivity';
-import Data100 from './100DataActivity';
-import Data200 from './200DataAcivity';
+import DataCurrent from './activities/CurrentDataActivity';
+import Data50 from './activities/50DataActivity';
+import Data100 from './activities/100DataActivity';
+import Data200 from './activities/200DataAcivity';
 
+// Navigateur
 const Stack = createNativeStackNavigator();
-
+// Chargement de l'appli
 function AppLoading() {
   return (
     <View style={styles.loadingContainer}>
@@ -47,7 +48,7 @@ const styles = StyleSheet.create({
   topLeftImage: { position: 'absolute', top: 30, left: 20 },
   topRightImage: { position: 'absolute', top: 30, right: 20 },
 });
-
+// Bouton pour lancer la partie jeu
 function ButtonGame({ navigation }: { navigation: any }) {
   return (
     <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Game')}>
@@ -55,7 +56,7 @@ function ButtonGame({ navigation }: { navigation: any }) {
     </TouchableOpacity>
   );
 }
-
+// Lancer la partie challenge
 function ButtonChallenge({ navigation }: { navigation: any }) {
   return (
     <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Challenge')}>
@@ -63,7 +64,7 @@ function ButtonChallenge({ navigation }: { navigation: any }) {
     </TouchableOpacity>
   );
 }
-
+// Lancer la partie données
 function ButtonData({ navigation }: { navigation: any }) {
   return (
     <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Data')}>
@@ -71,7 +72,7 @@ function ButtonData({ navigation }: { navigation: any }) {
     </TouchableOpacity>
   );
 }
-
+// Affichage du bouton d'option
 function OptionsImage() {
   return (
     <TouchableHighlight onPress={() => Alert.alert('Image pressée !')} underlayColor="transparent" style={styles.topRightImage}>
@@ -79,11 +80,11 @@ function OptionsImage() {
     </TouchableHighlight>
   );
 }
-
+// Affichage du logo de l'appli
 function Image1() {
   return <Image source={require('./assets/logo_cailloux.png')} style={{ width: 240, height: 240 }} />;
 }
-
+// Différents plans de l'image de fond
 const levelImages = {
   1: require('./assets/levels_main/lev1.png'),
   2: require('./assets/levels_main/lev2.png'),
@@ -94,11 +95,11 @@ const levelImages = {
   7: require('./assets/levels_main/lev7.png'),
   8: require('./assets/levels_main/lev8.png'),
 };
-
+// Affichage d'un plan de l'image de fond
 function ImageLevel({ level }: { level: keyof typeof levelImages }) {
   return <Image source={levelImages[level]} style={styles.bg_main} />;
 }
-
+// Liste des activités utilisées par l'appli
 type RootStackParamList = {
   Home: undefined;
   Game: undefined;
@@ -112,13 +113,11 @@ type RootStackParamList = {
   GameL2Activity: undefined;
 };
 
-import type { NativeStackScreenProps } from '@react-navigation/native-stack';
-import GameL1Activity from './GameL1Activity';
-import GameL2Activity from './GameL2Activity';
-import GameContextL1Activity from './GameContextL1Activity'
+import GameL1Activity from './activities/GameL1Activity';
+import GameL2Activity from './activities/GameL2Activity';
+import GameContextL1Activity from './activities/GameContextL1Activity'
 
-type HomeScreenProps = NativeStackScreenProps<RootStackParamList, 'Home'>;
-
+// Affichage de la page d'accueil
 function HomeScreen({ navigation }: { navigation: any }) {
   return (
     <ScrollView contentContainerStyle={styles.container}>

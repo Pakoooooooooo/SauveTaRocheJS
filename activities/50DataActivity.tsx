@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, StyleSheet, TouchableOpacity, Image, Platform, Text, Alert } from 'react-native';
 import MapView, { Polygon, PROVIDER_GOOGLE, PROVIDER_DEFAULT } from 'react-native-maps';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { floodZones } from './data/floodZones200';
+import { floodZones } from '../data/floodZones50';
 
 /* Types de navigation */
 type RootStackParamList = {
@@ -19,7 +19,7 @@ type RootStackParamList = {
   GameContextL1Activity: undefined;
 };
 
-type DataActivityNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Data200'>;
+type DataActivityNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Data50'>;
 
 interface NavigationProps {
   navigation: DataActivityNavigationProp;
@@ -34,7 +34,7 @@ function ButtonBack({ navigation }: NavigationProps) {
       activeOpacity={0.7}
     >
       <Image 
-        source={require('./assets/fleche.png')} 
+        source={require('../assets/fleche.png')} 
         style={styles.backIcon} 
         resizeMode="contain" 
       />
@@ -42,7 +42,7 @@ function ButtonBack({ navigation }: NavigationProps) {
   );
 }
 
-export default function Data200Activity({ navigation }: NavigationProps) {
+export default function Data50Activity({ navigation }: NavigationProps) {
   const [region, setRegion] = useState({
     latitude: 48.4084,
     longitude: -4.6147,
@@ -55,7 +55,7 @@ export default function Data200Activity({ navigation }: NavigationProps) {
   const handlePolygonPress = () => {
     Alert.alert(
       '🌊 Zone inondée',
-      'Cette zone sera submergée par la montée des eaux dans 200 ans avec une élévation de +2.0m du niveau de la mer.',
+      'Cette zone sera submergée par la montée des eaux dans 50 ans avec une élévation de +0.45m du niveau de la mer.',
       [{ text: 'Compris', style: 'default' }]
     );
   };
@@ -68,8 +68,8 @@ export default function Data200Activity({ navigation }: NavigationProps) {
       {showInfo && (
         <View style={styles.infoBanner}>
           <View style={styles.infoContent}>
-            <Text style={styles.infoTitle}>Projection +200 ans (2225)</Text>
-            <Text style={styles.infoText}>Montée : +2.0m</Text>
+            <Text style={styles.infoTitle}>Projection +50 ans (2075)</Text>
+            <Text style={styles.infoText}>Montée : +0.45m</Text>
             <Text style={styles.infoSubtext}>
               {floodZones.length} zones à risque
             </Text>
@@ -86,7 +86,7 @@ export default function Data200Activity({ navigation }: NavigationProps) {
       {/* Légende */}
       <View style={styles.legend}>
         <View style={styles.legendItem}>
-          <View style={[styles.legendColor, { backgroundColor: 'rgba(255, 59, 48, 0.5)' }]} />
+          <View style={[styles.legendColor, { backgroundColor: 'rgba(0, 122, 255, 0.5)' }]} />
           <Text style={styles.legendText}>Zones inondées</Text>
         </View>
       </View>
@@ -119,8 +119,8 @@ export default function Data200Activity({ navigation }: NavigationProps) {
           <Polygon
             key={zone.id}
             coordinates={zone.coordinates}
-            fillColor="rgba(255, 59, 48, 0.5)"
-            strokeColor="rgba(200, 0, 0, 0.9)"
+            fillColor="rgba(0, 122, 255, 0.5)"
+            strokeColor="rgba(0, 80, 200, 0.9)"
             strokeWidth={2}
             tappable={true}
             onPress={handlePolygonPress}
@@ -183,7 +183,7 @@ const styles = StyleSheet.create({
   infoTitle: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: '#FF9500',
+    color: '#007AFF',
     marginBottom: 4,
   },
   infoText: {
@@ -232,7 +232,7 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     marginRight: 8,
     borderWidth: 1,
-    borderColor: 'rgba(255, 100, 0, 0.9)',
+    borderColor: 'rgba(0, 80, 200, 0.9)',
   },
   legendText: {
     fontSize: 12,

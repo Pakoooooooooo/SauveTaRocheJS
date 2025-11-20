@@ -13,6 +13,7 @@ type RootStackParamList = {
   Data200: undefined;
   GameL1Activity: undefined;
   GameL2Activity: undefined;
+  GameContextL1Activity: undefined
 };
 
 type DataActivityNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Game'>;
@@ -22,17 +23,27 @@ interface NavigationProps {
 }
 
 const { height } = Dimensions.get('window');
-// Bouton suivant
-function ButtonNext({ navigation }: NavigationProps) {
+// Un bouton pour chaque niveaux (1 seul d'affiché pour l'instant)
+function ButtonLevel1({ navigation }: NavigationProps) {
   return (
     <TouchableOpacity
       style={styles.levelButton}
-      onPress={() => navigation.navigate('GameL1Activity')}>
-      <Text style={styles.levelButtonText}>Suivant</Text>
+      onPress={() => navigation.navigate('GameContextL1Activity')}>
+      <Text style={styles.levelButtonText}>NIVEAU 1</Text>
     </TouchableOpacity>
   );
 }
-
+// Pas utilisé pour l'instant
+function ButtonLevel2({ navigation }: NavigationProps) {
+  return (
+    <TouchableOpacity
+      style={styles.levelButton}
+      onPress={() => navigation.navigate('GameL2Activity')}>
+      <Text style={styles.levelButtonText}>NIVEAU 2</Text>
+    </TouchableOpacity>
+  );
+}
+// Bouton de retour
 function ButtonBack({ navigation }: NavigationProps) {
   return (
     <TouchableOpacity 
@@ -41,7 +52,7 @@ function ButtonBack({ navigation }: NavigationProps) {
       activeOpacity={0.7}
     >
       <Image 
-        source={require('./assets/fleche.png')} 
+        source={require('../assets/fleche.png')} 
         style={styles.backIcon} 
         resizeMode="contain" 
       />
@@ -49,7 +60,7 @@ function ButtonBack({ navigation }: NavigationProps) {
   );
 }
 
-export default function GameContextL1Activity({ navigation }: NavigationProps) {
+export default function GameActivity({ navigation }: NavigationProps) {
   return (
     <View style={{ flex: 1 }}>
       {/* Bouton retour en premier, en dehors du conteneur principal */}
@@ -58,12 +69,11 @@ export default function GameContextL1Activity({ navigation }: NavigationProps) {
       <View style={styles.container}>
         <View style={styles.content}>
           <Text style={styles.text}>
-            Dans ce niveau vous incarnez le maire de Granilande (ville cotière) et vous devrez répondre aux questions des différents habitants pour les satisfaire.
-            Attention à ne pas les décevoir au moment des elections ! Elles ont lieu tous les ans en Mai.
+            BIENVENUE DANS LE JEU, VEUILLEZ CHOISIR UN NIVEAU POUR DÉBUTER
           </Text>
 
           <View style={styles.levelsContainer}>
-            <ButtonNext navigation={navigation} />
+            <ButtonLevel1 navigation={navigation} />
           </View>
         </View>
       </View>
@@ -101,7 +111,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     minWidth: 220,
     alignItems: 'center',
-    shadowColor: '#000',
+    shadowColor: '#070A28',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 4,

@@ -12,6 +12,9 @@
     "@react-navigation/native": "^6.1.9",
     "@react-navigation/native-stack": "^6.9.17",
     "expo": "~51.0.0",
+    "expo-av": "~14.0.7",
+    "expo-build-properties": "^1.0.9",
+    "expo-dev-client": "~4.0.29",
     "expo-font": "~12.0.9",
     "expo-navigation-bar": "~3.0.7",
     "expo-status-bar": "~1.12.1",
@@ -24,6 +27,7 @@
   "devDependencies": {
     "@babel/core": "^7.24.0",
     "@types/react": "~18.2.45",
+    "@types/react-native": "^0.72.8",
     "typescript": "~5.3.3"
   },
   "overrides": {

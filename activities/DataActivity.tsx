@@ -73,7 +73,7 @@ function Button200({ navigation }: NavigationProps) {
 
 /* Background Images */
 const levelImages = {
-  1: require('./assets/levels_main/lev8.png'),
+  1: require('../assets/levels_main/lev8.png'),
 } as const;
 
 function ImageLevel({ level }: { level: keyof typeof levelImages }) {
@@ -84,7 +84,7 @@ function ImageLevel({ level }: { level: keyof typeof levelImages }) {
 function ButtonBack({ navigation }: NavigationProps) {
   return (
     <TouchableOpacity style={styles.topLeftImage} onPress={() => navigation.goBack()}>
-      <Image source={require('./assets/fleche.png')} style={{ width: 60, height: 60 }} resizeMode="contain" />
+      <Image source={require('../assets/fleche.png')} style={{ width: 60, height: 60 }} resizeMode="contain" />
     </TouchableOpacity>
   );
 }
