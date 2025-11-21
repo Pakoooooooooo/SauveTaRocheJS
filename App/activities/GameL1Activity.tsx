@@ -179,6 +179,12 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
     return newValue;
   });
 }, []);
+  async function ChangeHappAnim(incr: number) {
+    for (let i = 0; i < Math.abs(incr); i++) {
+        ChangeHappiness(incr/Math.abs(incr))
+        await G.delay(60);
+      }
+  }
   // Ajoute les revenus mensuelles/annuelles au budget
   const ApplyIncome = useCallback(() => {
     ChangeBudget(income);
@@ -223,7 +229,7 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
       // Change le budget en fonction de ce qui est éxplicité dans la question
       ChangeBudget(rep.price);
       // Change la satisfaction en fonction de ce qui est éxplicité dans la question
-      ChangeHappiness(rep.happiness);
+      ChangeHappAnim(rep.happiness);
       // On ajoute l'indice de la réponse à la liste des indices de réponses choisies
       let memRep = [...memResponses, index];
       setMemResponses(memRep);
@@ -251,7 +257,7 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
       setText2("");
       setText3("");
       setText4("");
-      setCaracter(1);
+      setCaracter(0);
       setSelectedRep(null);
     } else { // Dans le cas ou la question est une explication de question
       //  Aucune consequence n'est appliquée

@@ -1,7 +1,7 @@
 import * as Font from 'expo-font';
 import { StatusBar } from 'expo-status-bar';
 import * as NavigationBar from 'expo-navigation-bar';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   View,
   TouchableOpacity,
@@ -13,6 +13,8 @@ import {
   TouchableHighlight,
   Alert,
   Platform,
+  Animated,
+  Dimensions
 } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -38,16 +40,6 @@ function AppLoading() {
   );
 }
 
-const styles = StyleSheet.create({
-  button: { margin: 15, padding: 10 },
-  text: { fontSize: 50, color: '#FFC900', textAlign: 'center', fontFamily: 'Breamcatcher' },
-  loadingContainer: { flex: 1, justifyContent: 'center', alignItems: 'center' },
-  container: { flex: 1, backgroundColor: '#fff' },
-  contentContainer: { alignItems: 'center', paddingTop: 100 },
-  bg_main: { width: '100%', height: 900, position: 'absolute', top: -20 },
-  topLeftImage: { position: 'absolute', top: 30, left: 20 },
-  topRightImage: { position: 'absolute', top: 30, right: 20 },
-});
 // Bouton pour lancer la partie jeu
 function ButtonGame({ navigation }: { navigation: any }) {
   return (
@@ -95,10 +87,7 @@ const levelImages = {
   7: require('./assets/levels_main/lev7.png'),
   8: require('./assets/levels_main/lev8.png'),
 };
-// Affichage d'un plan de l'image de fond
-function ImageLevel({ level }: { level: keyof typeof levelImages }) {
-  return <Image source={levelImages[level]} style={styles.bg_main} />;
-}
+
 // Liste des activités utilisées par l'appli
 type RootStackParamList = {
   Home: undefined;
@@ -118,23 +107,122 @@ import GameL2Activity from './activities/GameL2Activity';
 import GameContextL1Activity from './activities/GameContextL1Activity'
 
 // Affichage de la page d'accueil
-function HomeScreen({ navigation }: { navigation: any }) {
+
+// Modifiez le style bg_main pour retirer la position absolute :
+const styles = StyleSheet.create({
+  button: { margin: 15, padding: 10 },
+  text: { fontSize: 50, color: '#FFC900', textAlign: 'center', fontFamily: 'Breamcatcher' },
+  loadingContainer: { flex: 1, justifyContent: 'center', alignItems: 'center' },
+  container: { flex: 1, backgroundColor: '#fff' },
+  contentContainer: { alignItems: 'center', paddingTop: 100 },
+  topLeftImage: { position: 'absolute', top: 30, left: 20 },
+  topRightImage: { position: 'absolute', top: 30, right: 20 },
+});
+
+const SCREEN_WIDTH = Dimensions.get('window').width;
+const a = 0.1;
+
+// Composant ImageLevel (inchangé)
+function ImageLevel({ level, animatedStyle }: { level: keyof typeof levelImages; animatedStyle?: any }) {
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <View style={styles.contentContainer}>
-        {Array.from({ length: 8 }, (_, i) => (
-          <ImageLevel key={8 - i} level={(8 - i) as keyof typeof levelImages} />
-        ))}
+    <Animated.Image
+      source={levelImages[level]}
+      style={[
+        {
+          width: SCREEN_WIDTH * (1 + a),
+          height: '100%',
+          position: 'absolute',
+          left: -SCREEN_WIDTH * a / 2, // Position de base
+        },
+        animatedStyle,
+      ]}
+      resizeMode="cover"
+    />
+  );
+}
+
+// Écran principal
+function HomeScreen({ navigation }: { navigation: any }) {
+  // Initialiser chaque Animated.Value à la position de départ
+  const scrollValues = useRef(
+    Array.from({ length: 8 }, () => new Animated.Value(-SCREEN_WIDTH * a / 2))
+  ).current;
+
+  const [isReady, setIsReady] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsReady(true);
+
+      scrollValues.forEach((scrollX, index) => {
+        const animation = Animated.sequence([
+          // Délai initial unique pour chaque image
+          Animated.delay(index * 600),
+          // Boucle infinie entre gauche et droite, en partant de la position initiale
+          Animated.loop(
+            Animated.sequence([
+              Animated.timing(scrollX, {
+                toValue: SCREEN_WIDTH * a / 2, // Vers la droite
+                duration: 5000,
+                useNativeDriver: true,
+              }),
+              Animated.timing(scrollX, {
+                toValue: -SCREEN_WIDTH * a / 2, // Vers la gauche
+                duration: 5000,
+                useNativeDriver: true,
+              }),
+            ])
+          ),
+        ]);
+        animation.start();
+      });
+    }, 50);
+
+    // Nettoyage des animations
+    return () => scrollValues.forEach((val) => val.stopAnimation());
+  }, [scrollValues]);
+
+  return (
+    <View style={{ flex: 1 }}>
+      {/* Container pour les images animées */}
+      <View
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          overflow: 'hidden',
+        }}
+      >
+        {Array.from({ length: 8 }, (_, i) => {
+          const animatedStyle = {
+              transform: [{ translateX: scrollValues[i] }], // ✅ Utilisez scrollValues[i]
+            };
+            return (
+              <ImageLevel
+                key={8 - i}
+                level={(8 - i) as keyof typeof levelImages}
+                animatedStyle={animatedStyle}
+              />
+            );
+          })}
+      </View>
+
+      {/* Contenu au-dessus du fond animé */}
+      <ScrollView contentContainerStyle={styles.contentContainer}>
         <StatusBar style="auto" />
         <Image1 />
         <ButtonGame navigation={navigation} />
         <ButtonChallenge navigation={navigation} />
         <ButtonData navigation={navigation} />
         <OptionsImage />
-      </View>
-    </ScrollView>
+      </ScrollView>
+    </View>
   );
 }
+
+
 
 export default function App() {
   const [fontsLoaded, setFontsLoaded] = useState(false);

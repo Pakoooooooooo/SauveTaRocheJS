@@ -1,5 +1,5 @@
 [{
-        "questionText": "Notre commune est tres appreciee des touristes et c'est en partie grace a eux que notre economie locale est si dynamique. Cependant depuis quelques annees ces touristes detreriorent nos côtes et polluent nos plages. Nous devons donc prendre une decision par rapport au flux touristique de Graniland. Que souhaitez-vous faire ?",
+        "questionText": "Notre commune est très appréciée des touristes et c'est en partie grâce à eux que notre économie locale est si dynamique, les commerces ne désemplissent pas ! Il faut continuer sur cette lancée.",
         "prevQuestCondition": [],
         "prevRepCondition": [],
         "prevQuestNotCondition": [],
@@ -11,8 +11,8 @@
             "happiness": 0,
             "mapChanges": [],
             "overlayChanges": [],
-            "incomeChanges": 0,
-            "explConseq": "La limitation du tourisme a un impact negatif sur l'activite economique de Graniland. Les commerces ont moins de clients. La population n'est pas affectee elle profite paisiblement du charme de Graniland.  Cette option coute 20000 un effort financier non negligeable pour la commune. La satisfaction reste inchangée pour ceux qui préfèrent les decisions discrètes."
+            "incomeChanges": -1000,
+            "explConseq": "La limitation du tourisme a un impact négatif sur l'activité économique de Graniland. Les commerces ont moins de clients ! Pour autant, la population n'est pas affectée, elle profite paisiblement du charme de Graniland."
         },
         "rep2": {
             "repText": "Promouvoir le tourisme",
@@ -20,17 +20,17 @@
             "happiness": 5,
             "mapChanges": [],
             "overlayChanges": [],
-            "incomeChanges": 0,
-            "explConseq": "En promouvant le tourisme votre attractivite ainsi que le flux touristique augmentent. Cela devient une source de revenus importante pour vous. Vos habitants sont fiers d'habiter dans une ville si attractive et dynamique.  Cette option genere un gain de 75000 ce qui fait toujours plaisir au budget local. La satisfaction augmente de 5 points signe que la décision va plutôt dans le sens des habitants."
+            "incomeChanges": 1000,
+            "explConseq": "En promouvant le tourisme votre attractivité ainsi que le flux touristique augmentent. Cela devient une source de revenus importante pour vous. Vos habitants sont fiers d'habiter dans une ville si attractive et dynamique.  Cette option génère un gain de 75 000 ce qui fait toujours plaisir au budget local."
         },
         "rep3": {
-            "repText": "Organiser des balades sur la côte encadrees par la ville",
+            "repText": "Organiser des balades sur la côte encadrées par la ville",
             "price": 2000,
             "happiness": -10,
             "mapChanges": [],
             "overlayChanges": [],
             "incomeChanges": 0,
-            "explConseq": "L'organisation de balades permet d'attirer de nouveaux touristes donc cela dynamise votre economie. Pourtant les habitants regrettent que leurs balades quotidiennes, autrefois secretes, soient maintenant un equivalent du peripherique parisien a l'heure de pointe.  Cette option genere un gain de 2000 ce qui fait toujours plaisir au budget local. La satisfaction baisse de 10 points preuve que certaines personnes risquent de grincer un peu des dents."
+            "explConseq": "L'organisation de balades permet d'attirer de nouveaux touristes donc cela dynamise votre économie. Pourtant les habitants regrettent que leurs balades quotidiennes autrefois secrètes soient maintenant un équivalent du périphérique parisien à l'heure de pointe.  Cette option génère un gain de 2 000, ce qui fait toujours plaisir au budget local. Le bonheur baisse de 10 points, preuve que certaines personnes risquent de grincer un peu des dents."
         },
         "rep4": {
             "repText": "Ne rien faire",
@@ -39,11 +39,11 @@
             "mapChanges": [],
             "overlayChanges": [],
             "incomeChanges": 0,
-            "explConseq": "Cette decision n'a aucun impact (c'est evident vu que vous n'avez rien fait). Cette option ne coûte rien ce qui la rend toujours plus facile a defendre en reunion. La satisfaction reste inchangée. Parfait pour ceux qui préfèrent les decisions discrètes."
+            "explConseq": "Cette décision n'a aucun impact (c'est évident vu que vous n'avez rien fait). C'est reculer pour mieux sauter !"
         }
     },
     {
-        "questionText": "De nombreuses personnes cherchent à se mettre au vert et l'emplacement de Graniland est ideal proche de la mer pas trop éloigne des grandes villes : Graniland fait rêver ! Vous avez l'opportunite de construire un lotissement avec des maisons traditionnelles et adaptées au territoire que faites-vous ?",
+        "questionText": "De nombreuses personnes cherchent à se mettre au vert et l'emplacement de Graniland est idéal. La ville est proche de la mer et des grandes villes : Graniland fait rêver ! Nous pourrions continuer sur cette lancée et accueillir de nouveaux habitants !",
         "prevQuestCondition": [],
         "prevRepCondition": [],
         "prevQuestNotCondition": [],
@@ -58,10 +58,10 @@
                 {"i": 2,"j": 6,"newType": "h"},
                 {"i": 3,"j": 6,"newType": "h"}],
             "incomeChanges": 2000,
-            "explConseq": "La construction sur la roche est assez coûteuse car les terrains sont proches de la mer mais les nouveaux arrivants sont ravis de rejoindre la chouette ville de Graniland.  Cette option coûte 400000 un effort financier non négligeable pour la commune. La satisfaction augmente de 10 points, signe que la decision va plutot dans le sens des habitants."
+            "explConseq": "La construction sur la roche est assez coûteuse car les terrains sont proches de la mer mais les nouveaux arrivants sont ravis de rejoindre la chouette ville de Graniland.  Cette option coûte 400 000, un effort financier non négligeable pour la commune."
         },
         "rep2": {
-            "repText": "Construire dans l'arrière pays",
+            "repText": "Construire dans l'arrière-pays",
             "price": -250000,
             "happiness": 5,
             "mapChanges": [],
@@ -69,7 +69,7 @@
                 {"i": 11,"j": 13,"newType": "h"},
                 {"i": 11,"j": 12,"newType": "h"}],
             "incomeChanges": 2000,
-            "explConseq": "Le nouveau lotissement est construit ! Les nouveaux habitants de Graniland trouvent ce qu'ils sont venus chercher : calme nature et sérénite.  Cette option coûte 250000 un effort financier non négligeable pour la commune. La satisfaction augmente de 5 points signe que la décision va plutot dans le sens des habitants."
+            "explConseq": "Le nouveau lotissement est construit ! Les nouveaux habitants de Graniland trouvent ce qu'ils sont venus chercher : calme, nature et sérénité.  Cette option coûte 250 000, un effort financier non négligeable pour la commune."
         },
         "rep3": {
             "repText": "Ne pas construire",
@@ -78,7 +78,7 @@
             "mapChanges": [],
             "overlayChanges": [],
             "incomeChanges": 0,
-            "explConseq": "Cette décision n'a aucun impact (c'est évident vu que vous n'avez rien fait). Cette option ne coûte rien ce qui la rend toujours plus facile à defendre en réunion. La satisfaction reste inchange parfait pour ceux qui préfèrent les décisions discrètes."
+            "explConseq": "Graniland est très bien comme elle est ! Nous n'avons pas besoin d'accueillir des nouveaux habitants, économisons pour la suite..."
         },
         "rep4": {
             "repText": "Construire proche du noyau villageois",
@@ -89,11 +89,11 @@
                 {"i": 7,"j": 10,"newType": "h"},
                 {"i": 8,"j": 10,"newType": "h"}],
             "incomeChanges": 2000,
-            "explConseq": "La construction proche du noyau villageois est coûteuse. Et oui c'est chic d'habiter dans le bourg d'une ville aussi charmante. Les nouveaux habitants sont ravis.  Cette option coûte 300000 un effort financier non négligeable pour la commune. La satisfaction augmente de 5 points signe que la décision va plutôt dans le sens des habitants."
+            "explConseq": "La construction proche du noyau villageois est coûteuse. Et oui c'est chic d'habiter dans le bourg d'une ville aussi charmante. Les nouveaux habitants sont ravis. Cette option coûte 300 000, un effort financier non négligeable pour la commune."
         }
     },
     {
-        "questionText": "La maison pres de la côte va etre obligatoirement détruite a cause du recul du trait de cote.",
+        "questionText": "CATASTROPHE le fléau du recul du trait de côte touche Graniland. La maison près de la côte doit être obligatoirement détruite et vous devez le financer.",
         "prevQuestCondition": [],
         "prevRepCondition": [],
         "prevQuestNotCondition": [],
@@ -138,7 +138,7 @@
         }
     },
     {
-        "questionText": "Le recul du trait de côte devient un problème avéré il faut comprendre le phénomène chercher des solutions potentielles ou sensibiliser les populations. Dans ce cadre qui souhaitez-vous financer ?",
+        "questionText": "Le recul du trait de côte devient un problème avéré il faut comprendre le phénomène, chercher des solutions ou sensibiliser les populations. Pouvez-vous nous aider financièrement ?",
         "prevQuestCondition": [],
         "prevRepCondition": [],
         "prevQuestNotCondition": [],
@@ -151,25 +151,25 @@
             "mapChanges": [],
             "overlayChanges": [],
             "incomeChanges": 0,
-            "explConseq": "Le financement de laboratoires universitaires fait appel à des acteurs locaux et credibles. C'est chouette de faire participer ces acteurs les habitants sont contents. Cette option coûte 10000 un effort financier non négligeable pour la commune. La satisfaction augmente de 5 points signe que la décision va plutôt dans le sens des habitants."
+            "explConseq": "Le financement de laboratoires universitaires fait appel à des acteurs locaux et crédibles. C'est chouette de faire participer ces acteurs, les habitants sont contents."
         },
         "rep2": {
-            "repText": "Association scientifique locale",
+            "repText": "L'association scientifique locale",
             "price": -2500,
             "happiness": 2,
             "mapChanges": [],
             "overlayChanges": [],
             "incomeChanges": 0,
-            "explConseq": "Financer des associations est moins coûteux que financer d'autres organismes. En plus c'est local les habitants sont assez contents. Sans plus faut pas exagérer.  Cette option coûte 2500 un effort financier non négligeable pour la commune. La satisfaction augmente de 2 points signe que la décision va plutôt dans le sens des habitants."
+            "explConseq": "Financer des associations est moins coûteux que financer d'autres organismes. En plus c'est local, les habitants sont assez contents."
         },
         "rep3": {
-            "repText": "Bureau d'etudes spécialise ou observatoire public technique",
+            "repText": "Bureau d'études spécialisé ou observatoire public technique",
             "price": -15000,
             "happiness": 2,
             "mapChanges": [],
             "overlayChanges": [],
             "incomeChanges": 0,
-            "explConseq": "Le financement de bureaux d'études est la solution la plus coûteuse mais les enjeux sont confiés à des organismes sérieux nationaux. Malheureusement ils sont moins sensibles aux probmematiques locales. Les habitants sont contents sans être emballes par l'idée.  Cette option coûte 15000 un effort financier non négligeable pour la commune. La satisfaction augmente de 2 points signe que la décision va plutôt dans le sens des habitants."
+            "explConseq": "Le financement de bureaux d'études est la solution la plus coûteuse mais les enjeux sont confiés à des organismes sérieux nationaux. Malheureusement ils sont moins sensibles aux problématiques locales. Les habitants sont contents sans être emballés par l'idée."
         },
         "rep4": {
             "repText": "Ne rien financer",
@@ -178,7 +178,7 @@
             "mapChanges": [],
             "overlayChanges": [],
             "incomeChanges": 0,
-            "explConseq": "Cette décision n'a aucun impact (c'est évident vu que vous n'avez rien fait). Cette option ne coûte rien ce qui la rend toujours plus facile à défendre en réunion. La satisfaction reste inchangée parfait pour ceux qui préfèrent les décisions discrètes."
+            "explConseq": "Cette option ne coûte rien ce qui la rend toujours plus facile à défendre en réunion. La satisfaction reste inchangée."
         }
     },
     {
@@ -195,7 +195,7 @@
             "mapChanges": [],
             "overlayChanges": [],
             "incomeChanges": 5000,
-            "explConseq": "Cette option coûte 10000 un effort financier non negligeable pour la commune. La satisfaction reste inchangée. Parfait pour ceux qui préfèrent les décisions discrètes."
+            "explConseq": "La MTDD va vous aider à développer harmonieusement le territoire de Graniland. La ville est dans un contexte de croissance démographique forte et de ressources à préserver. Votre budget annuel augmente !"
         },
         "rep2": {
             "repText": "Construction d'une route",
@@ -208,10 +208,10 @@
                 {"i": 3,"j": 11,"newType": "r"},
                 {"i": 3,"j": 10,"newType": "r"}],
             "incomeChanges": 0,
-            "explConseq": "Super bonne idée. Dommage qu'on ne sache pas encore à quoi ça sert. Ce sera peut être utile pour plus tard ou pas… Les habitants esquissent un sourire. Cette option coûte 30000 un effort financier non négligeable pour la commune. La satisfaction augmente de 2 points signe que la décision va plutôt dans le sens des habitants."
+            "explConseq": "Super bonne idée. Cette route sera peut-être utile pour plus tard ou pas… Les habitants esquissent un sourire."
         },
         "rep3": {
-            "repText": "Déplacement des maisons côtieres sur la roche",
+            "repText": "Déplacement des maisons côtières sur la roche",
             "price": -300000,
             "happiness": -15,
             "mapChanges": [],
@@ -221,7 +221,7 @@
                 {"i": 3,"j": 5,"newType": "h"},
                 {"i": 4,"j": 5,"newType": "h"}],
             "incomeChanges": 0,
-            "explConseq": "Cette option coûte 300000 un effort financier non négligeable pour la commune. La satisfaction baisse de 15 points. Preuve que certaines personnes risquent de grincer un peu des dents."
+            "explConseq": "Cette option coûte 300 000, un effort financier non négligeable pour la commune. Malheureusement, les habitants ne sont pas très heureux, la vue est moins belle ici ! La satisfaction baisse de 15 points."
         },
         "rep4": {
             "repText": "Ne rien faire",
@@ -230,89 +230,89 @@
             "mapChanges": [],
             "overlayChanges": [],
             "incomeChanges": 0,
-            "explConseq": "Cette option ne coûte rien ce qui la rend toujours plus facile à défendre en reunion. La satisfaction reste inchangée. Parfait pour ceux qui préfèrent les décisions discrètes."
+            "explConseq": "Finalement vous ne sentez plus rien ? Tant mieux ! C'était peut-être une fausse alerte."
         }
     },
     {
-        "questionText": "Avec votre développement l'intercommunalite des villes voisines vous propose de les rejoindre. Cela vous permet de recevoir de l'aide en cas de besoin mais egalement d'en donner lorsque les autres communes en demandent. Cette aide peut etre humaine materielle ou financiere. Que souhaitez-vous faire ?",
+        "questionText": "Avec votre développement l'intercommunalité des villes voisines vous propose de les rejoindre. Cela vous permet de recevoir de l'aide en cas de besoin mais également d'en donner lorsque les autres communes en demandent. Cette aide peut être humaine matérielle ou financière. Que souhaitez-vous faire ?",
         "prevQuestCondition": [0],
         "prevRepCondition": [2],
         "prevQuestNotCondition": [],
         "prevRepNotCondition": [],
         "caracter": 1,
         "rep1": {
-            "repText": "Rejoindre l'interco sans mise en commun du budget",
+            "repText": "Rejoindre l'intercommunalité sans mise en commun du budget",
             "price": 0,
             "happiness": 0,
             "mapChanges": [],
             "overlayChanges": [],
             "incomeChanges": 0,
-            "explConseq": "Cette option ne coûte rien ce qui la rend toujours plus facile a defendre en reunion. La satisfaction reste inchange parfait pour ceux qui preferent les decisions discretes."
+            "explConseq": "Pourquoi pas ? C'est toujours un soutien ! Et puis, vous n'avez déjà pas beaucoup de budget, vous n'allez pas partager..."
         },
         "rep2": {
-            "repText": "Rejoindre l'interco en mettant le budget en commun",
+            "repText": "Rejoindre l'intercommunalité en mettant le budget en commun",
             "price": 0,
             "happiness": 0,
             "mapChanges": [],
             "overlayChanges": [],
             "incomeChanges": -3000,
-            "explConseq": "Cette option ne coûte rien ce qui la rend toujours plus facile a defendre en reunion. La satisfaction reste inchange parfait pour ceux qui preferent les decisions discretes."
+            "explConseq": "On est plus fort ensemble que seul ! Bon, il faut payer maintenant, - 3 000."
         },
         "rep3": {
-            "repText": "Ne pas rejoindre l'interco mais rester proche des communes.",
+            "repText": "Ne pas rejoindre l'intercommunalité mais rester proche des communes.",
             "price": 0,
             "happiness": 0,
             "mapChanges": [],
             "overlayChanges": [],
             "incomeChanges": 0,
-            "explConseq": "Cette decision n'a pas impacte votre budget ni la satisfaction de vos habitants.  Cette option ne coûte rien ce qui la rend toujours plus facile a defendre en reunion. La satisfaction reste inchange parfait pour ceux qui preferent les decisions discretes."
+            "explConseq": "C'est votre choix, cela ne change pas la satisfaction de vos habitants et ne diminue pas votre budget, c'est ok finalement."
         },
         "rep4": {
-            "repText": "Ne pas rejoindre l'interco et ne pas garder de contact avec les autres communes.",
+            "repText": "Ne pas rejoindre l'intercommunalité et ne pas garder de contact avec les autres communes.",
             "price": 0,
             "happiness": 0,
             "mapChanges": [],
             "overlayChanges": [],
             "incomeChanges": 0,
-            "explConseq": "Cette option ne coûte rien ce qui la rend toujours plus facile a defendre en reunion. La satisfaction reste inchange parfait pour ceux qui preferent les decisions discretes."
+            "explConseq": "Chacun pour sa peau ! Il vaut mieux être seul que mal accompagné !"
         }
     },
     {
-        "questionText": "Graniland a été élue plus belle ville de la région quel succes ! Nos affaires marchent et les predicitions d'affluence touristique sont tres bonnes l'annee a venir promet d'etre intense. Pouvez-vous nous aider a developper les infrastructures ?",
+        "questionText": "Graniland a été élue plus belle ville de la région, quel succès ! Nos affaires marchent et les prédictions d'affluence touristique sont très bonnes, l'année à venir promet d'être intense. Pouvez-vous nous aider à développer les infrastructures ?",
         "prevQuestCondition": [],
         "prevRepCondition": [],
         "prevQuestNotCondition": [0],
         "prevRepNotCondition": [1],
         "caracter": 5,
         "rep1": {
-            "repText": "Installer une boutique proches de la plage",
-            "price": 30000,
+            "repText": "Installer une boutique proche de la plage",
+            "price": -30000,
             "happiness": 10,
             "mapChanges": [],
             "overlayChanges": [
                 { "i": 5,"j": 8,"newType": "c"}],
-            "incomeChanges": 0,
-            "explConseq": "Cette option genere un gain de 30000 ce qui fait toujours plaisir au budget local. La satisfaction augmente de 10 points signe que la decision va plutot dans le sens des habitants."
+            "incomeChanges": 1000,
+            "explConseq": "La boutique fonctionne du tonnerre ! C'est un succès."
         },
         "rep2": {
-            "repText": "Installer une zone commerciale dans l'arriere pays",
-            "price": 60000,
+            "repText": "Installer une zone commerciale dans l'arrière-pays",
+            "price": -60000,
             "happiness": 7,
             "mapChanges": [],
             "overlayChanges": [
                 {"i": 5,"j": 10,"newType": "c"},
                 {"i": 5,"j": 11,"newType": "c"}],
-            "incomeChanges": 0,
-            "explConseq": "Cette option genere un gain de 60000 ce qui fait toujours plaisir au budget local. La satisfaction augmente de 7 points signe que la decision va plutot dans le sens des habitants."
+            "incomeChanges": 1000,
+            "explConseq": "Les habitants sont ravis de ne plus avoir à aller jusqu'au bourg pour faire leurs courses. Bon choix !"
         },
         "rep3": {
-            "repText": "Developpement d'une ligne de bateau touristique",
-            "price": 20000,
+            "repText": "Développement d'une ligne de bateau touristique",
+            "price": -20000,
             "happiness": 2,
             "mapChanges": [],
             "overlayChanges": [],
             "incomeChanges": 0,
-            "explConseq": "Cette option genere un gain de 20000 ce qui fait toujours plaisir au budget local. La satisfaction augmente de 2 points signe que la decision va plutot dans le sens des habitants."
+            "explConseq": "Pourquoi ne pas découvrir Graniland sous un nouvel angle ? Bonne idée ! Pour autant, je ne suis pas sûr que nos voisins les poissons soient ravis du bruit généré... Satisfaction mitigée !"
         },
         "rep4": {
             "repText": "Ne rien faire",
@@ -321,11 +321,11 @@
             "mapChanges": [],
             "overlayChanges": [],
             "incomeChanges": 0,
-            "explConseq": "Cette decision n'a pas impacte votre budget ni la satisfaction de vos habitants.  Cette option ne coûte rien ce qui la rend toujours plus facile a defendre en reunion. La satisfaction reste inchange parfait pour ceux qui preferent les decisions discretes."
+            "explConseq": "Cette option ne coûte rien ce qui la rend toujours plus facile à défendre en réunion. De même, la satisfaction reste inchangée parfait pour ceux qui préfèrent les décisions discrètes."
         }
     },
     {
-        "questionText": "La marée du siecle vient de passer la parcelle en danger s'effondre et les maisons proches de la plage sont innondees.",
+        "questionText": "CATASTROPHE la marée du siècle vient de passer, la parcelle en danger s'effondre et les maisons proches de la plage sont inondées. Vous les aidez financièrement à traverser cette mauvaise passe.",
         "prevQuestCondition": [],
         "prevRepCondition": [],
         "prevQuestNotCondition": [],
@@ -370,7 +370,7 @@
         }
     },
     {
-        "questionText": "Vous constatez que de nombreux concitoyens ne connaissent pas les enjeux lies a l'erosion du trait de cete et une association vous propose un accompagnement sur la sensibilisation. Que faites-vous ?",
+        "questionText": "Nous ne savons pas réellement ce que sont les enjeux liés à l'érosion du trait de côte, une association propose de nous former !",
         "prevQuestCondition": [],
         "prevRepCondition": [],
         "prevQuestNotCondition": [],
@@ -383,7 +383,7 @@
             "mapChanges": [],
             "overlayChanges": [],
             "incomeChanges": 2000,
-            "explConseq": "Cette option coûte 10000 un effort financier non negligeable pour la commune. La satisfaction augmente de 15 points signe que la decision va plutot dans le sens des habitants."
+            "explConseq": "Bonne idée ! Tout le monde sur le même pied d'égalité !"
         },
         "rep2": {
             "repText": "Sensibiliser les plus jeunes",
@@ -392,7 +392,7 @@
             "mapChanges": [],
             "overlayChanges": [],
             "incomeChanges": 2000,
-            "explConseq": "Cette option coûte 5000 un effort financier non negligeable pour la commune. La satisfaction augmente de 10 points signe que la decision va plutot dans le sens des habitants."
+            "explConseq": "C'est à eux qu'appartient l'avenir après tout non ?"
         },
         "rep3": {
             "repText": "Sensibiliser les touristes",
@@ -401,7 +401,7 @@
             "mapChanges": [],
             "overlayChanges": [],
             "incomeChanges": 2000,
-            "explConseq": "Cette option coûte 2000 un effort financier non negligeable pour la commune. La satisfaction augmente de 5 points signe que la decision va plutot dans le sens des habitants."
+            "explConseq": "Le piétinement des côtes empire le phénomène d'érosion du trait de côte ! Sensibiliser les touristes est une bonne idée, c'est eux qui utilisent le plus les sentiers côtiers."
         },
         "rep4": {
             "repText": "Ne pas sensibiliser",
@@ -410,11 +410,11 @@
             "mapChanges": [],
             "overlayChanges": [],
             "incomeChanges": 1000,
-            "explConseq": "Cette decision n'a pas impacte votre budget ni la satisfaction de vos habitants. Cette option ne coûte rien ce qui la rend toujours plus facile a defendre en reunion. La satisfaction reste inchange parfait pour ceux qui preferent les decisions discretes."
+            "explConseq": "Attention, un maire doit être à l'écoute des habitants... Cela risquerait de vous porter préjudice plus tard..."
         }
     },
     {
-        "questionText": "Votre trait de cete recule de plus en plus et les scientifiques vous conseillent de limiter le pietinement sur les zones sensibles. Quelle decision prenez-vous ?",
+        "questionText": "Le trait de côte recule tous les ans ! Nous vous conseillons de limiter le piétinement sur les zones sensibles.",
         "prevQuestCondition": [],
         "prevRepCondition": [],
         "prevQuestNotCondition": [],
@@ -422,8 +422,8 @@
         "caracter": 2,
         "rep1": {
             "repText": "Interdire de marcher sur la plage",
-            "price": -75000,
-            "happiness": -20,
+            "price": -90000,
+            "happiness": -15,
             "mapChanges": [],
             "overlayChanges": [
                 {"i": 5,"j": 7,"newType": "s"},
@@ -438,28 +438,42 @@
                 {"i": 8,"j": 8,"newType": "s"},
                 {"i": 9,"j": 8,"newType": "s"}],
             "incomeChanges": 0,
-            "explConseq": "Cette option coûte 75000 un effort financier non negligeable pour la commune. La satisfaction baisse de 20 points preuve que certaines personnes risquent de grincer un peu des dents."
+            "explConseq": "Il a fallu engager des agents de sécurité pour mettre en vigueur l'interdiction ! Les habitants de Graniland sont vraiment tristes, ils aimaient se balader sur la plage..."
         },
         "rep2": {
-            "repText": "Interdire de marcher sur les cetes",
-            "price": -90000,
-            "happiness": -15,
+            "repText": "Interdire de marcher sur les côtes",
+            "price": -30000,
+            "happiness": -5,
             "mapChanges": [],
             "overlayChanges": [
                 {"i": 0,"j": 6,"newType": "s"},
                 {"i": 1,"j": 6,"newType": "s"},
                 {"i": 13,"j": 5,"newType": "s"}],
             "incomeChanges": 0,
-            "explConseq": "Cette option coûte 90000 un effort financier non negligeable pour la commune. La satisfaction baisse de 15 points preuve que certaines personnes risquent de grincer un peu des dents."
+            "explConseq": "Coup dur pour le tourisme, coup dur pour les habitants et leur randonnée dominicale... Au fond, c'est pour le bien de tout le monde non ? Et puis, il leur reste la plage..."
         },
         "rep3": {
-            "repText": "Contreler l'acces sur le sentier cetier et sur les plages",
-            "price": -30000,
-            "happiness": -5,
+            "repText": "Contrôler l'accès sur le sentier côtier et sur les plages",
+            "price": -90000,
+            "happiness": -20,
             "mapChanges": [],
-            "overlayChanges": [],
+            "overlayChanges": [
+                {"i": 0,"j": 6,"newType": "s"},
+                {"i": 1,"j": 6,"newType": "s"},
+                {"i": 13,"j": 5,"newType": "s"},
+                {"i": 5,"j": 7,"newType": "s"},
+                {"i": 6,"j": 7,"newType": "s"},
+                {"i": 7,"j": 7,"newType": "s"},
+                {"i": 8,"j": 7,"newType": "s"},
+                {"i": 9,"j": 7,"newType": "s"},
+                {"i": 10,"j": 7,"newType": "s"},
+                {"i": 10,"j": 6,"newType": "s"},
+                {"i": 6,"j": 8,"newType": "s"},
+                {"i": 7,"j": 8,"newType": "s"},
+                {"i": 8,"j": 8,"newType": "s"},
+                {"i": 9,"j": 8,"newType": "s"}],
             "incomeChanges": 0,
-            "explConseq": "Cette option coûte 30000 un effort financier non negligeable pour la commune. La satisfaction baisse de 5 points preuve que certaines personnes risquent de grincer un peu des dents."
+            "explConseq": "Tout est surveillé maintenant ! Pas sûr que ça ne fasse l'unanimité chez les habitants..."
         },
         "rep4": {
             "repText": "Ne rien faire",
@@ -468,11 +482,11 @@
             "mapChanges": [],
             "overlayChanges": [],
             "incomeChanges": 0,
-            "explConseq": "Cette decision n'a pas impacte votre budget ni la satisfaction de vos habitants. Cette option ne coûte rien ce qui la rend toujours plus facile a defendre en reunion. La satisfaction reste inchange parfait pour ceux qui preferent les decisions discretes."
+            "explConseq": "Il vaut mieux ne rien faire que de s'attirer les foudres des habitants non ?"
         }
     },
     {
-        "questionText": "Le temps a passe un morceau de plage disparate et on aperçoit depuis la plage un beluga.",
+        "questionText": "Le temps a passé, un bout de la plage a disparu à cause de la montée des eaux, le réchauffement est aussi visible, on a aperçu depuis la plage deux bélugas.",
         "prevQuestCondition": [],
         "prevRepCondition": [],
         "prevQuestNotCondition": [],
@@ -520,33 +534,33 @@
         }
     },
     {
-        "questionText": "La mer se rapproche petit a petit et met en danger certaines infrastructures. Voulez-vous en detruire ?",
+        "questionText": "La mer se rapproche petit à petit et met en danger certaines infrastructures. Voulez-vous les détruire ?",
         "prevQuestCondition": [],
         "prevRepCondition": [],
         "prevQuestNotCondition": [],
         "prevRepNotCondition": [],
         "caracter": 1,
         "rep1": {
-            "repText": "Detruire la maison sur la plage",
+            "repText": "Détruire la maison sur la plage",
             "price": -15000,
             "happiness": -15,
             "mapChanges": [],
             "overlayChanges": [
                 {"i": 6,"j": 8,"newType": ""}],
             "incomeChanges": -1000,
-            "explConseq": "Cette option coûte 15000 un effort financier non negligeable pour la commune. La satisfaction baisse de 15 points preuve que certaines personnes risquent de grincer un peu des dents."
+            "explConseq": "Les habitants sont vraiment tristes de quitter leur belle maison mais bon, ils ont vu par eux-mêmes le niveau de l'eau monter... c'était donc le meilleur choix ?"
         },
         "rep2": {
-            "repText": "Ne rien detruire",
+            "repText": "Ne rien toucher, la ville est parfaite",
             "price": 0,
             "happiness": 0,
             "mapChanges": [],
             "overlayChanges": [],
             "incomeChanges": 0,
-            "explConseq": "Cette decision n'a pas impacte votre budget ni la satisfaction de vos habitants."
+            "explConseq": "Et oui, Graniland n'a pas dépassé Angers dans le classement des villes où il fait bon vivre pour rien ! On aime Graniland !"
         },
         "rep3": {
-            "repText": "Detruire les maisons et les commerces sur et proches de la plage",
+            "repText": "Détruire deux maisons proches de la mer",
             "price": -120000,
             "happiness": -7,
             "mapChanges": [],
@@ -554,21 +568,21 @@
                 {"i": 10,"j": 8,"newType": ""},
                 {"i": 6,"j": 8,"newType": ""}],
             "incomeChanges": -2000,
-            "explConseq": "Cette option coûte 120000 un effort financier non negligeable pour la commune. La satisfaction baisse de 7 points preuve que certaines personnes risquent de grincer un peu des dents."
+            "explConseq": "Les habitants sont vraiment tristes de quitter le petit bout de paradis qu'est Graniland... On espère qu'ils retrouveront leur bonheur ailleurs ! En attendant, cette action coûte cher au moral comme au porte-monnaie !"
         },
         "rep4": {
-            "repText": "Detruire les maisons sur la roche et sur l'ile",
+            "repText": "Détruire la maison sur l'île",
             "price": -200000,
             "happiness": -10,
             "mapChanges": [],
             "overlayChanges": [
                 {"i": 7,"j": 3, "newType": ""}],
             "incomeChanges": -1000,
-            "explConseq": "Cette option coûte 200000 un effort financier non negligeable pour la commune. La satisfaction baisse de 10 points preuve que certaines personnes risquent de grincer un peu des dents."
+            "explConseq": "Les habitants sont tristes de quitter ce petit bout de paradis... On espère qu'ils retrouveront leur bonheur ailleurs ! En attendant, cette action coûte cher au moral comme au porte-monnaie !"
         }
     },
     {
-        "questionText": "Un habitant de Graniland est un ancien chercheur sur le sujet et il a longtemps etudie les solutions existantes pour ralentir la progression et il vous en propose trois adaptees a la situation. Choisissez-vous d'en installer une ?",
+        "questionText": "Je suis un ancien chercheur sur le sujet de l'érosion du trait de côte et donc j'ai longtemps étudié les solutions existantes pour ralentir la progression. Pourquoi ne pas mettre en place l'une de ces solutions ?",
         "prevQuestCondition": [],
         "prevRepCondition": [],
         "prevQuestNotCondition": [],
@@ -581,38 +595,38 @@
             "mapChanges": [],
             "overlayChanges": [],
             "incomeChanges": 0,
-            "explConseq": "Cette option coûte 10000 un effort financier non negligeable pour la commune. La satisfaction baisse de 10 points preuve que certaines personnes risquent de grincer un peu des dents."
+            "explConseq": "La mer est cachée par cette nouvelle grande dune ! Les habitants sont attristés et on peut les comprendre mais c'est le prix à payer non ? "
         },
         "rep2": {
             "repText": "Restaurer les marais",
             "price": -15000,
-            "happiness": -2,
-            "mapChanges": [],
-            "overlayChanges": [],
-            "incomeChanges": 0,
-            "explConseq": "Cette option coûte 15000 un effort financier non negligeable pour la commune. La satisfaction baisse de 2 points preuve que certaines personnes risquent de grincer un peu des dents."
-        },
-        "rep3": {
-            "repText": "Ne rien faire",
-            "price": 0,
             "happiness": 0,
             "mapChanges": [],
             "overlayChanges": [],
             "incomeChanges": 0,
-            "explConseq": "Cette decision n'a pas impacte votre budget ni la satisfaction de vos habitants. Cette option ne coûte rien ce qui la rend toujours plus facile a defendre en reunion. La satisfaction reste inchange parfait pour ceux qui preferent les decisions discretes."
+            "explConseq": "Cette option semble intéressante ! Les marais (endigués ou non, de chasse, salins…) sont essentiels à la biodiversité. Ils permettent la purification de l’eau ou la rétention du trop plein d’eau utile à son utilisation différée."
         },
-        "rep4": {
-            "repText": "Mettre en place une foret immergee",
-            "price": -20000,
-            "happiness": -2,
+        "rep3": {
+            "repText": "Ne pas l'écouter, il n'est peut-être même pas chercheur",
+            "price": 0,
+            "happiness": -10,
             "mapChanges": [],
             "overlayChanges": [],
             "incomeChanges": 0,
-            "explConseq": "Cette option coûte 20000 un effort financier non negligeable pour la commune. La satisfaction baisse de 2 points preuve que certaines personnes risquent de grincer un peu des dents."
+            "explConseq": "Zéro confiance envers les habitants... Cela témoigne d'un maire vraiment à l'écoute... -10 en satisfaction, il faut croire en l'humanité !"
+        },
+        "rep4": {
+            "repText": "Mettre en place une forêt immergée",
+            "price": -20000,
+            "happiness": -5,
+            "mapChanges": [],
+            "overlayChanges": [],
+            "incomeChanges": 0,
+            "explConseq": "Cette option coûte 20 000, est ce qu'on est vraiment sûr que toucher à la biodiversité soit une bonne idée ? Les pauvres poissons de Graniland... Ils vont être perdus... Eux aussi font partie de la ville !"
         }
     },
     {
-        "questionText": "Une grosse tempete frappe Graniland et effraie les habitants : 10 habitants demenagent.",
+        "questionText": "Une grosse tempête frappe Graniland et effraie les habitants : 10 habitants déménagent.",
         "prevQuestCondition": [],
         "prevRepCondition": [],
         "prevQuestNotCondition": [],
@@ -656,14 +670,14 @@
         }
     },
     {
-        "questionText": "A la suite des derniers evenements plusieurs maisons sont en danger. Decidez-vous d'agir ?",
+        "questionText": "À la suite des derniers évènements plusieurs maisons sont en danger. Que voulez-vous faire ?",
         "prevQuestCondition": [],
         "prevRepCondition": [],
         "prevQuestNotCondition": [],
         "prevRepNotCondition": [],
         "caracter": 1,
         "rep1": {
-            "repText": "Relocaliser les maisons du front de mer dans l'arriere pays",
+            "repText": "Relocaliser les maisons du front de mer dans l'arrière-pays",
             "price": -150000,
             "happiness": -10,
             "mapChanges": [],
@@ -675,7 +689,7 @@
                 {"i": 8,"j": 9,"newType": ""},
                 {"i": 7,"j": 9,"newType": ""}],
             "incomeChanges": 0,
-            "explConseq": "Cette option coûte 150000 un effort financier non negligeable pour la commune. La satisfaction baisse de 10 points preuve que certaines personnes risquent de grincer un peu des dents."
+            "explConseq": "150 000 dépensés pour une vue plus que moyenne... C'est décevant pour les habitants ! Mais c'est le prix pour leur sauver la vie, n'est-ce pas ?"
         },
         "rep2": {
             "repText": "Relocaliser les maisons du front de mer derrière la roche",
@@ -690,7 +704,7 @@
                 {"i": 8,"j": 9,"newType": ""},
                 {"i": 7,"j": 9,"newType": ""}],
             "incomeChanges": 0,
-            "explConseq": "Cette option coûte 200000 un effort financier non negligeable pour la commune. La satisfaction baisse de 10 points preuve que certaines personnes risquent de grincer un peu des dents."
+            "explConseq": "200 000 de dépensé pour une vue plus que moyenne... C'est décevant pour les habitants ! Mais c'est le prix pour leur sauver la vie, n'est-ce pas ?"
         },
         "rep3": {
             "repText": "Ne rien faire",
@@ -702,10 +716,10 @@
                 {"i": 8,"j": 9,"newType": ""},
                 {"i": 7,"j": 9,"newType": ""}],
             "incomeChanges": 0,
-            "explConseq": "Cette decision n'a pas impacte votre budget ni la satisfaction de vos habitants.  Cette option ne coûte rien ce qui la rend toujours plus facile a defendre en reunion. La satisfaction reste inchange parfait pour ceux qui preferent les decisions discretes."
+            "explConseq": "Il vaut mieux ne rien faire que de mal faire... C'est ça votre stratégie ?"
         },
         "rep4": {
-            "repText": "Relocaliser les maisons proches de la plage sur une autre commune",
+            "repText": "Relocaliser deux maisons du bourg et un commerce sur une autre commune",
             "price": -100000,
             "happiness": -5,
             "mapChanges": [],
@@ -714,11 +728,11 @@
                 {"i": 9,"j": 9,"newType": ""},
                 {"i": 7,"j": 9,"newType": ""}],
             "incomeChanges": -3000,
-            "explConseq": "Cette option coûte 100000 un effort financier non negligeable pour la commune. La satisfaction baisse de 5 points preuve que certaines personnes risquent de grincer un peu des dents."
+            "explConseq": "Cette option coûte 100 000, c'est cher ! Puis, c'est toujours triste de voir des habitants quitter la ville un peu de force, pourquoi la mer ne veut pas d'eux ici ? - 5 de satisfaction ! "
         }
     },
     {
-        "questionText": "La commune voisine est touchee par l'erosion et 2 maisons sont detruites.",
+        "questionText": "ALERTE la commune voisine est touchée par l'érosion et 2 maisons sont détruites. Membre de l'intercommunalité avec mise en commun du budget, nous devons apporter notre soutien !",
         "prevQuestCondition": [5],
         "prevRepCondition": [2],
         "prevQuestNotCondition": [],
@@ -762,7 +776,7 @@
         }
     },
     {
-        "questionText": "La commune voisine est touchee par l'erosion et 2 maisons sont detruites.",
+        "questionText": "ALERTE la commune voisine est touchée par l'érosion et 2 maisons sont détruites, devons-nous nous inquiéter pour Graniland ?",
         "prevQuestCondition": [],
         "prevRepCondition": [],
         "prevQuestNotCondition": [5],
@@ -806,7 +820,7 @@
         }
     },
     {
-        "questionText": "La situation devient urgente, il faut ralentir au maximum l'erosion du trait de cote avant que d'autres habitants soient touches. Que souhaitez-vous mettre en place ?",
+        "questionText": "La situation devient urgente, il faut ralentir au maximum l'érosion du trait de côte avant que d'autres habitants soient touchés. Que souhaitez-vous mettre en place ?",
         "prevQuestCondition": [],
         "prevRepCondition": [],
         "prevQuestNotCondition": [5],
@@ -824,10 +838,10 @@
                 {"i": 10,"j": 5,"newType": "stone"}],
             "overlayChanges": [],
             "incomeChanges": 0,
-            "explConseq": "Cette option coûte 55000 un effort financier non negligeable pour la commune. La satisfaction baisse de 10 points preuve que certaines personnes risquent de grincer un peu des dents."
+            "explConseq": "Cette option coûte 55 000, un effort financier non négligeable pour la commune. La satisfaction baisse de 10 points, en effet, il faut le dire, cette grande barrière de béton est moche."
         },
         "rep2": {
-            "repText": "Brise lame",
+            "repText": "Brise-lame",
             "price": -30000,
             "happiness": -5,
             "mapChanges": [
@@ -835,10 +849,10 @@
                 {"i": 9,"j": 4,"newType": "stone"}],
             "overlayChanges": [],
             "incomeChanges": 0,
-            "explConseq": "Cette option coûte 30000 un effort financier non negligeable pour la commune. La satisfaction baisse de 5 points preuve que certaines personnes risquent de grincer un peu des dents."
+            "explConseq": "Un brise-lames est un ouvrage littoral orienté parallèlement au trait de côte. Et donc pourquoi pas ! Ce n'est pas la solution la plus belle qui existe mais bon ça semble fonctionner ! Puis 30 000, c'est une affaire pour 5 points de satisfaction en moins."
         },
         "rep3": {
-            "repText": "Epi",
+            "repText": "Épi",
             "price": -15000,
             "happiness": -5,
             "mapChanges": [
@@ -846,7 +860,7 @@
                 {"i": 9,"j": 5,"newType": "stone"}],
             "overlayChanges": [],
             "incomeChanges": 0,
-            "explConseq": "Cette option coûte 15000 un effort financier non negligeable pour la commune. La satisfaction baisse de 5 points preuve que certaines personnes risquent de grincer un peu des dents."
+            "explConseq": "Un épi est un ouvrage hydraulique rigide construit au bord de l'océan ou sur une berge d'un cours d'eau important pour freiner les courants d'eau. Donc pourquoi pas ! Ce n'est pas la solution la plus belle qui existe mais bon ça semble fonctionner ! Puis 15 000, c'est une affaire pour 5 points de satisfaction en moins."
         },
         "rep4": {
             "repText": "Ne rien faire",
@@ -855,18 +869,18 @@
             "mapChanges": [],
             "overlayChanges": [],
             "incomeChanges": 0,
-            "explConseq": "Cette decision n'a pas impacte votre budget ni la satisfaction de vos habitants. Cette option ne coûte rien ce qui la rend toujours plus facile a defendre en reunion. La satisfaction reste inchange parfait pour ceux qui preferent les decisions discretes."
+            "explConseq": "Peut-être que l'urgence n'est finalement pas si urgente ? C'est vous qui savez..."
         }
     },
     {
-        "questionText": "Rien ne fonctionne la roche est maintenant isolee.",
-        "prevQuestCondition": [],
-        "prevRepCondition": [],
+        "questionText": "CATASTROPHE, rien n'a fonctionné, la roche est maintenant isolée. Les habitants ont été évacués de justesse même si leurs habitations y sont passées... Pour autant rien n'est joué, SAUVEZ LES HABITANTS BLOQUÉS SUR LA ROCHE !",
+        "prevQuestCondition": [14],
+        "prevRepCondition": [2],
         "prevQuestNotCondition": [],
         "prevRepNotCondition": [],
         "caracter": 0,
         "rep1": {
-            "repText": " SAUVEZ LES HABITANTS BLOQUES !",
+            "repText": "",
             "price": 0,
             "happiness": -20,
             "mapChanges": [
@@ -911,7 +925,59 @@
         }
     },
     {
-        "questionText": "Aucune solution mise en place n'a pu ralentir suffisamment le recul du trait de cote votre ville est maintenant isolee, que souhaitez-vous faire ?",
+        "questionText": "CATASTROPHE, rien n'a fonctionné, la roche est maintenant isolée. SAUVEZ LES HABITANTS BLOQUÉS !",
+        "prevQuestCondition": [],
+        "prevRepCondition": [],
+        "prevQuestNotCondition": [14],
+        "prevRepNotCondition": [2],
+        "caracter": 0,
+        "rep1": {
+            "repText": "",
+            "price": 0,
+            "happiness": -20,
+            "mapChanges": [
+                {"i": 0,"j": 6,"newType": "sea"},
+                {"i": 1,"j": 6,"newType": "sea"},
+  	            {"i": 1,"j": 7,"newType": "sea"},
+                {"i": 2,"j": 7,"newType": "sea"},
+                {"i": 3,"j": 7,"newType": "sea"},
+                {"i": 4,"j": 7,"newType": "sea"},
+                {"i": 5,"j": 7,"newType": "sea"}],
+            "overlayChanges": [
+                {"i": 4,"j": 7,"newType": ""}],
+            "incomeChanges": -100000,
+            "explConseq": ""
+        },
+        "rep2": {
+            "repText": "",
+            "price": 0,
+            "happiness": 0,
+            "mapChanges": [],
+            "overlayChanges": [],
+            "incomeChanges": -100000,
+            "explConseq": ""
+        },
+        "rep3": {
+            "repText": "",
+            "price": 0,
+            "happiness": 0,
+            "mapChanges": [],
+            "overlayChanges": [],
+            "incomeChanges": -100000,
+            "explConseq": ""
+        },
+        "rep4": {
+            "repText": "",
+            "price": 0,
+            "happiness": 0,
+            "mapChanges": [],
+            "overlayChanges": [],
+            "incomeChanges": -100000,
+            "explConseq": ""
+        }
+    },
+    {
+        "questionText": "Aucune solution mise en place n'a pu suffisamment ralentir le recul du trait de côte. Il faut agir, que souhaitez-vous faire ?",
         "prevQuestCondition": [],
         "prevRepCondition": [],
         "prevQuestNotCondition": [],
@@ -928,10 +994,10 @@
                 {"i": 3,"j": 7,"newType": "l"},
                 {"i": 3,"j": 8,"newType": "p"}],
             "incomeChanges": 0,
-            "explConseq": "Cette option coûte 350000 un effort financier non negligeable pour la commune. La satisfaction augmente de 10 points signe que la decision va plutot dans le sens des habitants."
+            "explConseq": "Les habitants sont sauvés et heureux ! Qui n'a jamais rêvé d'habiter sur une île ? Ils savent maintenant qu'ils peuvent compter sur vous. + 15 points de satisfaction."
         },
         "rep2": {
-            "repText": "Creer un pont pour raccorder la roche",
+            "repText": "Créer un pont pour raccorder la roche",
             "price": -400000,
             "happiness": 15,
             "mapChanges": [
@@ -939,14 +1005,16 @@
             "overlayChanges": [
                 {"i": 4,"j": 7,"newType": "r"}],
             "incomeChanges": 0,
-            "explConseq": "Cette option coûte 400000 un effort financier non negligeable pour la commune. La satisfaction augmente de 15 points signe que la decision va plutot dans le sens des habitants."
+            "explConseq": "Les habitants sont sauvés et heureux ! Ils savent maintenant qu'ils peuvent compter sur vous. + 15 points de satisfaction"
         },
         "rep3": {
-            "repText": "Vous payez le rapatriement et le demenagement de tous les habitants dans une autre commune",
+            "repText": "Vous payez le rapatriement et le déménagement de tous les habitants dans une autre commune",
             "price": -1500000,
             "happiness": 35,
             "mapChanges": [],
             "overlayChanges": [
+                {"i": 1,"j": 9,"newType": ""},
+                {"i": 1,"j": 10,"newType": ""},
                 {"i": 2,"j": 6,"newType": ""},
                 {"i": 3,"j": 6,"newType": ""},
                 {"i": 4,"j": 6,"newType": ""},
@@ -959,7 +1027,7 @@
                 {"i": 7,"j": 5,"newType": ""},
                 {"i": 6,"j": 5,"newType": ""}],
             "incomeChanges": 0,
-            "explConseq": "Cette option coûte 1500000 un effort financier non negligeable pour la commune. La satisfaction augmente de 35 points signe que la decision va plutot dans le sens des habitants."
+            "explConseq": "C'est triste... La ville est bien vide sans eux... Mais cet investissement à hauteur de 1 500 000 était vraiment nécessaire, vous les avez sauvés. La satisfaction monte de 35 points, pour autant, pour qui être réélu ? Il n'y a plus personne ici..."
         },
         "rep4": {
             "repText": "Ne rien faire...",
@@ -968,6 +1036,6 @@
             "mapChanges": [],
             "overlayChanges": [],
             "incomeChanges": 0,
-            "explConseq": "Cette decision n'a pas impacte votre budget ni la satisfaction de vos habitants. Cette option ne coûte rien ce qui la rend toujours plus facile a defendre en reunion. La satisfaction tombe à 0"
+            "explConseq": "C'est une catastrophe... les habitants ont envoyé des lettres par pigeon voyageur au gouvernement, ils se sentent esseulés, affamés et vous ? Le gouvernement vous destitue d'urgence."
         }
     }]

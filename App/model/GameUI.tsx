@@ -16,6 +16,8 @@ export const btnWidth = Math.floor(Math.min(width, height) / 3.6);
 export const caracterScale = (Math.min(width, height)**(p*2)*p/2.1);
 export const scaleHeight = (Math.min(width, height)**(p*3)*p*44);
 
+
+export const delay = (ms: number) => new Promise(res => setTimeout(res, ms));
 // Transforme le number : 3 en string : "03"
 export function ToString(i: number): string{
   let rep = i.toString()
@@ -565,6 +567,7 @@ export const styles = StyleSheet.create({
     fontFamily: 'Gloucester',
     color: '#070A28',
     width: speechWidth,
+    height: smallTextSize*7,
   },
   caracterImage: {
     alignSelf: 'flex-end',
