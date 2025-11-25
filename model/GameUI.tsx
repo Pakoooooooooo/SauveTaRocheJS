@@ -1,5 +1,14 @@
-import React from 'react';
-import { StyleSheet, TouchableHighlight, TouchableOpacity, Image, View, Text, Dimensions } from 'react-native';
+import React, { useState } from 'react';
+import {
+  StyleSheet,
+  TouchableHighlight,
+  TouchableOpacity,
+  Image,
+  View,
+  Text,
+  Dimensions,
+  ScrollView,
+  Modal } from 'react-native';
 import * as Q from './GameQuestions';
 
 /*GameUI répertorie les constantes communes à tous les niveaux et l'aspect du l'IHM du jeu*/
@@ -449,7 +458,7 @@ export const Grid = React.memo(({ map }: { map: string[][] }) => {
 // Affichage du budget au dessus de la carte
 export const Budget = React.memo(({budget}: {budget: number}) => {
   return (
-    <Text style={styles.budgetText}>{budget} €</Text>
+    <Text style={styles.budgetText}>{budget} Crédits</Text>
   );
 });
 // Affichage de la date en dessous de la carte
@@ -500,12 +509,125 @@ export const Speech = React.memo(({txt}: {txt: string}) => {
     <Text style={styles.speech}>{txt}</Text>
   );
 });
+export const closeActivityWithResult = (
+  navigation: any,
+  result: 'win' | 'loss' | 'draw',
+  targetScreen: string  // OBLIGATOIRE: le nom exact de votre écran parent
+) => {
+  navigation.navigate(targetScreen, { gameResult: result });
+};
+export const closeActivityWithParams = (
+  navigation: any,
+  params: object,
+  targetScreen?: string
+) => {
+  if (targetScreen) {
+    navigation.navigate(targetScreen, params);
+  } else {
+    navigation.goBack();
+  }
+};
 // Bouton de retour aux activités précédentes
 export const ButtonBack = React.memo(({ navigation }: NavigationProps) => {
   return (
-    <TouchableOpacity style={styles.topLeftImage} onPress={() => navigation.goBack()}>
+    <TouchableOpacity style={styles.topLeftImage} onPress={() => closeActivityWithParams(navigation, { gameResult: 'draw' }, 'GameContextL1Activity')}>
       <Image source={require('../assets/fleche.png')} style={{ width: 60, height: 60 }} resizeMode="contain" />
     </TouchableOpacity>
+  );
+});
+// Affichage du bouton d'option
+export const OptionsImage = React.memo(() => {
+  const [modalVisible, setModalVisible] = useState(false);
+
+  return (
+    <>
+      <TouchableHighlight 
+        onPress={() => setModalVisible(true)} 
+        underlayColor="transparent" 
+        style={styles.topRightImage}
+      >
+        <Image 
+          source={require('../assets/options_logo.png')} 
+          style={{ width: 50, height: 50 }} 
+          resizeMode="contain" 
+        />
+      </TouchableHighlight>
+
+      <Modal
+        animationType="fade"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => setModalVisible(false)}
+      >
+        <View style={styles.modalOverlay}>
+          <View style={styles.modalContent}>
+            {/* Bouton de fermeture */}
+            <TouchableOpacity 
+              style={styles.closeButton}
+              onPress={() => setModalVisible(false)}
+            >
+              <Text style={styles.closeButtonText}>×</Text>
+            </TouchableOpacity>
+
+            <ScrollView contentContainerStyle={styles.scrollContent}>
+              {/* Titre */}
+              <Text style={styles.modalTitle}>Bâtiments</Text>
+
+              {/* Images et texte */}
+              <View style={styles.imageContainer}>
+                <Image 
+                  source={require('../assets/overlayTiles/house.png')} 
+                  style={styles.modalImage}
+                  resizeMode="cover"
+                />
+                <Text style={styles.imageCaption}>Maison : 5 habitants vivent dans chaque maison et payent 200 crédits par an. Les habitants ne seront pas satisfaits si leur maison n'est pas désservi par une route.</Text>
+              </View>
+
+              <View style={styles.imageContainer}>
+                <Image 
+                  source={require('../assets/overlayTiles/commerce.png')} 
+                  style={styles.modalImage}
+                  resizeMode="cover"
+                />
+                <Text style={styles.imageCaption}>Commerce : Les commerçants attirent du tourisme et participent aux revenus de la ville.</Text>
+              </View>
+
+              <View style={styles.imageContainer}>
+                <Image 
+                  source={require('../assets/overlayTiles/port.png')} 
+                  style={styles.modalImage}
+                  resizeMode="cover"
+                />
+                <Text style={styles.imageCaption}>Port : Permet de desservir une ligne maritime. Il faut qu'un port soit présent aux deux extrémités de la ligne.</Text>
+              </View>
+
+              <View style={styles.imageContainer}>
+                <Image 
+                  source={require('../assets/overlayTiles/road1010.png')} 
+                  style={styles.modalImage}
+                  resizeMode="cover"
+                />
+                <Text style={styles.imageCaption}>Route : Permet de relier les maisons, commerces et ports de la ville au reste du monde.</Text>
+              </View>
+
+              <View style={styles.imageContainer}>
+                <Image 
+                  source={require('../assets/overlayTiles/line1010.png')} 
+                  style={styles.modalImage}
+                  resizeMode="cover"
+                />
+                <Text style={styles.imageCaption}>Ligne maritime : Permet de relier les habitants des îles au réseau routier continental.</Text>
+              </View>
+
+              {/* Texte supplémentaire */}
+              <Text style={styles.descriptionText}>
+                Modifiez la carte en répondant aux questions des personnages.
+              </Text>
+            </ScrollView>
+          </View>
+        </View>
+      </Modal>
+    </>
   );
 });
 export const styles = StyleSheet.create({
@@ -609,5 +731,82 @@ export const styles = StyleSheet.create({
     marginTop: -20,
     height: scaleHeight,
     width: scaleHeight/12
-  }
+  },
+  topRightImage: {
+    position: 'absolute',
+    resizeMode: 'contain',
+    top: 30,
+    right: 20 },
+    modalOverlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.3)',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  modalContent: {
+    backgroundColor: '#61a7f2ff',
+    borderRadius: 12,
+    width: '90%',
+    maxHeight: '80%',
+    padding: 20,
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  closeButton: {
+    position: 'absolute',
+    top: 10,
+    right: 10,
+    zIndex: 1,
+    width: 30,
+    height: 30,
+    borderRadius: 15,
+    backgroundColor: '#f0f0f0',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  closeButtonText: {
+    fontSize: 24,
+    color: '#070A28',
+    fontWeight: 'bold',
+  },
+  scrollContent: {
+    paddingTop: 10,
+  },
+  modalTitle: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 20,
+    textAlign: 'center',
+    color: '#333',
+  },
+  imageContainer: {
+    flexDirection: 'row',
+    marginBottom: 20,
+    alignItems: 'center',
+  },
+  modalImage: {
+    width: 40,
+    height: 40,
+    borderRadius: 8,
+    marginBottom: 10,
+  },
+  imageCaption: {
+    fontSize: 14,
+    color: '#070A28',
+    textAlign: 'left',
+    marginStart: 10,
+    paddingEnd: 40,
+  },
+  descriptionText: {
+    fontSize: 16,
+    color: '#070A28',
+    lineHeight: 24,
+    textAlign: 'justify',
+    padding: 5,
+  },
 });
