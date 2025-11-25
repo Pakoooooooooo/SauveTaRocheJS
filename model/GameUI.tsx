@@ -340,7 +340,6 @@ export function isServed(
   
   return false;
 }
-
 // Check si les ports ont un acces route sans check les lignes maritimes
 export function checkPortRoadAccess(overLayMap: string[][], i: number, j: number): boolean {
   const rows = overLayMap.length;
@@ -371,7 +370,6 @@ export function checkPortRoadAccess(overLayMap: string[][], i: number, j: number
   
   return false;
 }
-
 // Affichage du sol de la carte
 export const ShowGrid = React.memo(({showMap, overLayMap, servedCache}: {showMap: string[][], overLayMap: string[][], servedCache: {[key: string]: boolean}}) => {
   const rows = overLayMap.length;
@@ -391,7 +389,6 @@ export const ShowGrid = React.memo(({showMap, overLayMap, servedCache}: {showMap
   }
   return <View style={styles.showGrid}>{grid}</View>;
 });
-
 // Affichage d'indices visuels sur la carte
 export const OverlayGrid = React.memo(({overLayMap}:{overLayMap : string[][]}) => {
   const rows = overLayMap.length;
@@ -439,7 +436,6 @@ export const OverlayGrid = React.memo(({overLayMap}:{overLayMap : string[][]}) =
   }
   return <View style={styles.grid}>{grid}</View>;
 });
-
 // Affichage des batiments de la carte
 export const Grid = React.memo(({ map }: { map: string[][] }) => {
   const rows = map.length;
@@ -456,10 +452,16 @@ export const Grid = React.memo(({ map }: { map: string[][] }) => {
   return <View>{grid}</View>;
 });
 // Affichage du budget au dessus de la carte
-export const Budget = React.memo(({budget}: {budget: number}) => {
-  return (
-    <Text style={styles.budgetText}>{budget} Crédits</Text>
-  );
+export const Budget = React.memo(({budget, up}: {budget: number, up: boolean}) => {
+  if (up){
+    return (
+    <Text style={styles.budgetText}>↗ {budget} Crédits</Text>
+    );
+  } else {
+    return (
+    <Text style={styles.budgetText}>↘ {budget} Crédits</Text>
+    );
+  }
 });
 // Affichage de la date en dessous de la carte
 export const DateDisplay = React.memo(({year}: {year: number}) => {
