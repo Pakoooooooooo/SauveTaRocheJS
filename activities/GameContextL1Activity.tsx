@@ -41,7 +41,7 @@ function TextLevel(){
       {wins === 0 && (
       <Text style={styles.text}>
             Dans ce niveau vous incarnerez le maire de Granilande (ville cotière) et vous devrez répondre aux questions des différents habitants pour les satisfaire.
-            Attention à ne pas les décevoir au moment des elections ! Elles ont lieu tous les ans en Mai.
+            Attention à ne pas les décevoir au moment des élections ! Elles ont lieu tous les 5 ans.
           </Text>)}
       {wins === 1 && (
       <Text style={styles.textWin}>
@@ -50,7 +50,7 @@ function TextLevel(){
           </Text>)}
       {wins === -1 && (
       <Text style={styles.textLose}>
-            Malheureusement, vous n'avez pas réussi à satisfaire les habitants de Granilande avant les élections...
+            Malheureusement, vous n'avez pas réussi à satisfaire les habitants de Graniland avant les élections...
             Les aléas climatiques et les choix difficiles ont eu raison de votre mandat.
           </Text>)}
     </View>

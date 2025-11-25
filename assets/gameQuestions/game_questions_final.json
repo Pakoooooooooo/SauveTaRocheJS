@@ -282,7 +282,7 @@
         "prevQuestCondition": [],
         "prevRepCondition": [],
         "prevQuestNotCondition": [0],
-        "prevRepNotCondition": [1],
+        "prevRepNotCondition": [2],
         "caracter": 5,
         "rep1": {
             "repText": "Installer une boutique proche de la plage",
@@ -780,7 +780,7 @@
         "prevQuestCondition": [],
         "prevRepCondition": [],
         "prevQuestNotCondition": [5],
-        "prevRepNotCondition": [1],
+        "prevRepNotCondition": [2],
         "caracter": 0,
         "rep1": {
             "repText": "",

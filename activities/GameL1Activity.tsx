@@ -57,7 +57,7 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
     ["","","","","","","","","","","","","",""],
     ["","","","","","","","","","c","h","","",""],
     ["","","","","","","","","","r","h","h","",""],
-    ["","","","","","","","","","r","","","",""],
+    ["","","","","","","","r","","r","","","",""],
     ["","","","","","","h","r","r","r","","","",""],
     ["","","","","","l","p","","","r","","","",""],
     ["","","","p","l","l","","","h","r","r","r","",""],
@@ -70,8 +70,7 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
     ["","","","","h","","","","","","","","",""]
   ]);
   // autres constantes de départ (useState permet d'associer la variable à la dynamique d'affichage de GameUI) :
-  const [budget, setBudget] = useState(600000);
-  const [prevBudget, setPrevBudget] = useState(0);
+  const [budget, setBudget] = useState(0);//600000
   const [income, setIncome] = useState(10000); // la valeur des revenues est enlevée au budget quand la valeur apply revenus est appelée
   const [year, setYear] = useState(2026);
   const [happiness, setHappiness] = useState(70);
@@ -83,10 +82,14 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
   const [up, setUp] = useState(true);
 
   // Définir les textes des réponses
-  const [txt1, setText1] = useState(Questions[currentQindex].rep1.repText);
-  const [txt2, setText2] = useState(Questions[currentQindex].rep2.repText);
-  const [txt3, setText3] = useState(Questions[currentQindex].rep3.repText);
-  const [txt4, setText4] = useState(Questions[currentQindex].rep4.repText);
+  const [txt1, setText1] = useState(Questions[currentQindex].rep1.repText + " " + Questions[currentQindex].rep1.price + " C");
+  const [txt2, setText2] = useState(Questions[currentQindex].rep2.repText + " " + Questions[currentQindex].rep2.price + " C");
+  const [txt3, setText3] = useState(Questions[currentQindex].rep3.repText + " " + Questions[currentQindex].rep3.price + " C");
+  const [txt4, setText4] = useState(Questions[currentQindex].rep4.repText + " " + Questions[currentQindex].rep4.price + " C");
+  const [aff1, setPos1] = useState(-Questions[currentQindex].rep1.price <= budget + income);
+  const [aff2, setPos2] = useState(-Questions[currentQindex].rep2.price <= budget + income);
+  const [aff3, setPos3] = useState(-Questions[currentQindex].rep3.price <= budget + income);
+  const [aff4, setPos4] = useState(-Questions[currentQindex].rep4.price <= budget + income);
   const [SpeechText, setSpeechText] = useState(Questions[currentQindex].questionText); // Définir quelle est la bonne réponse
 
   const soundRef = useRef<Audio.Sound | null>(null);
@@ -163,12 +166,18 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
     if (map[i][j] === "sea" && type === 'l'){
       setOverlayTile(i, j, type);
     } else if (map[i][j] !== "sea" && type !== 'l'){
-      setOverlayTile(i, j, type);
+      if (type === 's'){
+        if (overLayMap[i][j]===''){
+          setOverlayTile(i, j, type);
+        }
+      } else {
+        setOverlayTile(i, j, type);
+      }
     }
   }, [map, setOverlayTile]);
   // Ajoute incr au budget
-  const ChangeBudget = useCallback((incr: number) => {
-    if (budget + incr>=0){
+  const ChangeBudget = useCallback((bud: number, incr: number) => {
+    if (bud + incr>=0){
       setBudget(prevBudget => prevBudget + incr);
     } else {setBudget(0)}
   }, []);
@@ -187,9 +196,6 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
         await G.delay(60);
       }
   }
-  const ChangeIncome = useCallback((incr: number) => {
-    setIncome(prevIncome => prevIncome + incr);
-  }, [income]);
   // Passe au personnage suivant
   const setCaracter = useCallback((id: number) => {
     setCurrentCaracterIndex((id) % G.caracters.length);
@@ -205,11 +211,7 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
   if (isProcessingRef.current) return;
   isProcessingRef.current = true;
 
-  // Capture la valeur actuelle de `budget` avant toute modification
-  const currentBudget = budget;
-
   if (currentQindex % 2 === 0) {
-    setPrevBudget(currentBudget); // Enregistre le budget actuel
     setSelectedRep(index);
 
     // Sélection de la réponse
@@ -225,8 +227,9 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
 
     // Calculer la différence de budget
     const budgetChange = rep.price;
-    ChangeBudget(budgetChange);
-    ChangeBudget(income); // Appliquer les revenus
+    ChangeBudget(budget,budgetChange+income);// Appliquer le changement de budget
+
+    ChangeHappAnim(rep.happiness);
 
     // Utiliser `useEffect` pour réagir au changement de `budget`
     // (à placer en dehors de `handleSelectRep`, voir plus bas)
@@ -248,6 +251,10 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
       setText2("");
       setText3("");
       setText4("");
+      setPos1(true);
+      setPos2(false);
+      setPos3(false);
+      setPos4(false);
       setCaracter(0);
       setSelectedRep(null);
     } else {
@@ -267,10 +274,14 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
       setCurrentQindex(currentQindex + i);
       const newQuestion = Questions[currentQindex + i];
       setSpeechText(newQuestion.questionText);
-      setText1(newQuestion.caracter === 0 ? "Suivant" : newQuestion.rep1.repText);
-      setText2(newQuestion.rep2.repText);
-      setText3(newQuestion.rep3.repText);
-      setText4(newQuestion.rep4.repText);
+      setText1(newQuestion.caracter === 0 ? "Suivant" : newQuestion.rep1.repText + " " + newQuestion.rep1.price + " C");
+      setText2(newQuestion.rep2.repText + " " + newQuestion.rep2.price + " C");
+      setText3(newQuestion.rep3.repText + " " + newQuestion.rep3.price + " C");
+      setText4(newQuestion.rep4.repText + " " + newQuestion.rep4.price + " C");
+      setPos1(newQuestion.caracter === 0 ? true : -newQuestion.rep1.price <= budget + income);
+      setPos2(-newQuestion.rep2.price <= budget + income);
+      setPos3(-newQuestion.rep3.price <= budget + income);
+      setPos4(-newQuestion.rep4.price <= budget + income);
       setCaracter(newQuestion.caracter);
     } else {
       G.closeActivityWithResult(navigation, 'win', 'GameContextL1Activity');
@@ -284,12 +295,15 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
   isProcessingRef.current = false;
   }, [currentQindex, budget, memQuestions, memResponses, year, periode, happiness]);
 
-
   // Affichage d'un bouton de réponse aux questions
-  const ButtonRep = useCallback(({txt, style, index, onSelect, selectedRep}: 
-    {txt?: string; style?: object; index: number; onSelect: (index: number) => void; selectedRep: number | null;}) => {
+  const ButtonRep = useCallback(({txt, style, index, onSelect, selectedRep, affordable}: 
+    {txt?: string; style?: object; index: number; onSelect: (index: number) => void; selectedRep: number | null; affordable: boolean;}) => {
+    
     let bg = '#070A28'; // couleur neutre de base
     let txtcolor = '#FFFFFF';
+    if (!affordable){
+      bg = '#969696ff';
+    }
 
     // Jugement des couleurs - appliqué à tous les boutons après sélection
     if (selectedRep !== null) {
@@ -302,11 +316,12 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
       }
     }
 
+
     return (
       <TouchableOpacity
         style={[style, { backgroundColor: bg }]}
         onPress={() => onSelect(index)}
-        disabled={selectedRep !== null} // empêche de recliquer après réponse
+        disabled={selectedRep !== null || !affordable} // empêche de recliquer après réponse
       >
         <Text style={[G.styles.repText, { color: txtcolor }]}>{txt}</Text>
       </TouchableOpacity>
@@ -314,17 +329,17 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
   }, []);
 
   // Affichage des boutons de réponse aux questions
-  const Reps = React.memo(({txt1 = '', txt2 = '', txt3 = '', txt4 = '', onSelect, selectedRep}:
-    {txt1?: string; txt2?: string; txt3?: string; txt4?: string; onSelect: (index: number) => void; selectedRep: number | null;}) => {
+  const Reps = React.memo(({txt1 = '', txt2 = '', txt3 = '', txt4 = '', aff1 = false, aff2 = false, aff3 = false, aff4 = false, onSelect, selectedRep}:
+    {txt1?: string; txt2?: string; txt3?: string; txt4?: string; onSelect: (index: number) => void; selectedRep: number | null; aff1: boolean; aff2: boolean; aff3: boolean; aff4: boolean;}) => {
     return (
       <View style={{ flexDirection: 'column' }}>
         <View style={{ flexDirection: 'row' }}>
-          <ButtonRep txt={txt1} style={G.styles.buttonRep} index={1} onSelect={onSelect} selectedRep={selectedRep}/>
-          <ButtonRep txt={txt2} style={[G.styles.buttonRep, { display: (currentCaracterIndex!==0 && currentQindex%2===0) ? 'flex' : 'none' }]} index={2} onSelect={onSelect} selectedRep={selectedRep}/>
+          <ButtonRep txt={txt1} style={G.styles.buttonRep} index={1} onSelect={onSelect} selectedRep={selectedRep} affordable={aff1}/>
+          <ButtonRep txt={txt2} style={[G.styles.buttonRep, { display: (currentCaracterIndex!==0 && currentQindex%2===0) ? 'flex' : 'none' }]} index={2} onSelect={onSelect} selectedRep={selectedRep} affordable={aff2}/>
         </View>
         <View style={{ flexDirection: 'row' }}>
-          <ButtonRep txt={txt3} style={[G.styles.buttonRep, { display: (currentCaracterIndex!==0 && currentQindex%2===0) ? 'flex' : 'none' }]} index={3} onSelect={onSelect} selectedRep={selectedRep}/>
-          <ButtonRep txt={txt4} style={[G.styles.buttonRep, { display: (currentCaracterIndex!==0 && currentQindex%2===0) ? 'flex' : 'none' }]} index={4} onSelect={onSelect} selectedRep={selectedRep}/>
+          <ButtonRep txt={txt3} style={[G.styles.buttonRep, { display: (currentCaracterIndex!==0 && currentQindex%2===0) ? 'flex' : 'none' }]} index={3} onSelect={onSelect} selectedRep={selectedRep} affordable={aff3}/>
+          <ButtonRep txt={txt4} style={[G.styles.buttonRep, { display: (currentCaracterIndex!==0 && currentQindex%2===0) ? 'flex' : 'none' }]} index={4} onSelect={onSelect} selectedRep={selectedRep} affordable={aff4}/>
         </View>
       </View>
     );
@@ -363,6 +378,10 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
               txt4={txt4}
               onSelect={handleSelectRep}
               selectedRep={selectedRep}
+              aff1={aff1}
+              aff2={aff2}
+              aff3={aff3}
+              aff4={aff4}
             />
           </View>
           <G.JaugeImage happiness={happiness}/>

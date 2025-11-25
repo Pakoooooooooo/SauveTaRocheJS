@@ -21,7 +21,7 @@ export const lineLength = Math.floor((Math.min(width, height)**(p*4))*3);
 export const textSize = Math.floor((Math.min(width, height)**p)*p*40);
 export const smallTextSize = Math.floor((Math.min(width, height)**(p*4))*p/1.5);
 export const speechWidth = Math.floor(Math.min(width, height) / 1.8);
-export const btnWidth = Math.floor(Math.min(width, height) / 3.6);
+export const btnWidth = Math.floor(Math.min(width, height) / 3.5);
 export const caracterScale = (Math.min(width, height)**(p*2)*p/2.1);
 export const scaleHeight = (Math.min(width, height)**(p*3)*p*44);
 
@@ -47,7 +47,7 @@ export function respects(Quest: Q.GameQuestionData, ListQuest: Q.GameQuestionDat
   }
   for (const q of Quest.prevQuestNotCondition) {
     const i = Quest.prevQuestNotCondition.indexOf(q);
-    if (ListQuest.includes(q) && ListRep[i] === Quest.prevRepCondition[i]){
+    if (ListQuest.includes(q) && ListRep[i] === Quest.prevRepNotCondition[i]){
       return false
     }
   }
@@ -582,7 +582,7 @@ export const OptionsImage = React.memo(() => {
                   style={styles.modalImage}
                   resizeMode="cover"
                 />
-                <Text style={styles.imageCaption}>Maison : 5 habitants vivent dans chaque maison et payent 200 crédits par an. Les habitants ne seront pas satisfaits si leur maison n'est pas désservi par une route.</Text>
+                <Text style={styles.imageCaption}>Maison : 5 habitants vivent dans chaque maison et payent 100 crédits par an. Les habitants ne seront pas satisfaits si leur maison n'est pas désservi par une route.</Text>
               </View>
 
               <View style={styles.imageContainer}>
