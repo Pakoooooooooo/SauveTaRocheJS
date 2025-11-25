@@ -83,7 +83,7 @@ export class GameQuestionData {
   }
 }
 
-export const Explication = new  Q.GameQuestionData("",[],[],[],[],1,
+export const Explication = new  Q.GameQuestionData("",[],[],[],[],0,
   new Q.GameRepData("", 0, 0, [], [], 0, ""),
   new Q.GameRepData("", 0, 0, [], [], 0, ""),
   new Q.GameRepData("", 0, 0, [], [], 0, ""),

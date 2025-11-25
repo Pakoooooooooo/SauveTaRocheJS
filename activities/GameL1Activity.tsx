@@ -8,6 +8,8 @@ import { Audio } from 'expo-av';
 // Liste des questions qui auront lieu pendant la partie (une question sur deux est en réalité un explication de la question précédente dont la réponse n'a donc pas d'impactsur le jeu)
 const Qu = R.parseGameQuestions()
 
+const periode = 5
+
 // Création de la liste de questions alternée d'explications
 const Questions = [... Qu.flatMap((question, index) => 
   index < Qu.length - 1 ? [question, Q.Explication] : [question]
@@ -70,7 +72,6 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
   // autres constantes de départ (useState permet d'associer la variable à la dynamique d'affichage de GameUI) :
   const [budget, setBudget] = useState(600000);
   const [income, setIncome] = useState(10000); // la valeur des revenues est enlevée au budget quand la valeur apply revenus est appelée
-  const [monthIndex, setMonthIndex] = useState(4);
   const [year, setYear] = useState(2026);
   const [happiness, setHappiness] = useState(70);
   const [currentCaracterIndex, setCurrentCaracterIndex] = useState(1);
@@ -78,7 +79,6 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
   const [currentQindex, setCurrentQindex] = useState(0);
   const [memQuestions, setMemQuestion] = useState<Q.GameQuestionData[]>([]);
   const [memResponses, setMemResponses] = useState<number[]>([]);
-  const [explication, setExplication] = useState(false);
 
   // Définir les textes des réponses
   const [txt1, setText1] = useState(Questions[currentQindex].rep1.repText);
@@ -179,6 +179,12 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
     return newValue;
   });
 }, []);
+  async function ChangeHappAnim(incr: number) {
+    for (let i = 0; i < Math.abs(incr); i++) {
+        ChangeHappiness(incr/Math.abs(incr))
+        await G.delay(60);
+      }
+  }
   // Ajoute les revenus mensuelles/annuelles au budget
   const ApplyIncome = useCallback(() => {
     ChangeBudget(income);
@@ -188,16 +194,9 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
     setCurrentCaracterIndex((id) % G.caracters.length);
   }, []);
   // Passe au mois suivant
-  const NextMonth = useCallback(() => {
-    setMonthIndex(prev => {
-      if (prev < G.months.length - 1) {
-        return prev + 1;
-      } else {
-        setYear(y => y + 1);
-        ApplyIncome();
-        return 0;
-      }
-    });
+  const NextYear = useCallback(() => {
+    setYear(y => y + 1);
+    ApplyIncome();
   }, []);
 
   const isProcessingRef = useRef(false);
@@ -205,11 +204,10 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
   const handleSelectRep = useCallback((index: number) => {
     if (isProcessingRef.current) return; // Utiliser une ref
     isProcessingRef.current = true;
-    
     // Cas où la question n'est pas une explication
-    if (!explication){
+    if (currentQindex%2===0){
       setSelectedRep(index); // On enresgistre la réponse de l'utilisateur
-      NextMonth(); // On passe au mois suivant
+      NextYear(); // On passe au mois suivant
       let rep = Questions[currentQindex].rep1 // On prend la réponse à la question selon l'indice enregistré
       if (index === 1) {
         rep = Questions[currentQindex].rep1
@@ -231,7 +229,7 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
       // Change le budget en fonction de ce qui est éxplicité dans la question
       ChangeBudget(rep.price);
       // Change la satisfaction en fonction de ce qui est éxplicité dans la question
-      ChangeHappiness(rep.happiness);
+      ChangeHappAnim(rep.happiness);
       // On ajoute l'indice de la réponse à la liste des indices de réponses choisies
       let memRep = [...memResponses, index];
       setMemResponses(memRep);
@@ -259,15 +257,14 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
       setText2("");
       setText3("");
       setText4("");
-      setCaracter(1);
+      setCaracter(0);
       setSelectedRep(null);
-      setExplication(true)
     } else { // Dans le cas ou la question est une explication de question
       //  Aucune consequence n'est appliquée
       let i = 1;
       while (currentQindex + i < Questions.length && 
             !G.respects(Questions[currentQindex + i], memQuestions, memResponses)) {
-        i += 1;
+        i += 2;
       }
       
       let newI = currentQindex;
@@ -276,6 +273,9 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
         setCurrentQindex(newI);
       }
       else {
+        navigation.goBack()
+      }
+      if ((year - 2026)%periode === 0 && happiness < 50) {
         navigation.goBack()
       }
       // Affichage de la question suivante
@@ -288,12 +288,11 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
       setText4(Questions[newI].rep4.repText);
       setCaracter(Questions[newI].caracter);
       setSelectedRep(null);
-      setExplication(false)
     }
     
     // Réinitialiser le flag à la fin
     isProcessingRef.current = false;
-  }, [selectedRep, currentQindex, setCaracter, NextMonth, ApplyIncome, ChangeMapTile, ChangeOverlayTile, ChangeBudget, setCurrentQindex, setSpeechText, setText1, setText2, setText3, setText4]);
+  }, [selectedRep, currentQindex, setCaracter, NextYear, ApplyIncome, ChangeMapTile, ChangeOverlayTile, ChangeBudget, setCurrentQindex, setSpeechText, setText1, setText2, setText3, setText4]);
 
   // Affichage d'un bouton de réponse aux questions
   const ButtonRep = useCallback(({txt, style, index, onSelect, selectedRep}: 
@@ -330,11 +329,11 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
       <View style={{ flexDirection: 'column' }}>
         <View style={{ flexDirection: 'row' }}>
           <ButtonRep txt={txt1} style={G.styles.buttonRep} index={1} onSelect={onSelect} selectedRep={selectedRep}/>
-          <ButtonRep txt={txt2} style={[G.styles.buttonRep, { display: (currentCaracterIndex!==0 && !explication) ? 'flex' : 'none' }]} index={2} onSelect={onSelect} selectedRep={selectedRep}/>
+          <ButtonRep txt={txt2} style={[G.styles.buttonRep, { display: (currentCaracterIndex!==0 && currentQindex%2===0) ? 'flex' : 'none' }]} index={2} onSelect={onSelect} selectedRep={selectedRep}/>
         </View>
         <View style={{ flexDirection: 'row' }}>
-          <ButtonRep txt={txt3} style={[G.styles.buttonRep, { display: (currentCaracterIndex!==0 && !explication) ? 'flex' : 'none' }]} index={3} onSelect={onSelect} selectedRep={selectedRep}/>
-          <ButtonRep txt={txt4} style={[G.styles.buttonRep, { display: (currentCaracterIndex!==0 && !explication) ? 'flex' : 'none' }]} index={4} onSelect={onSelect} selectedRep={selectedRep}/>
+          <ButtonRep txt={txt3} style={[G.styles.buttonRep, { display: (currentCaracterIndex!==0 && currentQindex%2===0) ? 'flex' : 'none' }]} index={3} onSelect={onSelect} selectedRep={selectedRep}/>
+          <ButtonRep txt={txt4} style={[G.styles.buttonRep, { display: (currentCaracterIndex!==0 && currentQindex%2===0) ? 'flex' : 'none' }]} index={4} onSelect={onSelect} selectedRep={selectedRep}/>
         </View>
       </View>
     );
@@ -356,7 +355,7 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
             <G.OverlayGrid overLayMap={overLayMap}/>
           </View>
         </View>
-        <G.DateDisplay monthIndex={monthIndex} year={year} />
+        <G.DateDisplay year={year} />
       </View>
       <G.SeparationLine />
       <View style={styles.bottomScreen}>

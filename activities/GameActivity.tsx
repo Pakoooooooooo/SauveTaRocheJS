@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Dimensions, Image } from 'react-native';
+import { Alert, View, Text, StyleSheet, TouchableOpacity, Dimensions, Image } from 'react-native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 type RootStackParamList = {
@@ -37,8 +37,8 @@ function ButtonLevel1({ navigation }: NavigationProps) {
 function ButtonLevel2({ navigation }: NavigationProps) {
   return (
     <TouchableOpacity
-      style={styles.levelButton}
-      onPress={() => navigation.navigate('GameL2Activity')}>
+      style={styles.levelButtonGrey}
+      onPress={() => {Alert.alert("pour bientôt...");}}>
       <Text style={styles.levelButtonText}>NIVEAU 2</Text>
     </TouchableOpacity>
   );
@@ -74,6 +74,7 @@ export default function GameActivity({ navigation }: NavigationProps) {
 
           <View style={styles.levelsContainer}>
             <ButtonLevel1 navigation={navigation} />
+            <ButtonLevel2 navigation={navigation} />
           </View>
         </View>
       </View>
@@ -106,6 +107,19 @@ const styles = StyleSheet.create({
   },
   levelButton: {
     backgroundColor: '#FFC900',
+    paddingVertical: 16,
+    paddingHorizontal: 50,
+    borderRadius: 10,
+    minWidth: 220,
+    alignItems: 'center',
+    shadowColor: '#070A28',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
+  },
+  levelButtonGrey: {
+    backgroundColor: '#9a9a9aff',
     paddingVertical: 16,
     paddingHorizontal: 50,
     borderRadius: 10,

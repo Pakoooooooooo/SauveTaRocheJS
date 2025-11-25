@@ -16,6 +16,8 @@ export const btnWidth = Math.floor(Math.min(width, height) / 3.6);
 export const caracterScale = (Math.min(width, height)**(p*2)*p/2.1);
 export const scaleHeight = (Math.min(width, height)**(p*3)*p*44);
 
+
+export const delay = (ms: number) => new Promise(res => setTimeout(res, ms));
 // Transforme le number : 3 en string : "03"
 export function ToString(i: number): string{
   let rep = i.toString()
@@ -203,8 +205,6 @@ export const JAUGE_IAMGES: JaugeImages = {
   frame_98: require('../assets/jauge_frames/frame_00098.png'),
   frame_99: require('../assets/jauge_frames/frame_00099.png')
 }
-// Banque des mois de l'anné
-export const months = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Aout", "Septembre", "Octobre", "Novembre", "Décembre"];
 // Banque de types de personnages
 export const caracters = ['Présentatrice','Secrétaire', 'Scientifique', 'Habitant', 'Gardien_de_Port', 'Commerçant'];
 // Méthode de navigation
@@ -221,7 +221,6 @@ export const Tiles = React.memo(({ type }: { type: keyof typeof TILE_IMAGES }) =
     </TouchableHighlight>
   );
 });
-
 // Calcul si un batiment (maison/route/port...) est déservi par une route ou une ligne maritime
 export function isServed(
   overLayMap: string[][],
@@ -454,9 +453,9 @@ export const Budget = React.memo(({budget}: {budget: number}) => {
   );
 });
 // Affichage de la date en dessous de la carte
-export const DateDisplay = React.memo(({monthIndex, year}: {monthIndex: number, year: number}) => {
+export const DateDisplay = React.memo(({year}: {year: number}) => {
   return (
-    <Text style={styles.budgetText}>{months[monthIndex]} {year}</Text>
+    <Text style={styles.budgetText}>{year}</Text>
   );
 });
 // Affichage de la ligne de séparation entre l'écran superieur (carte+budget+date) et l'écran inferieur (personnage+question/rep+jauge)
@@ -568,6 +567,7 @@ export const styles = StyleSheet.create({
     fontFamily: 'Gloucester',
     color: '#070A28',
     width: speechWidth,
+    height: smallTextSize*7,
   },
   caracterImage: {
     alignSelf: 'flex-end',
