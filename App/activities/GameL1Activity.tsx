@@ -249,7 +249,7 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
         setCurrentQindex(newI);
       }
       else {
-        navigation.goBack()
+        G.closeActivityWithResult(navigation, 'win', 'GameContextL1Activity')
       }
       // On affiche les informations de l'explication de la question
       setSpeechText(rep.explConseq);
@@ -273,10 +273,10 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
         setCurrentQindex(newI);
       }
       else {
-        navigation.goBack()
+        G.closeActivityWithResult(navigation, 'win', 'GameContextL1Activity')
       }
       if ((year - 2026)%periode === 0 && happiness < 50) {
-        navigation.goBack()
+        G.closeActivityWithResult(navigation, 'loss', 'GameContextL1Activity')
       }
       // Affichage de la question suivante
       setSpeechText(Questions[newI].questionText);
@@ -341,6 +341,7 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
 
   return (
     <View style={styles.container}>
+      <G.OptionsImage />
       <G.ButtonBack navigation={navigation} />
       <View style={G.styles.mapcontainer}>
         <G.Budget budget={budget}/>

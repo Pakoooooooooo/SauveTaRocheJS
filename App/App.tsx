@@ -10,8 +10,6 @@ import {
   StyleSheet,
   ActivityIndicator,
   ScrollView,
-  TouchableHighlight,
-  Alert,
   Platform,
   Animated,
   Dimensions
@@ -39,7 +37,6 @@ function AppLoading() {
     </View>
   );
 }
-
 // Bouton pour lancer la partie jeu
 function ButtonGame({ navigation }: { navigation: any }) {
   return (
@@ -64,14 +61,6 @@ function ButtonData({ navigation }: { navigation: any }) {
     </TouchableOpacity>
   );
 }
-// Affichage du bouton d'option
-function OptionsImage() {
-  return (
-    <TouchableHighlight onPress={() => Alert.alert('Image pressée !')} underlayColor="transparent" style={styles.topRightImage}>
-      <Image source={require('./assets/options_logo.png')} style={{ width: 60, height: 60 }} resizeMode="contain" />
-    </TouchableHighlight>
-  );
-}
 // Affichage du logo de l'appli
 function Image1() {
   return <Image source={require('./assets/logo_cailloux.png')} style={{ width: 240, height: 240 }} />;
@@ -87,7 +76,6 @@ const levelImages = {
   7: require('./assets/levels_main/lev7.png'),
   8: require('./assets/levels_main/lev8.png'),
 };
-
 // Liste des activités utilisées par l'appli
 type RootStackParamList = {
   Home: undefined;
@@ -116,7 +104,6 @@ const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#fff' },
   contentContainer: { alignItems: 'center', paddingTop: 100 },
   topLeftImage: { position: 'absolute', top: 30, left: 20 },
-  topRightImage: { position: 'absolute', top: 30, right: 20 },
 });
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
@@ -216,13 +203,10 @@ function HomeScreen({ navigation }: { navigation: any }) {
         <ButtonGame navigation={navigation} />
         <ButtonChallenge navigation={navigation} />
         <ButtonData navigation={navigation} />
-        <OptionsImage />
       </ScrollView>
     </View>
   );
 }
-
-
 
 export default function App() {
   const [fontsLoaded, setFontsLoaded] = useState(false);
