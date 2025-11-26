@@ -29,10 +29,9 @@ function backgroundColor(){
     return '#ffff'; // Jaune clair pour en cours
   } else if (wins === 1) {
     return '#28a745'; // Vert pour victoire
-  } else if (wins === -1) {
+  } else if (wins < 0) {
     return '#dc3545'; // Rouge pour défaite
-  }
-}
+}}
 
 const { height } = Dimensions.get('window');
 function TextLevel(){
@@ -40,7 +39,7 @@ function TextLevel(){
     <View >
       {wins === 0 && (
       <Text style={styles.text}>
-            Dans ce niveau vous incarnerez le maire de Granilande (ville cotière) et vous devrez répondre aux questions des différents habitants pour les satisfaire.
+            Dans ce niveau vous incarnerez le maire de Graniland (ville cotière) et vous devrez répondre aux questions des différents habitants pour les satisfaire.
             Attention à ne pas les décevoir au moment des élections ! Elles ont lieu tous les 5 ans.
           </Text>)}
       {wins === 1 && (
@@ -52,6 +51,10 @@ function TextLevel(){
       <Text style={styles.textLose}>
             Malheureusement, vous n'avez pas réussi à satisfaire les habitants de Graniland avant les élections...
             Les aléas climatiques et les choix difficiles ont eu raison de votre mandat.
+          </Text>)}
+      {wins === -2 && (
+      <Text style={styles.textLose}>
+            Malheureusement, votre budget est tombé dans le négatif... L'Etat a donc pris la decision de vous révoquer avant la fin de votre mandat...
           </Text>)}
     </View>
   )
@@ -97,6 +100,8 @@ export default function GameContextL1Activity({ navigation }: NavigationProps) {
     wins += 1;
   } else if (gameResult==='loss') {
     wins = -1;
+  } else if (gameResult==='bankruptcy') {
+    wins = -2;
   } else {
     wins = 0;
   }

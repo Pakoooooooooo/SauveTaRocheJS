@@ -70,7 +70,7 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
     ["","","","","h","","","","","","","","",""]
   ]);
   // autres constantes de départ (useState permet d'associer la variable à la dynamique d'affichage de GameUI) :
-  const [budget, setBudget] = useState(0);//600000
+  const [budget, setBudget] = useState(600000);
   const [income, setIncome] = useState(10000); // la valeur des revenues est enlevée au budget quand la valeur apply revenus est appelée
   const [year, setYear] = useState(2026);
   const [happiness, setHappiness] = useState(70);
@@ -82,10 +82,10 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
   const [up, setUp] = useState(true);
 
   // Définir les textes des réponses
-  const [txt1, setText1] = useState(Questions[currentQindex].rep1.repText + " " + Questions[currentQindex].rep1.price + " C");
-  const [txt2, setText2] = useState(Questions[currentQindex].rep2.repText + " " + Questions[currentQindex].rep2.price + " C");
-  const [txt3, setText3] = useState(Questions[currentQindex].rep3.repText + " " + Questions[currentQindex].rep3.price + " C");
-  const [txt4, setText4] = useState(Questions[currentQindex].rep4.repText + " " + Questions[currentQindex].rep4.price + " C");
+  const [txt1, setText1] = useState(Questions[currentQindex].rep1.repText + " " + G.formatNumber(Questions[currentQindex].rep1.price) + " C");
+  const [txt2, setText2] = useState(Questions[currentQindex].rep2.repText + " " + G.formatNumber(Questions[currentQindex].rep2.price) + " C");
+  const [txt3, setText3] = useState(Questions[currentQindex].rep3.repText + " " + G.formatNumber(Questions[currentQindex].rep3.price) + " C");
+  const [txt4, setText4] = useState(Questions[currentQindex].rep4.repText + " " + G.formatNumber(Questions[currentQindex].rep4.price) + " C");
   const [aff1, setPos1] = useState(-Questions[currentQindex].rep1.price <= budget + income);
   const [aff2, setPos2] = useState(-Questions[currentQindex].rep2.price <= budget + income);
   const [aff3, setPos3] = useState(-Questions[currentQindex].rep3.price <= budget + income);
@@ -190,11 +190,40 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
     return newValue;
   });
 }, []);
+  //Animation de vidage ou de remplissage de la jauge de satisfaction
   async function ChangeHappAnim(incr: number) {
     for (let i = 0; i < Math.abs(incr); i++) {
         ChangeHappiness(incr/Math.abs(incr))
         await G.delay(60);
       }
+  }
+  async function overlayFlashingBoxAnimation(boxes: [number, number, string][]) {
+    if (boxes.length === 0) return;
+    const oldTypes: [number, number, string][] = boxes.map(([i, j]) => [i, j, overLayMap[i][j]]);
+    for (let k = 0; k < 4; k++) {
+      oldTypes.forEach(([i, j, oldType]) => {
+        ChangeOverlayTile(i, j, oldType);
+      });
+      await G.delay(300);
+      boxes.forEach(([i, j, type]) => {
+        ChangeOverlayTile(i, j, type);
+      });
+      await G.delay(300);
+    }
+  }
+  async function mapFlashingBoxAnimation(boxes: [number, number, string][]) {
+    if (boxes.length === 0) return;
+    const oldTypes: [number, number, string][] = boxes.map(([i, j]) => [i, j, map[i][j]]);
+    for (let k = 0; k < 4; k++) {
+      oldTypes.forEach(([i, j, oldType]) => {
+        ChangeMapTile(i, j, oldType);
+      });
+      await G.delay(300);
+      boxes.forEach(([i, j, type]) => {
+        ChangeMapTile(i, j, type);
+      });
+      await G.delay(300);
+    }
   }
   // Passe au personnage suivant
   const setCaracter = useCallback((id: number) => {
@@ -207,7 +236,7 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
 
   const isProcessingRef = useRef(false);
   // Fonction pour gérer la sélection d'une réponse
-  const handleSelectRep = useCallback((index: number) => {
+  const handleSelectRep = useCallback(async (index: number) => {
   if (isProcessingRef.current) return;
   isProcessingRef.current = true;
 
@@ -221,8 +250,8 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
                Questions[currentQindex].rep4;
 
     // Appliquer les changements
-    rep.mapChanges?.forEach(c => ChangeMapTile(c.i, c.j, c.newType));
-    rep.overlayChanges?.forEach(c => ChangeOverlayTile(c.i, c.j, c.newType));
+    await mapFlashingBoxAnimation(rep.mapChanges ? rep.mapChanges.map(c => [c.i, c.j, c.newType] as [number, number, string]) : []);
+    await overlayFlashingBoxAnimation(rep.overlayChanges ? rep.overlayChanges.map(c => [c.i, c.j, c.newType] as [number, number, string]) : []);
     setIncome(prevIncome => prevIncome + rep.incomeChanges); // Ajuster les revenus en fonction de la réponse
 
     // Calculer la différence de budget
@@ -245,6 +274,10 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
     }
 
     if (currentQindex + i < Questions.length) {
+      if (budget + income < 0) {
+        console.log();
+        G.closeActivityWithResult(navigation, 'bankruptcy', 'GameContextL1Activity');
+      }
       setCurrentQindex(currentQindex + i);
       setSpeechText(rep.explConseq);
       setText1("Suivant");
@@ -274,10 +307,10 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
       setCurrentQindex(currentQindex + i);
       const newQuestion = Questions[currentQindex + i];
       setSpeechText(newQuestion.questionText);
-      setText1(newQuestion.caracter === 0 ? "Suivant" : newQuestion.rep1.repText + " " + newQuestion.rep1.price + " C");
-      setText2(newQuestion.rep2.repText + " " + newQuestion.rep2.price + " C");
-      setText3(newQuestion.rep3.repText + " " + newQuestion.rep3.price + " C");
-      setText4(newQuestion.rep4.repText + " " + newQuestion.rep4.price + " C");
+      setText1(newQuestion.caracter === 0 ? "Suivant" : newQuestion.rep1.repText + " " + G.formatNumber(newQuestion.rep1.price) + " C");
+      setText2(newQuestion.rep2.repText + " " + G.formatNumber(newQuestion.rep2.price) + " C");
+      setText3(newQuestion.rep3.repText + " " + G.formatNumber(newQuestion.rep3.price) + " C");
+      setText4(newQuestion.rep4.repText + " " + G.formatNumber(newQuestion.rep4.price) + " C");
       setPos1(newQuestion.caracter === 0 ? true : -newQuestion.rep1.price <= budget + income);
       setPos2(-newQuestion.rep2.price <= budget + income);
       setPos3(-newQuestion.rep3.price <= budget + income);
@@ -350,7 +383,7 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
       <G.OptionsImage />
       <G.ButtonBack navigation={navigation} />
       <View style={G.styles.mapcontainer}>
-        <G.Budget budget={budget} up={up}/>
+        <G.Budget budget={budget} up={up} income={income}/>
         <View style={styles.fullmapcontainer}>
           <View style={styles.grid}>
             <G.Grid map={map} />

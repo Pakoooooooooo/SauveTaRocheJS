@@ -25,6 +25,9 @@ export const btnWidth = Math.floor(Math.min(width, height) / 3.5);
 export const caracterScale = (Math.min(width, height)**(p*2)*p/2.1);
 export const scaleHeight = (Math.min(width, height)**(p*3)*p*44);
 
+export const formatNumber = (num: number): string => {
+  return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+};
 
 export const delay = (ms: number) => new Promise(res => setTimeout(res, ms));
 // Transforme le number : 3 en string : "03"
@@ -452,21 +455,35 @@ export const Grid = React.memo(({ map }: { map: string[][] }) => {
   return <View>{grid}</View>;
 });
 // Affichage du budget au dessus de la carte
-export const Budget = React.memo(({budget, up}: {budget: number, up: boolean}) => {
+export const Budget = React.memo(({budget, up, income}: {budget: number, up: boolean, income: number}) => {
   if (up){
     return (
-    <Text style={styles.budgetText}>↗ {budget} Crédits</Text>
-    );
+      <View style={{ flexDirection: 'row', alignItems: 'flex-end', justifyContent: 'space-between', width: '100%' }}>
+        <Text style={[styles.budgetText, { fontSize: textSize / 1.5, marginBottom: 0, marginStart: 0 }]}>
+          (Revenus annuels : {formatNumber(income)} C)
+        </Text>
+        <Text style={[styles.budgetText, { marginLeft: 10 }]}>
+          ↗ {formatNumber(budget)} Crédits
+        </Text>
+      </View>
+      );
   } else {
     return (
-    <Text style={styles.budgetText}>↘ {budget} Crédits</Text>
-    );
+      <View style={{ flexDirection: 'row', alignItems: 'flex-end', justifyContent: 'space-between', width: '100%' }}>
+        <Text style={[styles.budgetText, { fontSize: textSize / 1.5, marginBottom: 0, marginStart: 0 }]}>
+          (Revenus annuels : {formatNumber(income)} C)
+        </Text>
+        <Text style={[styles.budgetText, { marginLeft: 10 }]}>
+          ↘ {formatNumber(budget)} Crédits
+        </Text>
+      </View>
+      );
   }
 });
 // Affichage de la date en dessous de la carte
 export const DateDisplay = React.memo(({year}: {year: number}) => {
   return (
-    <Text style={styles.budgetText}>{year}</Text>
+    <Text style={[styles.budgetText,{alignSelf: 'flex-end'}]}>{year}</Text>
   );
 });
 // Affichage de la ligne de séparation entre l'écran superieur (carte+budget+date) et l'écran inferieur (personnage+question/rep+jauge)
@@ -513,7 +530,7 @@ export const Speech = React.memo(({txt}: {txt: string}) => {
 });
 export const closeActivityWithResult = (
   navigation: any,
-  result: 'win' | 'loss' | 'draw',
+  result: 'win' | 'loss' | 'draw' | 'bankruptcy',
   targetScreen: string  // OBLIGATOIRE: le nom exact de votre écran parent
 ) => {
   navigation.navigate(targetScreen, { gameResult: result });
@@ -650,7 +667,8 @@ export const styles = StyleSheet.create({
     fontFamily: 'Gloucester',
     color: '#070A28',
     textAlign: 'right',
-    width: '100%',
+    alignSelf: 'center',
+    marginEnd: 0
   },
   fullmapcontainer: {
   },
