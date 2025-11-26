@@ -20,10 +20,12 @@ export const tileSize = Math.floor((Math.min(width, height)**(p*4))/5);
 export const lineLength = Math.floor((Math.min(width, height)**(p*4))*3);
 export const textSize = Math.floor((Math.min(width, height)**p)*p*40);
 export const smallTextSize = Math.floor((Math.min(width, height)**(p*4))*p/1.5);
-export const speechWidth = Math.floor(Math.min(width, height) / 1.8);
-export const btnWidth = Math.floor(Math.min(width, height) / 3.5);
+export const speechWidth = Math.floor(Math.min(width, height) / 1.6);
+export const btnWidth = Math.floor(Math.min(width, height) / 3.3);
 export const caracterScale = (Math.min(width, height)**(p*2)*p/2.1);
 export const scaleHeight = (Math.min(width, height)**(p*3)*p*44);
+
+export const periode = 5 // Nombre d'années entre deux éléctions
 
 export const formatNumber = (num: number): string => {
   return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
@@ -649,6 +651,13 @@ export const OptionsImage = React.memo(() => {
     </>
   );
 });
+//Image de fond
+export const BackgroundImage = React.memo(() => {
+  return (
+    <Image source={require('../assets/fond_game.png')} style={{position: 'absolute', width: '100%', height: Math.max(width, height)*1.2, justifyContent: 'center', alignItems: 'center'}} />
+  );
+});
+// Styles
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -665,7 +674,7 @@ export const styles = StyleSheet.create({
     fontSize: textSize,
     margin: 10,
     fontFamily: 'Gloucester',
-    color: '#070A28',
+    color: '#ffffffff',
     textAlign: 'right',
     alignSelf: 'center',
     marginEnd: 0
@@ -704,8 +713,9 @@ export const styles = StyleSheet.create({
     textDecorationLine: 'underline',
   },
   speech: {
-    fontSize: smallTextSize*0.9,
+    fontSize: smallTextSize,
     margin: 5,
+    marginStart: 10,
     fontFamily: 'Gloucester',
     color: '#070A28',
     width: speechWidth,
@@ -714,7 +724,7 @@ export const styles = StyleSheet.create({
   caracterImage: {
     alignSelf: 'flex-end',
     margin: -20,
-    marginEnd: -200,
+    marginEnd: -210,
     left: -110,
     top: -25,
     width: 100*3*caracterScale,

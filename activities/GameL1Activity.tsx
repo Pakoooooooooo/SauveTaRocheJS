@@ -8,8 +8,6 @@ import { Audio } from 'expo-av';
 // Liste des questions qui auront lieu pendant la partie (une question sur deux est en réalité un explication de la question précédente dont la réponse n'a donc pas d'impactsur le jeu)
 const Qu = R.parseGameQuestions()
 
-const periode = 5
-
 // Création de la liste de questions alternée d'explications
 const Questions = [... Qu.flatMap((question, index) => 
   index < Qu.length - 1 ? [question, Q.Explication] : [question]
@@ -71,7 +69,7 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
   ]);
   // autres constantes de départ (useState permet d'associer la variable à la dynamique d'affichage de GameUI) :
   const [budget, setBudget] = useState(600000);
-  const [income, setIncome] = useState(10000); // la valeur des revenues est enlevée au budget quand la valeur apply revenus est appelée
+  const [income, setIncome] = useState(5000); // la valeur des revenues est enlevée au budget quand la valeur apply revenus est appelée
   const [year, setYear] = useState(2026);
   const [happiness, setHappiness] = useState(70);
   const [currentCaracterIndex, setCurrentCaracterIndex] = useState(1);
@@ -241,8 +239,8 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
   isProcessingRef.current = true;
 
   if (currentQindex % 2 === 0) {
+    // Logique pour les questions
     setSelectedRep(index);
-
     // Sélection de la réponse
     const rep = index === 1 ? Questions[currentQindex].rep1 :
                index === 2 ? Questions[currentQindex].rep2 :
@@ -269,7 +267,7 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
 
     // Avancer à la prochaine question
     let i = 1;
-    while (currentQindex + i < Questions.length && !G.respects(Questions[currentQindex + i], memQuestions, memResponses)) {
+    while (currentQindex + i < Questions.length && (!G.respects(Questions[currentQindex + i], memQuestions, memResponses) || (Questions[currentQindex+i].caracter === 0  && Questions[currentQindex+i-1].caracter === 0))) {
       i += 1;
     }
 
@@ -278,26 +276,43 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
         console.log();
         G.closeActivityWithResult(navigation, 'bankruptcy', 'GameContextL1Activity');
       }
-      setCurrentQindex(currentQindex + i);
-      setSpeechText(rep.explConseq);
-      setText1("Suivant");
-      setText2("");
-      setText3("");
-      setText4("");
-      setPos1(true);
-      setPos2(false);
-      setPos3(false);
-      setPos4(false);
-      setCaracter(0);
-      setSelectedRep(null);
+      // Si la question précédente était un évênement, on passe l'explication
+      if (Questions[currentQindex].caracter === 0) {
+        setCurrentQindex(currentQindex + i);
+        const newQuestion = Questions[currentQindex + i];
+        setSpeechText(newQuestion.questionText);
+        setText1(newQuestion.caracter === 0 ? "Suivant" : newQuestion.rep1.repText + " " + G.formatNumber(newQuestion.rep1.price) + " C");
+        setText2(newQuestion.rep2.repText + " " + G.formatNumber(newQuestion.rep2.price) + " C");
+        setText3(newQuestion.rep3.repText + " " + G.formatNumber(newQuestion.rep3.price) + " C");
+        setText4(newQuestion.rep4.repText + " " + G.formatNumber(newQuestion.rep4.price) + " C");
+        setPos1(newQuestion.caracter === 0 ? true : -newQuestion.rep1.price <= budget + income);
+        setPos2(-newQuestion.rep2.price <= budget + income);
+        setPos3(-newQuestion.rep3.price <= budget + income);
+        setPos4(-newQuestion.rep4.price <= budget + income);
+        setCaracter(newQuestion.caracter);
+        setSelectedRep(null);
+      } else {
+        setCurrentQindex(currentQindex + i);
+        setSpeechText(rep.explConseq);
+        setText1("Suivant");
+        setText2("");
+        setText3("");
+        setText4("");
+        setPos1(true);
+        setPos2(false);
+        setPos3(false);
+        setPos4(false);
+        setCaracter(0);
+        setSelectedRep(null);
+      }
     } else {
       G.closeActivityWithResult(navigation, 'win', 'GameContextL1Activity');
     }
-
     NextYear();
     setUp(budgetChange+income>=0);
   } else {
-    // Logique pour les questions d'explication
+    // Logique pour les explication
+
     let i = 1;
     while (currentQindex + i < Questions.length && !G.respects(Questions[currentQindex + i], memQuestions, memResponses)) {
       i += 2;
@@ -320,13 +335,13 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
       G.closeActivityWithResult(navigation, 'win', 'GameContextL1Activity');
     }
 
-    if ((year - 2026) % periode === 0 && happiness < 50) {
+    if ((year - 2026) % G.periode === 0 && happiness < 50) {
       G.closeActivityWithResult(navigation, 'loss', 'GameContextL1Activity');
     }
   }
 
   isProcessingRef.current = false;
-  }, [currentQindex, budget, memQuestions, memResponses, year, periode, happiness]);
+  }, [currentQindex, budget, memQuestions, memResponses, year, G.periode, happiness]);
 
   // Affichage d'un bouton de réponse aux questions
   const ButtonRep = useCallback(({txt, style, index, onSelect, selectedRep, affordable}: 
@@ -380,6 +395,7 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
 
   return (
     <View style={styles.container}>
+      <G.BackgroundImage />
       <G.OptionsImage />
       <G.ButtonBack navigation={navigation} />
       <View style={G.styles.mapcontainer}>
@@ -397,7 +413,6 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
         </View>
         <G.DateDisplay year={year} />
       </View>
-      <G.SeparationLine />
       <View style={styles.bottomScreen}>
         <G.CaracterName currentCaracterIndex={currentCaracterIndex} />
         <View style={styles.infoDisplay}>
@@ -450,7 +465,7 @@ const styles = StyleSheet.create({
     left: 20,
   },
   bottomScreen: {
-    marginVertical: 5,
+    marginVertical: 15,
     marginHorizontal: -10,
   },
   infoDisplay: {
