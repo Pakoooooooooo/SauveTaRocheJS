@@ -12,6 +12,7 @@ SAUVETAROCHE est une application mobile interactive compatible <strong>Android</
 <ul>
   <li>JavaScript/TypeScript pour le langage de programmation</li>
   <li>React Native (Front-end)</li>
+  <li>Google Maps SDK (Afficher cartes sur Android)</li>
   <li>Expo CLI pour le développement mobile et test</li>
   <li>Android Studio (émulateur)</li>
   <li>VSCode comme IDE principal</li>
@@ -44,27 +45,35 @@ SAUVETAROCHE est une application mobile interactive compatible <strong>Android</
   <li><strong>Page principale</strong> avec 3 onglets horizontaux : <em>Défis</em>, <em>Jeu</em>, <em>Données</em></li>
   <li><strong>Défis</strong> : une question avec 4 choix de réponses et une correction après les réponses.</li>
   <li><strong>Données</strong> : 4 onglets temporels (<em>Actuel</em>, <em>+50 ans</em>, <em>+100 ans</em>, <em>+200 ans</em>) affichant des cartes prévisionnelles</li>
-  <li><strong>Jeu</strong> : Subdivisé en deux niveaux avec complexité différentes. Pour chaque niveau, l'utilisateur joue le role d'un personnage amené à prendre des décisions afin de gérer au mieux sa circonscripton. Chaque décsions a un impact visible sur sa circonscription et la satisfaction de la population à travers un carte de la zone et une jauge de satisfaction.</li>
+  <li><strong>Jeu</strong> : Subdivisé en deux niveaux avec complexité différentes (le deuxième est en stand by). Pour chaque niveau, l'utilisateur joue le role d'un personnage amené à prendre des décisions afin de gérer au mieux sa circonscripton. Chaque décsions a un impact visible sur sa circonscription et la satisfaction de la population à travers un carte de la zone et une jauge de satisfaction.</li>
 </ul>
 
-<h2> Aperçus de l'application</h2>
-<p>Page principale :</p>
-<img src="Page principale.jpg" alt="Page principale" width="300">
+<p style="text-align: center;">
+  <img src="Page principale.jpg" alt="Page principale" width="300">
+</p>
 
-<p>Défis :</p>
-<img src="URL_IMAGE_PAGE_DEFIS" alt="Page Défis" width="300">
+<p><strong>Défis :</strong></p>
+<div style="display: flex; justify-content: center; gap: 10px;">
+  <img src="Challenge.jpg" alt="Défis 1" width="200">
+  <img src="URL_IMAGE_PAGE_DEFIS_2" alt="Défis 2" width="200">
+  <img src="URL_IMAGE_PAGE_DEFIS_3" alt="Défis 3" width="200">
+</div>
 
-<p>Données :</p>
-<img src="URL_IMAGE_PAGE_DONNEES" alt="Page Données" width="300">
+<p><strong>Données :</strong></p>
+<div style="display: flex; justify-content: center; gap: 10px;">
+  <img src="Data50.jpg" alt="Prévision 50ans" width="200">
+  <img src="Data100.jpg" alt="Prévision 100ans" width="200">
+  <img src="Data200.jpg" alt="Prévision 200ans" width="200">
+</div>
 
 <h2> Remerciements</h2>
 <p>
-Nous remercions tous les membres de l’équipe, les encadrants, ainsi que les participants aux enquêtes de terrain pour leur précieuse contribution. Ce projet a été pour nous un moyen de monter en compétences et de découvrir tous les aspects de la gestion du projet.
+Nous remercions tous les membres de l’équipe, les encadrants, ainsi que les participants aux enquêtes de terrain pour leur précieuse contribution. Ce projet a été pour nous un moyen de monter en compétences tant au niveau technique que humain et aussi de découvrir tous les aspects de la gestion du projet par la pratique.
 </p>
 
 <h2> Contact & Documentation</h2>
 <p>
-Pour consulter les <strong>User Stories</strong>, <strong>Personas</strong> et les <strong>études de terrain</strong>, accédez à notre Drive :
+Pour consulter les <strong>User Stories</strong>, <strong>Personas</strong> et les <strong>études de terrain</strong> et tout autres articles en rapport avec le projet, accédez à notre Drive via le lien suivant :
 </p>
 <p><a href="https://drive.google.com/drive/u/2/folders/1-6Zyo5Eqjw6-DlHBN8UDSrhlZlRopb-F" target="_blank"> Accéder à la documentation du projet (Enquête de terrain, blog, état de l'art, cartographie des acteurs.)</a></p>
 
