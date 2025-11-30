@@ -49,7 +49,7 @@ SAUVETAROCHE est une application mobile interactive compatible <strong>Android</
 
 <h2> Aperçus de l'application</h2>
 <p>Page principale :</p>
-<img src="URL_IMAGE_PAGE_MAIN" alt="Page principale" width="300">
+<img src="Page principale.jpg" alt="Page principale" width="300">
 
 <p>Défis :</p>
 <img src="URL_IMAGE_PAGE_DEFIS" alt="Page Défis" width="300">
