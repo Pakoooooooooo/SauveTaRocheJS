@@ -49,22 +49,22 @@ SAUVETAROCHE est une application mobile interactive compatible <strong>Android</
 </ul>
 
 <p style="text-align: center;"><strong>Page principale :</strong></p>
-<p style="text-align: center;">
+<p style="display: flex; justify-content: center">
   <img src="Page principale.jpg" alt="Page principale" width="300">
 </p>
 
 <p><strong>Défis :</strong></p>
 <div style="display: flex; justify-content: center; gap: 20px; margin-bottom: 15px;">
-  <img src="Challege.jpg" alt="Page Défis 1" width="250">
+  <img src="Challenge.jpg" alt="Page Défis 1" width="250">
   <img src="URL_IMAGE_PAGE_DEFIS_2" alt="Page Défi réussi" width="250">
   <img src="URL_IMAGE_PAGE_DEFIS_3" alt="Page Défi échoué" width="250">
 </div>
 
 <p><strong>Données :</strong></p>
 <div style="display: flex; justify-content: center; gap: 20px; margin-bottom: 15px;">
-  <img src="Data50" alt="Page Données 50ans" width="250">
-  <img src="Data100" alt="Page Données 100ans" width="250">
-  <img src="Data200" alt="Page Données 200ans" width="250">
+  <img src="Data50.jpg" alt="Page Données 50ans" width="250">
+  <img src="Data100.jpg" alt="Page Données 100ans" width="250">
+  <img src="Data200.jpg" alt="Page Données 200ans" width="250">
 </div>
 
 <p>
