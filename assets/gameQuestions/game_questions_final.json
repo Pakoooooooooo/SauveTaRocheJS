@@ -1,18 +1,18 @@
 [{
-        "questionText": "Notre commune est très appréciée des touristes et c'est en partie grâce à eux que notre économie locale est si dynamique, les commerces ne désemplissent pas ! Il faut continuer sur cette lancée.",
+        "questionText": "Notre commune est très appréciée des touristes et c'est en partie grâce à eux que nos commerces ne désemplissent pas ! Il faut continuer sur cette lancée.",
         "prevQuestCondition": [],
         "prevRepCondition": [],
         "prevQuestNotCondition": [],
         "prevRepNotCondition": [],
         "caracter": 5,
         "rep1": {
-            "repText": "Limiter le tourisme",
-            "price": -20000,
-            "happiness": 0,
+            "repText": "Organiser des balades sur la côte encadrées par la ville",
+            "price": -5000,
+            "happiness": -10,
             "mapChanges": [],
             "overlayChanges": [],
-            "incomeChanges": -1000,
-            "explConseq": "La limitation du tourisme a un impact négatif sur l'activité économique de Graniland. Les commerces ont moins de clients ! Pour autant, la population n'est pas affectée, elle profite paisiblement du charme de Graniland."
+            "incomeChanges": 0,
+            "explConseq": "Ce choix permet d'attirer de nouveaux touristes. Pourtant, les habitants regrettent que leurs balades quotidiennes soient maintenant un équivalent du périphérique parisien à l'heure de pointe."
         },
         "rep2": {
             "repText": "Promouvoir le tourisme",
@@ -21,16 +21,16 @@
             "mapChanges": [],
             "overlayChanges": [],
             "incomeChanges": 1000,
-            "explConseq": "En promouvant le tourisme votre attractivité ainsi que le flux touristique augmentent. Cela devient une source de revenus importante pour vous. Vos habitants sont fiers d'habiter dans une ville si attractive et dynamique.  Cette option génère un gain de 75 000 ce qui fait toujours plaisir au budget local."
+            "explConseq": "Graniland est plus attractive pour les touristes. Vos habitants sont fiers d'habiter dans une ville si dynamique."
         },
         "rep3": {
-            "repText": "Organiser des balades sur la côte encadrées par la ville",
-            "price": 2000,
+            "repText": "Limiter le tourisme",
+            "price": -20000,
             "happiness": -10,
             "mapChanges": [],
             "overlayChanges": [],
-            "incomeChanges": 0,
-            "explConseq": "L'organisation de balades permet d'attirer de nouveaux touristes donc cela dynamise votre économie. Pourtant les habitants regrettent que leurs balades quotidiennes autrefois secrètes soient maintenant un équivalent du périphérique parisien à l'heure de pointe.  Cette option génère un gain de 2 000, ce qui fait toujours plaisir au budget local. Le bonheur baisse de 10 points, preuve que certaines personnes risquent de grincer un peu des dents."
+            "incomeChanges": -1000,
+            "explConseq": "Ce choix a un impact négatif sur l’économie de Graniland : nos commerces ont moins de clients ! Vos revenus annuels diminuent…"
         },
         "rep4": {
             "repText": "Ne rien faire",
@@ -43,7 +43,7 @@
         }
     },
     {
-        "questionText": "De nombreuses personnes cherchent à se mettre au vert et l'emplacement de Graniland est idéal. La ville est proche de la mer et des grandes villes : Graniland fait rêver ! Nous pourrions continuer sur cette lancée et accueillir de nouveaux habitants !",
+        "questionText": "De nombreuses personnes cherchent à se mettre au vert et l'emplacement de Graniland est idéal : proche de la mer et des grandes villes ! Nous pourrions accueillir de nouveaux habitants !",
         "prevQuestCondition": [],
         "prevRepCondition": [],
         "prevQuestNotCondition": [],
@@ -57,8 +57,8 @@
             "overlayChanges": [
                 {"i": 2,"j": 6,"newType": "h"},
                 {"i": 3,"j": 6,"newType": "h"}],
-            "incomeChanges": 2000,
-            "explConseq": "La construction sur la roche est assez coûteuse car les terrains sont proches de la mer mais les nouveaux arrivants sont ravis de rejoindre la chouette ville de Graniland.  Cette option coûte 400 000, un effort financier non négligeable pour la commune."
+            "incomeChanges": 1000,
+            "explConseq": "La construction sur la roche est assez coûteuse car les terrains sont proches de la mer mais les nouveaux arrivants sont ravis de rejoindre la chouette ville de Graniland."
         },
         "rep2": {
             "repText": "Construire dans l'arrière-pays",
@@ -68,8 +68,8 @@
             "overlayChanges": [
                 {"i": 11,"j": 13,"newType": "h"},
                 {"i": 11,"j": 12,"newType": "h"}],
-            "incomeChanges": 2000,
-            "explConseq": "Le nouveau lotissement est construit ! Les nouveaux habitants de Graniland trouvent ce qu'ils sont venus chercher : calme, nature et sérénité.  Cette option coûte 250 000, un effort financier non négligeable pour la commune."
+            "incomeChanges": 1000,
+            "explConseq": "Le nouveau lotissement est construit ! Les nouveaux habitants de Graniland trouvent ce qu'ils sont venus chercher : calme, nature et sérénité."
         },
         "rep3": {
             "repText": "Ne pas construire",
@@ -88,8 +88,8 @@
             "overlayChanges": [
                 {"i": 7,"j": 10,"newType": "h"},
                 {"i": 8,"j": 10,"newType": "h"}],
-            "incomeChanges": 2000,
-            "explConseq": "La construction proche du noyau villageois est coûteuse. Et oui c'est chic d'habiter dans le bourg d'une ville aussi charmante. Les nouveaux habitants sont ravis. Cette option coûte 300 000, un effort financier non négligeable pour la commune."
+            "incomeChanges": 1000,
+            "explConseq": "La construction proche du noyau villageois est coûteuse. Et oui, c'est chic d'habiter dans le bourg d'une ville aussi charmante. Les nouveaux habitants sont ravis."
         }
     },
     {
@@ -106,7 +106,7 @@
             "mapChanges": [],
             "overlayChanges": [
                 {"i": 13,"j": 4,"newType": ""}],
-            "incomeChanges": -1000,
+            "incomeChanges": -500,
             "explConseq": ""
         },
         "rep2": {
@@ -138,7 +138,7 @@
         }
     },
     {
-        "questionText": "Le recul du trait de côte devient un problème avéré il faut comprendre le phénomène, chercher des solutions ou sensibiliser les populations. Pouvez-vous nous aider financièrement ?",
+        "questionText": "Le recul du trait de côte devient un problème avéré, il faut comprendre le phénomène, chercher des solutions ou sensibiliser les populations. Pouvez-vous nous aider financièrement ?",
         "prevQuestCondition": [],
         "prevRepCondition": [],
         "prevQuestNotCondition": [],
@@ -165,11 +165,11 @@
         "rep3": {
             "repText": "Bureau d'études spécialisé ou observatoire public technique",
             "price": -15000,
-            "happiness": 2,
+            "happiness": 0,
             "mapChanges": [],
             "overlayChanges": [],
             "incomeChanges": 0,
-            "explConseq": "Le financement de bureaux d'études est la solution la plus coûteuse mais les enjeux sont confiés à des organismes sérieux nationaux. Malheureusement ils sont moins sensibles aux problématiques locales. Les habitants sont contents sans être emballés par l'idée."
+            "explConseq": "Le financement de bureaux d'études est la solution la plus coûteuse mais les enjeux sont confiés à des organismes nationaux. Malheureusement, ils sont moins sensibles aux problématiques locales."
         },
         "rep4": {
             "repText": "Ne rien financer",
@@ -178,7 +178,7 @@
             "mapChanges": [],
             "overlayChanges": [],
             "incomeChanges": 0,
-            "explConseq": "Cette option ne coûte rien ce qui la rend toujours plus facile à défendre en réunion. La satisfaction reste inchangée."
+            "explConseq": "Cette option ne coûte rien, ce qui la rend toujours plus facile à défendre en réunion. La satisfaction reste inchangée."
         }
     },
     {
@@ -189,13 +189,13 @@
         "prevRepNotCondition": [],
         "caracter": 1,
         "rep1": {
-            "repText": "Adhésion au programme d'aide de la MTDD",
+            "repText": "Adhésion à un programme d'aide départemental (financier et scientifique)",
             "price": -10000,
             "happiness": 0,
             "mapChanges": [],
             "overlayChanges": [],
             "incomeChanges": 5000,
-            "explConseq": "La MTDD va vous aider à développer harmonieusement le territoire de Graniland. La ville est dans un contexte de croissance démographique forte et de ressources à préserver. Votre budget annuel augmente !"
+            "explConseq": "Le programme vous aide à développer harmonieusement le territoire de Graniland. La ville est dans un contexte de croissance démographique forte et de ressources à préserver. Votre budget annuel augmente !"
         },
         "rep2": {
             "repText": "Construction d'une route",
@@ -208,7 +208,7 @@
                 {"i": 3,"j": 11,"newType": "r"},
                 {"i": 3,"j": 10,"newType": "r"}],
             "incomeChanges": 0,
-            "explConseq": "Super bonne idée. Cette route sera peut-être utile pour plus tard ou pas… Les habitants esquissent un sourire."
+            "explConseq": "Super bonne idée. Cette route sera peut-être utile pour plus tard ou pas... Les habitants ont le sourire."
         },
         "rep3": {
             "repText": "Déplacement des maisons côtières sur la roche",
@@ -221,7 +221,7 @@
                 {"i": 3,"j": 5,"newType": "h"},
                 {"i": 4,"j": 5,"newType": "h"}],
             "incomeChanges": 0,
-            "explConseq": "Cette option coûte 300 000, un effort financier non négligeable pour la commune. Malheureusement, les habitants ne sont pas très heureux, la vue est moins belle ici ! La satisfaction baisse de 15 points."
+            "explConseq": "Malheureusement, les habitants ne sont pas très heureux, la vue est moins belle ici..."
         },
         "rep4": {
             "repText": "Ne rien faire",
@@ -234,7 +234,7 @@
         }
     },
     {
-        "questionText": "Avec votre développement l'intercommunalité des villes voisines vous propose de les rejoindre. Cela vous permet de recevoir de l'aide en cas de besoin mais également d'en donner lorsque les autres communes en demandent. Cette aide peut être humaine matérielle ou financière. Que souhaitez-vous faire ?",
+        "questionText": "L'intercommunalité des villes voisines vous propose de les rejoindre ! Cela vous permet de recevoir de l'aide (matérielle ou financière) en cas de besoin.",
         "prevQuestCondition": [0],
         "prevRepCondition": [2],
         "prevQuestNotCondition": [],
@@ -256,7 +256,7 @@
             "mapChanges": [],
             "overlayChanges": [],
             "incomeChanges": -3000,
-            "explConseq": "On est plus fort ensemble que seul ! Bon, il faut payer maintenant, - 3 000."
+            "explConseq": "On est plus fort ensemble que seul ! Bon, il faut payer maintenant."
         },
         "rep3": {
             "repText": "Ne pas rejoindre l'intercommunalité mais rester proche des communes.",
@@ -265,7 +265,7 @@
             "mapChanges": [],
             "overlayChanges": [],
             "incomeChanges": 0,
-            "explConseq": "C'est votre choix, cela ne change pas la satisfaction de vos habitants et ne diminue pas votre budget, c'est ok finalement."
+            "explConseq": "C'est votre choix, cela ne change pas la satisfaction de vos habitants et ne diminue pas votre budget."
         },
         "rep4": {
             "repText": "Ne pas rejoindre l'intercommunalité et ne pas garder de contact avec les autres communes.",
@@ -278,7 +278,7 @@
         }
     },
     {
-        "questionText": "Graniland a été élue plus belle ville de la région, quel succès ! Nos affaires marchent et les prédictions d'affluence touristique sont très bonnes, l'année à venir promet d'être intense. Pouvez-vous nous aider à développer les infrastructures ?",
+        "questionText": "Graniland a été élue plus belle ville de la région, quel succès ! Nos affaires marchent, l'année à venir promet d'être intense. Pouvez-vous nous aider ?",
         "prevQuestCondition": [],
         "prevRepCondition": [],
         "prevQuestNotCondition": [0],
@@ -291,7 +291,7 @@
             "mapChanges": [],
             "overlayChanges": [
                 { "i": 5,"j": 8,"newType": "c"}],
-            "incomeChanges": 1000,
+            "incomeChanges": 500,
             "explConseq": "La boutique fonctionne du tonnerre ! C'est un succès."
         },
         "rep2": {
@@ -302,7 +302,7 @@
             "overlayChanges": [
                 {"i": 5,"j": 10,"newType": "c"},
                 {"i": 5,"j": 11,"newType": "c"}],
-            "incomeChanges": 1000,
+            "incomeChanges": 500,
             "explConseq": "Les habitants sont ravis de ne plus avoir à aller jusqu'au bourg pour faire leurs courses. Bon choix !"
         },
         "rep3": {
@@ -321,7 +321,7 @@
             "mapChanges": [],
             "overlayChanges": [],
             "incomeChanges": 0,
-            "explConseq": "Cette option ne coûte rien ce qui la rend toujours plus facile à défendre en réunion. De même, la satisfaction reste inchangée parfait pour ceux qui préfèrent les décisions discrètes."
+            "explConseq": "Cette option ne coûte rien, ce qui la rend toujours plus facile à défendre en réunion. De même, la satisfaction reste inchangée."
         }
     },
     {
@@ -338,7 +338,7 @@
             "mapChanges": [
                 {"i": 13,"j": 4,"newType": "sea"}],
             "overlayChanges": [],
-            "incomeChanges": -1000,
+            "incomeChanges": 0,
             "explConseq": ""
         },
         "rep2": {
@@ -391,7 +391,7 @@
             "happiness": 10,
             "mapChanges": [],
             "overlayChanges": [],
-            "incomeChanges": 2000,
+            "incomeChanges": 500,
             "explConseq": "C'est à eux qu'appartient l'avenir après tout non ?"
         },
         "rep3": {
@@ -400,7 +400,7 @@
             "happiness": 5,
             "mapChanges": [],
             "overlayChanges": [],
-            "incomeChanges": 2000,
+            "incomeChanges": 500,
             "explConseq": "Le piétinement des côtes empire le phénomène d'érosion du trait de côte ! Sensibiliser les touristes est une bonne idée, c'est eux qui utilisent le plus les sentiers côtiers."
         },
         "rep4": {
@@ -409,7 +409,7 @@
             "happiness": 0,
             "mapChanges": [],
             "overlayChanges": [],
-            "incomeChanges": 1000,
+            "incomeChanges": 0,
             "explConseq": "Attention, un maire doit être à l'écoute des habitants... Cela risquerait de vous porter préjudice plus tard..."
         }
     },
@@ -449,7 +449,7 @@
                 {"i": 0,"j": 6,"newType": "s"},
                 {"i": 1,"j": 6,"newType": "s"},
                 {"i": 13,"j": 5,"newType": "s"}],
-            "incomeChanges": 0,
+            "incomeChanges": -500,
             "explConseq": "Coup dur pour le tourisme, coup dur pour les habitants et leur randonnée dominicale... Au fond, c'est pour le bien de tout le monde non ? Et puis, il leur reste la plage..."
         },
         "rep3": {
@@ -472,7 +472,7 @@
                 {"i": 7,"j": 8,"newType": "s"},
                 {"i": 8,"j": 8,"newType": "s"},
                 {"i": 9,"j": 8,"newType": "s"}],
-            "incomeChanges": 0,
+            "incomeChanges": -500,
             "explConseq": "Tout est surveillé maintenant ! Pas sûr que ça ne fasse l'unanimité chez les habitants..."
         },
         "rep4": {
@@ -547,7 +547,7 @@
             "mapChanges": [],
             "overlayChanges": [
                 {"i": 6,"j": 8,"newType": ""}],
-            "incomeChanges": -1000,
+            "incomeChanges": -500,
             "explConseq": "Les habitants sont vraiment tristes de quitter leur belle maison mais bon, ils ont vu par eux-mêmes le niveau de l'eau monter... c'était donc le meilleur choix ?"
         },
         "rep2": {
@@ -567,8 +567,8 @@
             "overlayChanges": [
                 {"i": 10,"j": 8,"newType": ""},
                 {"i": 6,"j": 8,"newType": ""}],
-            "incomeChanges": -2000,
-            "explConseq": "Les habitants sont vraiment tristes de quitter le petit bout de paradis qu'est Graniland... On espère qu'ils retrouveront leur bonheur ailleurs ! En attendant, cette action coûte cher au moral comme au porte-monnaie !"
+            "incomeChanges": -1000,
+            "explConseq": "Les habitants sont vraiment tristes de quitter le petit bout de paradis qu'est Graniland... On espère qu'ils retrouveront leur bonheur ailleurs !"
         },
         "rep4": {
             "repText": "Détruire la maison sur l'île",
@@ -577,7 +577,7 @@
             "mapChanges": [],
             "overlayChanges": [
                 {"i": 7,"j": 3, "newType": ""}],
-            "incomeChanges": -1000,
+            "incomeChanges": -500,
             "explConseq": "Les habitants sont tristes de quitter ce petit bout de paradis... On espère qu'ils retrouveront leur bonheur ailleurs ! En attendant, cette action coûte cher au moral comme au porte-monnaie !"
         }
     },
@@ -594,8 +594,8 @@
             "happiness": -10,
             "mapChanges": [],
             "overlayChanges": [],
-            "incomeChanges": 0,
-            "explConseq": "La mer est cachée par cette nouvelle grande dune ! Les habitants sont attristés et on peut les comprendre mais c'est le prix à payer non ? "
+            "incomeChanges": -1000,
+            "explConseq": "La mer disparaît derrière la dune. Touristes déçus, habitants aussi, mais difficile d’y échapper."
         },
         "rep2": {
             "repText": "Restaurer les marais",
@@ -604,7 +604,7 @@
             "mapChanges": [],
             "overlayChanges": [],
             "incomeChanges": 0,
-            "explConseq": "Cette option semble intéressante ! Les marais (endigués ou non, de chasse, salins…) sont essentiels à la biodiversité. Ils permettent la purification de l’eau ou la rétention du trop plein d’eau utile à son utilisation différée."
+            "explConseq": "Cette option semble intéressante ! Les marais sont essentiels à la biodiversité. Ils permettent la purification de l’eau ou la rétention du trop plein d’eau."
         },
         "rep3": {
             "repText": "Ne pas l'écouter, il n'est peut-être même pas chercheur",
@@ -613,7 +613,7 @@
             "mapChanges": [],
             "overlayChanges": [],
             "incomeChanges": 0,
-            "explConseq": "Zéro confiance envers les habitants... Cela témoigne d'un maire vraiment à l'écoute... -10 en satisfaction, il faut croire en l'humanité !"
+            "explConseq": "Zéro confiance envers les habitants... Cela témoigne d'un maire vraiment à l'écoute... Il faut croire en l'humanité !"
         },
         "rep4": {
             "repText": "Mettre en place une forêt immergée",
@@ -622,7 +622,7 @@
             "mapChanges": [],
             "overlayChanges": [],
             "incomeChanges": 0,
-            "explConseq": "Cette option coûte 20 000, est ce qu'on est vraiment sûr que toucher à la biodiversité soit une bonne idée ? Les pauvres poissons de Graniland... Ils vont être perdus... Eux aussi font partie de la ville !"
+            "explConseq": "Est ce qu'on est vraiment sûr que toucher à la biodiversité soit une bonne idée ? Les pauvres poissons de Graniland... Ils vont être perdus... Eux aussi font partie de la ville !"
         }
     },
     {
@@ -638,7 +638,7 @@
             "happiness": -15,
             "mapChanges": [],
             "overlayChanges": [],
-            "incomeChanges": -1000,
+            "incomeChanges": -500,
             "explConseq": ""
         },
         "rep2": {
@@ -689,7 +689,7 @@
                 {"i": 8,"j": 9,"newType": ""},
                 {"i": 7,"j": 9,"newType": ""}],
             "incomeChanges": 0,
-            "explConseq": "150 000 dépensés pour une vue plus que moyenne... C'est décevant pour les habitants ! Mais c'est le prix pour leur sauver la vie, n'est-ce pas ?"
+            "explConseq": "La nouvelle vue est décevante pour les habitants ! Mais c'est le prix pour leur sauver la vie, n'est-ce pas ?"
         },
         "rep2": {
             "repText": "Relocaliser les maisons du front de mer derrière la roche",
@@ -697,14 +697,14 @@
             "happiness": -10,
             "mapChanges": [],
             "overlayChanges": [
-                {"i": 4,"j": 7,"newType": "h"},
+                {"i": 2,"j": 7,"newType": "h"},
                 {"i": 3,"j": 7,"newType": "h"},
-                {"i": 4,"j": 8,"newType": "c"},
+                {"i": 3,"j": 8,"newType": "c"},
                 {"i": 9,"j": 9,"newType": ""},
                 {"i": 8,"j": 9,"newType": ""},
                 {"i": 7,"j": 9,"newType": ""}],
             "incomeChanges": 0,
-            "explConseq": "200 000 de dépensé pour une vue plus que moyenne... C'est décevant pour les habitants ! Mais c'est le prix pour leur sauver la vie, n'est-ce pas ?"
+            "explConseq": "La vue est décevante pour les habitants ! Mais c'est le prix pour leur sauver la vie, n'est-ce pas ?"
         },
         "rep3": {
             "repText": "Ne rien faire",
@@ -727,8 +727,8 @@
                 {"i": 8,"j": 9,"newType": ""},
                 {"i": 9,"j": 9,"newType": ""},
                 {"i": 7,"j": 9,"newType": ""}],
-            "incomeChanges": -3000,
-            "explConseq": "Cette option coûte 100 000, c'est cher ! Puis, c'est toujours triste de voir des habitants quitter la ville un peu de force, pourquoi la mer ne veut pas d'eux ici ? - 5 de satisfaction ! "
+            "incomeChanges": -2000,
+            "explConseq": "C'est toujours triste de voir des habitants quitter la ville un peu de force, pourquoi la mer ne veut pas d'eux ici ?"
         }
     },
     {
@@ -744,7 +744,7 @@
             "happiness": 0,
             "mapChanges": [],
             "overlayChanges": [],
-            "incomeChanges": -10000,
+            "incomeChanges": 0,
             "explConseq": ""
         },
         "rep2": {
@@ -838,7 +838,7 @@
                 {"i": 10,"j": 5,"newType": "stone"}],
             "overlayChanges": [],
             "incomeChanges": 0,
-            "explConseq": "Cette option coûte 55 000, un effort financier non négligeable pour la commune. La satisfaction baisse de 10 points, en effet, il faut le dire, cette grande barrière de béton est moche."
+            "explConseq": "Il faut le dire, cette grande barrière de béton est moche."
         },
         "rep2": {
             "repText": "Brise-lame",
@@ -849,7 +849,7 @@
                 {"i": 9,"j": 4,"newType": "stone"}],
             "overlayChanges": [],
             "incomeChanges": 0,
-            "explConseq": "Un brise-lames est un ouvrage littoral orienté parallèlement au trait de côte. Et donc pourquoi pas ! Ce n'est pas la solution la plus belle qui existe mais bon ça semble fonctionner ! Puis 30 000, c'est une affaire pour 5 points de satisfaction en moins."
+            "explConseq": "Un brise-lames est un ouvrage littoral orienté parallèlement au trait de côte. Et donc pourquoi pas ! Ce n'est pas la solution la plus belle qui existe mais bon ça semble fonctionner !"
         },
         "rep3": {
             "repText": "Épi",
@@ -860,7 +860,7 @@
                 {"i": 9,"j": 5,"newType": "stone"}],
             "overlayChanges": [],
             "incomeChanges": 0,
-            "explConseq": "Un épi est un ouvrage hydraulique rigide construit au bord de l'océan ou sur une berge d'un cours d'eau important pour freiner les courants d'eau. Donc pourquoi pas ! Ce n'est pas la solution la plus belle qui existe mais bon ça semble fonctionner ! Puis 15 000, c'est une affaire pour 5 points de satisfaction en moins."
+            "explConseq": "Un épi est un ouvrage hydraulique rigide construit au bord de l'océan ou sur une berge d'un cours d'eau important pour freiner les courants d'eau."
         },
         "rep4": {
             "repText": "Ne rien faire",
@@ -994,7 +994,7 @@
                 {"i": 3,"j": 7,"newType": "l"},
                 {"i": 3,"j": 8,"newType": "p"}],
             "incomeChanges": 0,
-            "explConseq": "Les habitants sont sauvés et heureux ! Qui n'a jamais rêvé d'habiter sur une île ? Ils savent maintenant qu'ils peuvent compter sur vous. + 15 points de satisfaction."
+            "explConseq": "Les habitants sont sauvés et heureux ! Qui n'a jamais rêvé d'habiter sur une île ? Ils savent maintenant qu'ils peuvent compter sur vous."
         },
         "rep2": {
             "repText": "Créer un pont pour raccorder la roche",
@@ -1005,7 +1005,7 @@
             "overlayChanges": [
                 {"i": 4,"j": 7,"newType": "r"}],
             "incomeChanges": 0,
-            "explConseq": "Les habitants sont sauvés et heureux ! Ils savent maintenant qu'ils peuvent compter sur vous. + 15 points de satisfaction"
+            "explConseq": "Les habitants sont sauvés et heureux ! Ils savent maintenant qu'ils peuvent compter sur vous."
         },
         "rep3": {
             "repText": "Vous payez le rapatriement et le déménagement de tous les habitants dans une autre commune",
@@ -1027,7 +1027,7 @@
                 {"i": 7,"j": 5,"newType": ""},
                 {"i": 6,"j": 5,"newType": ""}],
             "incomeChanges": 0,
-            "explConseq": "C'est triste... La ville est bien vide sans eux... Mais cet investissement à hauteur de 1 500 000 était vraiment nécessaire, vous les avez sauvés. La satisfaction monte de 35 points, pour autant, pour qui être réélu ? Il n'y a plus personne ici..."
+            "explConseq": "C'est triste... La ville est bien vide sans eux... Mais cet investissement était vraiment nécessaire, vous les avez sauvés. Dernière question : pour qui être réélu ? Il n'y a plus personne ici..."
         },
         "rep4": {
             "repText": "Ne rien faire...",
@@ -1039,3 +1039,4 @@
             "explConseq": "C'est une catastrophe... les habitants ont envoyé des lettres par pigeon voyageur au gouvernement, ils se sentent esseulés, affamés et vous ? Le gouvernement vous destitue d'urgence."
         }
     }]
+
