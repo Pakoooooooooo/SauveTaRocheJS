@@ -48,25 +48,25 @@ SAUVETAROCHE est une application mobile interactive compatible <strong>Android</
   <li><strong>Jeu</strong> : Subdivisé en deux niveaux avec complexité différentes (le deuxième est en stand by). Pour chaque niveau, l'utilisateur joue le role d'un personnage amené à prendre des décisions afin de gérer au mieux sa circonscripton. Chaque décsions a un impact visible sur sa circonscription et la satisfaction de la population à travers un carte de la zone et une jauge de satisfaction.</li>
 </ul>
 
+<p style="text-align: center;"><strong>Page principale :</strong></p>
 <p style="text-align: center;">
   <img src="Page principale.jpg" alt="Page principale" width="300">
 </p>
 
 <p><strong>Défis :</strong></p>
-<div style="display: flex; justify-content: center; gap: 10px;">
-  <img src="Challenge.jpg" alt="Défis 1" width="200">
-  <img src="URL_IMAGE_PAGE_DEFIS_2" alt="Défis 2" width="200">
-  <img src="URL_IMAGE_PAGE_DEFIS_3" alt="Défis 3" width="200">
+<div style="display: flex; justify-content: center; gap: 20px; margin-bottom: 15px;">
+  <img src="Challege.jpg" alt="Page Défis 1" width="250">
+  <img src="URL_IMAGE_PAGE_DEFIS_2" alt="Page Défi réussi" width="250">
+  <img src="URL_IMAGE_PAGE_DEFIS_3" alt="Page Défi échoué" width="250">
 </div>
 
 <p><strong>Données :</strong></p>
-<div style="display: flex; justify-content: center; gap: 10px;">
-  <img src="Data50.jpg" alt="Prévision 50ans" width="200">
-  <img src="Data100.jpg" alt="Prévision 100ans" width="200">
-  <img src="Data200.jpg" alt="Prévision 200ans" width="200">
+<div style="display: flex; justify-content: center; gap: 20px; margin-bottom: 15px;">
+  <img src="Data50" alt="Page Données 50ans" width="250">
+  <img src="Data100" alt="Page Données 100ans" width="250">
+  <img src="Data200" alt="Page Données 200ans" width="250">
 </div>
 
-<h2> Remerciements</h2>
 <p>
 Nous remercions tous les membres de l’équipe, les encadrants, ainsi que les participants aux enquêtes de terrain pour leur précieuse contribution. Ce projet a été pour nous un moyen de monter en compétences tant au niveau technique que humain et aussi de découvrir tous les aspects de la gestion du projet par la pratique.
 </p>
