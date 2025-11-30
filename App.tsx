@@ -2,6 +2,7 @@ import * as Font from 'expo-font';
 import { StatusBar } from 'expo-status-bar';
 import * as NavigationBar from 'expo-navigation-bar';
 import React, { useState, useEffect, useRef } from 'react';
+import { AudioProvider, useAudio } from './model/AudioContext';
 import {
   View,
   TouchableOpacity,
@@ -16,7 +17,7 @@ import {
   Animated,
   Dimensions
 } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, useFocusEffect  } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { enableScreens } from 'react-native-screens';
 enableScreens();
@@ -143,6 +144,17 @@ function ImageLevel({ level, animatedStyle }: { level: keyof typeof levelImages;
 
 // Écran principal
 function HomeScreen({ navigation }: { navigation: any }) {
+  const { playMusic, stopMusic } = useAudio();
+
+  useFocusEffect(
+   React.useCallback(() => {
+    playMusic(require('./assets/Bruits_de_vagues.mp3'), true);
+
+    return () => {
+      stopMusic();
+    };
+   }, [])
+  );
   // Initialiser chaque Animated.Value à la position de départ
   const scrollValues = useRef(
     Array.from({ length: 8 }, () => new Animated.Value(-SCREEN_WIDTH * a / 2))
@@ -216,7 +228,7 @@ function HomeScreen({ navigation }: { navigation: any }) {
         <ButtonGame navigation={navigation} />
         <ButtonChallenge navigation={navigation} />
         <ButtonData navigation={navigation} />
-        <OptionsImage />
+        {/*<OptionsImage />*/}
       </ScrollView>
     </View>
   );
@@ -251,20 +263,22 @@ export default function App() {
   if (!fontsLoaded) return <AppLoading />;
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Game" component={GameActivity} />
-        <Stack.Screen name="Data" component={DataActivity} />
-        <Stack.Screen name="Challenge" component={ChallengeActivity} />
-        <Stack.Screen name="DataCurrent" component={DataCurrent} />
-        <Stack.Screen name="Data50" component={Data50} />
-        <Stack.Screen name="Data100" component={Data100} />
-        <Stack.Screen name="Data200" component={Data200} />
-        <Stack.Screen name="GameL1Activity" component={GameL1Activity} />
-        <Stack.Screen name="GameL2Activity" component={GameL2Activity} />
-        <Stack.Screen name="GameContextL1Activity" component={GameContextL1Activity} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <AudioProvider>
+      <NavigationContainer>
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="Home" component={HomeScreen} />
+          <Stack.Screen name="Game" component={GameActivity} />
+          <Stack.Screen name="Data" component={DataActivity} />
+          <Stack.Screen name="Challenge" component={ChallengeActivity} />
+          <Stack.Screen name="DataCurrent" component={DataCurrent} />
+          <Stack.Screen name="Data50" component={Data50} />
+          <Stack.Screen name="Data100" component={Data100} />
+          <Stack.Screen name="Data200" component={Data200} />
+          <Stack.Screen name="GameL1Activity" component={GameL1Activity} />
+          <Stack.Screen name="GameL2Activity" component={GameL2Activity} />
+          <Stack.Screen name="GameContextL1Activity" component={GameContextL1Activity} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </AudioProvider>
   );
 }

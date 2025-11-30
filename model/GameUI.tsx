@@ -219,6 +219,15 @@ export const JAUGE_IAMGES: JaugeImages = {
   frame_98: require('../assets/jauge_frames/frame_00098.png'),
   frame_99: require('../assets/jauge_frames/frame_00099.png')
 }
+export type VoteImages = {
+  [key: string]: any;
+};
+export const VOTE_IAMGES: JaugeImages = {
+    vote : require('../assets/vote_logo.png'),
+    big_vote : require('../assets/big_vote_logo.png'),
+    point : require('../assets/point.png'),
+    big_point : require('../assets/big_point.png')
+}
 // Banque de types de personnages
 export const caracters = ['Présentatrice','Secrétaire', 'Scientifique', 'Habitant', 'Gardien_de_Port', 'Commerçant'];
 // Méthode de navigation
@@ -484,15 +493,46 @@ export const Budget = React.memo(({budget, up, income}: {budget: number, up: boo
 });
 // Affichage de la date en dessous de la carte
 export const DateDisplay = React.memo(({year}: {year: number}) => {
+  let vote = ""
+  let dot1 = ""
+  let dot2 = ""
+  let dot3 = ""
+  let dot4 = ""
+  if ((year-2026) % periode === 0){
+    vote = "big_"
+  } else if ((year-2026) % periode === 1){
+    dot1 = "big_"
+  } else if ((year-2026) % periode === 2){
+    dot2 = "big_"
+  } else if ((year-2026) % periode === 3){
+    dot3 = "big_"
+  } else if ((year-2026) % periode === 4){
+    dot4 = "big_"
+  }
   return (
-    <Text style={[styles.budgetText,{alignSelf: 'flex-end'}]}>{year}</Text>
-  );
-});
-// Affichage de la ligne de séparation entre l'écran superieur (carte+budget+date) et l'écran inferieur (personnage+question/rep+jauge)
-export const SeparationLine = React.memo(() => {
-  return (
-    <Image style={styles.separationLine} source={require('../assets/separation_line.png')} />
-  );
+    <View style={{flexDirection: 'row', 
+                  alignItems: 'center',
+                  alignSelf: 'flex-end',  // Colle la View à droite de son parent
+                  gap: 8}}>
+      <TouchableHighlight>
+        <Image 
+          source={VOTE_IAMGES[vote + "vote"]} 
+          style={{width: 30, height: 30, resizeMode: "contain"}}
+        />
+      </TouchableHighlight>
+      
+      {[dot1, dot2, dot3, dot4].map((dot, index) => (
+        <TouchableHighlight key={index}>
+          <Image 
+            source={VOTE_IAMGES[dot + "point"]} 
+            style={{width: 15, height: 15, resizeMode: "contain"}}
+          />
+        </TouchableHighlight>
+      ))}
+      
+      <Text style={styles.budgetText}>{year}</Text>
+    </View>
+    );
 });
 // Affichage du nom du type de personnage
 export const CaracterName = React.memo(({currentCaracterIndex}: {currentCaracterIndex: number}) => {

@@ -3,7 +3,7 @@ import { StyleSheet, TouchableOpacity, Image, View, Text, Dimensions } from 'rea
 import * as G from '../model/GameUI';
 import * as Q from '../model/GameQuestions';
 import * as R from '../model/GameQuestionsRepository';
-import { Audio } from 'expo-av';
+import { useAudio } from '../model/AudioContext';
 
 // Liste des questions qui auront lieu pendant la partie (une question sur deux est en réalité un explication de la question précédente dont la réponse n'a donc pas d'impactsur le jeu)
 const Qu = R.parseGameQuestions()
@@ -14,6 +14,21 @@ const Questions = [... Qu.flatMap((question, index) =>
 ), Q.Explication]
 
 export default function GameL1Activity({ navigation }: G.NavigationProps) {
+
+  const { stopMusic, playMusic, playSoundEffect } = useAudio();
+  // Stop musique accueil et lance musique niveau 1
+  useEffect(() => {
+  (async () => {
+  await stopMusic();
+  await playMusic(require('../assets/musique_niveau1.mp3'));
+  })();
+    // Cleanup : stop la musique quand on quitte ce composant
+    return () => {
+      (async () => {
+        await stopMusic();
+      })();
+    };
+  }, []);
 
   // Conditions initiales du jeu lu par les fonctions d'affichage de GameUI :
   // Sol de la carte initiale
@@ -90,26 +105,6 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
   const [aff4, setPos4] = useState(-Questions[currentQindex].rep4.price <= budget + income);
   const [SpeechText, setSpeechText] = useState(Questions[currentQindex].questionText); // Définir quelle est la bonne réponse
 
-  const soundRef = useRef<Audio.Sound | null>(null);
-  useEffect(() => {
-    const playMusic = async () => {
-      const { sound } = await Audio.Sound.createAsync(
-        require('../assets/musique_niveau1.mp3'), // ton fichier dans assets
-        { shouldPlay: true, isLooping: true, volume: 1.2 }
-      );
-      soundRef.current = sound;
-    }
-
-    playMusic();
-
-    return () => {
-      // Stop le son quand le composant se démonte
-      if (soundRef.current) {
-        soundRef.current.unloadAsync();
-      }
-    };
-  }, []);
-
   // Cache des calculs isServed - recalculé uniquement quand overLayMap change
   const servedCache = useMemo(() => {
     const cache: { [key: string]: boolean } = {};
@@ -161,6 +156,14 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
   }, [setMapTile, overLayMap]);
   // Change le type de la case batiment (i,j) en 'type' si possible en fonction de la carte sol
   const ChangeOverlayTile = useCallback((i: number, j: number, type: string) => {
+    const prevType = overLayMap[i][j];
+    if (type !== '' && prevType !== type) {
+      // Construction
+      playSoundEffect(require('../assets/CONSTRUIRE.mp3'));
+    } else if (type === '' && prevType !== '') {
+      // Destruction
+      playSoundEffect(require('../assets/TOUTCASSER.mp3'));
+    }
     if (map[i][j] === "sea" && type === 'l'){
       setOverlayTile(i, j, type);
     } else if (map[i][j] !== "sea" && type !== 'l'){
@@ -178,6 +181,9 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
     if (bud + incr>=0){
       setBudget(prevBudget => prevBudget + incr);
     } else {setBudget(0)}
+    if (incr !== 0) {
+      playSoundEffect(require('../assets/ARGENTBCP.mp3'));
+    }
   }, []);
   // Ajoute incr à la jauge de satisfaction
   const ChangeHappiness = useCallback((incr: number) => {
@@ -273,7 +279,8 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
 
     if (currentQindex + i < Questions.length) {
       if (budget + income < 0) {
-        console.log();
+        await playMusic(require('../assets/Défaite_la_honte.mp3'), false);
+        await G.delay(3000);
         G.closeActivityWithResult(navigation, 'bankruptcy', 'GameContextL1Activity');
       }
       // Si la question précédente était un évênement, on passe l'explication
@@ -306,6 +313,8 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
         setSelectedRep(null);
       }
     } else {
+      await playMusic(require('../assets/Victoire_Jeu.mp3'), false);
+      await G.delay(3000);
       G.closeActivityWithResult(navigation, 'win', 'GameContextL1Activity');
     }
     NextYear();
@@ -332,11 +341,16 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
       setPos4(-newQuestion.rep4.price <= budget + income);
       setCaracter(newQuestion.caracter);
     } else {
+      await playMusic(require('../assets/Victoire_Jeu.mp3'), false);
+      await G.delay(3000);
       G.closeActivityWithResult(navigation, 'win', 'GameContextL1Activity');
     }
 
     if ((year - 2026) % G.periode === 0 && happiness < 50) {
-      G.closeActivityWithResult(navigation, 'loss', 'GameContextL1Activity');
+      playMusic(require('../assets/Défaite_la_honte.mp3'), false).then(async () => {
+        await G.delay(3000);
+        G.closeActivityWithResult(navigation, 'loss', 'GameContextL1Activity');
+      });
     }
   }
 

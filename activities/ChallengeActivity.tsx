@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import questionsData from '../assets/questions.json';
+import { Audio } from 'expo-av';
 
 // retourne la enieme question en fonction de la date du jour
 function getDaysSinceJanuary1st(): number {
@@ -207,13 +208,32 @@ function ButtonBack({ navigation }: NavigationProps) {
 export default function ChallengeActivity({ navigation }: NavigationProps) {
   const [selectedRep, setSelectedRep] = useState<number | null>(null);
   const [bgColor, setBgColor] = useState('#fff');
+  const [victorySound, setVictorySound] = useState<Audio.Sound | null>(null);
+  const [loseSound, setLoseSound] = useState<Audio.Sound | null>(null);
+  
+  useEffect(() => {
+    async function loadSounds() {
+      const { sound: victory } = await Audio.Sound.createAsync(require('../assets/Victoire_cest_cool_de_gagner_hein.mp3'));
+      const { sound: lose } = await Audio.Sound.createAsync(require('../assets/Défaite_la_honte.mp3'));
+      setVictorySound(victory);
+      setLoseSound(lose);
+    }
+    loadSounds();
+
+    return () => {
+      victorySound?.unloadAsync();
+      loseSound?.unloadAsync();
+    }
+  }, []);
 
   useEffect(() => {
     if (selectedRep === null) return;
     if (selectedRep === currentQuestion.correctRep) {
       setBgColor('#28a745'); //le fond devient vert en cas de bonne rep
+      victorySound?.replayAsync();
     } else {
       setBgColor('#dc3545'); //le fond devient rouge en cas de mauvaise rep
+      loseSound?.replayAsync();
     }
   }, [selectedRep]);
 
@@ -235,7 +255,6 @@ export default function ChallengeActivity({ navigation }: NavigationProps) {
     </View>
   );
 }
-
 
 const styles = StyleSheet.create({
   container: {
