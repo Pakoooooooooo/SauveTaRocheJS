@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, TouchableHighlight, TouchableOpacity, Image, View, Text, Dimensions } from 'react-native';
 import { GameQuestionData, GameRepData, MapChangeData } from './GameQuestions';
 
-/*Lit et stoque la liste des questions du csv*/
+/*Lit et stoque la liste des questions du json*/
 import gameQuestionsData from '../assets/gameQuestions/game_questions_final.json';
 
 export function parseGameQuestions(): GameQuestionData[] {

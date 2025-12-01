@@ -201,6 +201,7 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
         await G.delay(60);
       }
   }
+  // Animation de clignotement des batiments modifiées
   async function overlayFlashingBoxAnimation(boxes: [number, number, string][]) {
     if (boxes.length === 0) return;
     const oldTypes: [number, number, string][] = boxes.map(([i, j]) => [i, j, overLayMap[i][j]]);
@@ -215,6 +216,7 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
       await G.delay(300);
     }
   }
+  // Animation de clignotement des cases de sol modifiées
   async function mapFlashingBoxAnimation(boxes: [number, number, string][]) {
     if (boxes.length === 0) return;
     const oldTypes: [number, number, string][] = boxes.map(([i, j]) => [i, j, map[i][j]]);
@@ -298,7 +300,7 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
         setPos4(-newQuestion.rep4.price <= budget + income);
         setCaracter(newQuestion.caracter);
         setSelectedRep(null);
-      } else {
+      } else {// Sinon on affiche l'explication des consequences de la réponse donnée
         setCurrentQindex(currentQindex + i);
         setSpeechText(rep.explConseq);
         setText1("Suivant");
@@ -312,7 +314,7 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
         setCaracter(0);
         setSelectedRep(null);
       }
-    } else {
+    } else { // S'il n'y a plus d'autres questions, le jeu est gagné
       await playMusic(require('../assets/Victoire_Jeu.mp3'), false);
       await G.delay(3000);
       G.closeActivityWithResult(navigation, 'win', 'GameContextL1Activity');
@@ -327,7 +329,7 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
       i += 2;
     }
 
-    if (currentQindex + i < Questions.length) {
+    if (currentQindex + i < Questions.length) { //Après l'explication, on passe à la question suivante
       setCurrentQindex(currentQindex + i);
       const newQuestion = Questions[currentQindex + i];
       setSpeechText(newQuestion.questionText);
@@ -340,13 +342,13 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
       setPos3(-newQuestion.rep3.price <= budget + income);
       setPos4(-newQuestion.rep4.price <= budget + income);
       setCaracter(newQuestion.caracter);
-    } else {
+    } else {// S'il n'y a plus d'autres questions, le jeu est gagné
       await playMusic(require('../assets/Victoire_Jeu.mp3'), false);
       await G.delay(3000);
       G.closeActivityWithResult(navigation, 'win', 'GameContextL1Activity');
     }
 
-    if ((year - 2026) % G.periode === 0 && happiness < 50) {
+    if ((year - 2026) % G.periode === 0 && happiness < 50) { //Si la jauge de satisfaction est inferieure à 50% à la fin d'une période, le jeu est perdu
       playMusic(require('../assets/Défaite_la_honte.mp3'), false).then(async () => {
         await G.delay(3000);
         G.closeActivityWithResult(navigation, 'loss', 'GameContextL1Activity');

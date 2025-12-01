@@ -4,6 +4,7 @@ import * as Q from './GameQuestions';
 
 /*GameQuestions implémente le format des questions du jeu*/
 
+// Un changement de carte à lieu à des coordonnées i,j et attribut un nouveau type à la case
 export class MapChangeData {
   i: number;
   j: number;
@@ -19,6 +20,14 @@ export class MapChangeData {
   }
 }
 
+// Une réponse à une question de jeu comprend :
+// - un texte de réponse
+// - un coût en crédits
+// - un impact sur le bonheur des habitants
+// - des changements de carte (cases de sol modifiées)
+// - des changements de superposition (bâtiments modifiés)
+// - un impact sur les revenus périodiques
+// - une explication des conséquences
 export class GameRepData {
   repText: string;
   price: number;
@@ -46,6 +55,11 @@ export class GameRepData {
   }
 }
 
+// Une question de jeu comprend :
+// - un texte de question
+// - des conditions préalables (questions/réponses) pour que la question puisse être posée
+// - un personnage associé
+// - quatre réponses possibles
 export class GameQuestionData {
   questionText: string;
   prevQuestCondition: GameQuestionData[];
@@ -83,6 +97,7 @@ export class GameQuestionData {
   }
 }
 
+// Une explication est représentée par une question sans conditions et des réponses vides, toujours amenée par la présentatrice
 export const Explication = new  Q.GameQuestionData("",[],[],[],[],0,
   new Q.GameRepData("", 0, 0, [], [], 0, ""),
   new Q.GameRepData("", 0, 0, [], [], 0, ""),

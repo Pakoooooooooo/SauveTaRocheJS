@@ -100,11 +100,11 @@ export const TILE_IMAGES = {
   sign: require('../assets/overlayTiles/sign.png'),
 };
 // On explicite le type de la banque d'image pour les personnages
-export type CharacterImages = {
+export type Images = {
   [key: string]: any;
 };
 // Banque d'image pour les personnages
-export const CARACTER_IMAGES: CharacterImages = {
+export const CARACTER_IMAGES: Images = {
   Présentatrice: require('../assets/Présentatrice.png'),
   Secrétaire: require('../assets/Secrétaire.png'),
   Scientifique: require('../assets/Scientifique.png'),
@@ -112,12 +112,8 @@ export const CARACTER_IMAGES: CharacterImages = {
   Gardien_de_Port : require('../assets/Gardien_de_Port.png'),
   Commerçant : require('../assets/Commerçant.png')
 };
-// On explicite le type de la banque d'image pour la jauge de satisfaction
-export type JaugeImages = {
-  [key: string]: any;
-};
 // Banque d'image pour la jauge de satisfaction
-export const JAUGE_IAMGES: JaugeImages = {
+export const JAUGE_IAMGES: Images = {
     frame_00: require('../assets/jauge_frames/frame_00000.png'),
   frame_01: require('../assets/jauge_frames/frame_00001.png'),
   frame_02: require('../assets/jauge_frames/frame_00002.png'),
@@ -219,10 +215,8 @@ export const JAUGE_IAMGES: JaugeImages = {
   frame_98: require('../assets/jauge_frames/frame_00098.png'),
   frame_99: require('../assets/jauge_frames/frame_00099.png')
 }
-export type VoteImages = {
-  [key: string]: any;
-};
-export const VOTE_IAMGES: JaugeImages = {
+// Banque d'image pour la bar de distance au prochain vote
+export const VOTE_IAMGES: Images = {
     vote : require('../assets/vote_logo.png'),
     big_vote : require('../assets/big_vote_logo.png'),
     point : require('../assets/point.png'),
@@ -694,7 +688,19 @@ export const OptionsImage = React.memo(() => {
 //Image de fond
 export const BackgroundImage = React.memo(() => {
   return (
-    <Image source={require('../assets/fond_game.png')} style={{position: 'absolute', width: '100%', height: Math.max(width, height)*1.2, justifyContent: 'center', alignItems: 'center'}} />
+    <Image source={require('../assets/fond_game.png')} style={{
+        position: 'absolute',
+        width: '100%',
+        height: Math.max(width, height) * 1.2,
+        top: '50%',
+        left: '50%',
+        transform: [
+          { translateX: -(width / 2) },
+          { translateY: -(Math.max(width, height) * 1.2 / 2) }
+        ],
+        justifyContent: 'center',
+        alignItems: 'center'
+      }} />
   );
 });
 // Styles
