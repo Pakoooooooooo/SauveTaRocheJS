@@ -63,7 +63,7 @@
         "rep2": {
             "repText": "Construire dans l'arrière-pays",
             "price": -250000,
-            "happiness": 5,
+            "happiness": 7,
             "mapChanges": [],
             "overlayChanges": [
                 {"i": 11,"j": 13,"newType": "h"},
@@ -83,7 +83,7 @@
         "rep4": {
             "repText": "Construire proche du noyau villageois",
             "price": -300000,
-            "happiness": 5,
+            "happiness": 8,
             "mapChanges": [],
             "overlayChanges": [
                 {"i": 7,"j": 10,"newType": "h"},
@@ -543,7 +543,7 @@
         "rep1": {
             "repText": "Détruire la maison sur la plage",
             "price": -15000,
-            "happiness": -15,
+            "happiness": -5,
             "mapChanges": [],
             "overlayChanges": [
                 {"i": 6,"j": 8,"newType": ""}],
@@ -573,7 +573,7 @@
         "rep4": {
             "repText": "Détruire la maison sur l'île",
             "price": -200000,
-            "happiness": -10,
+            "happiness": -7,
             "mapChanges": [],
             "overlayChanges": [
                 {"i": 7,"j": 3, "newType": ""}],
@@ -591,7 +591,7 @@
         "rep1": {
             "repText": "Installer une dune",
             "price": -10000,
-            "happiness": -10,
+            "happiness": -5,
             "mapChanges": [],
             "overlayChanges": [],
             "incomeChanges": -1000,
@@ -600,7 +600,7 @@
         "rep2": {
             "repText": "Restaurer les marais",
             "price": -15000,
-            "happiness": 0,
+            "happiness": 3,
             "mapChanges": [],
             "overlayChanges": [],
             "incomeChanges": 0,
@@ -609,7 +609,7 @@
         "rep3": {
             "repText": "Ne pas l'écouter, il n'est peut-être même pas chercheur",
             "price": 0,
-            "happiness": -10,
+            "happiness": -5,
             "mapChanges": [],
             "overlayChanges": [],
             "incomeChanges": 0,
@@ -635,7 +635,7 @@
         "rep1": {
             "repText": "",
             "price": -150000,
-            "happiness": -15,
+            "happiness": -12,
             "mapChanges": [],
             "overlayChanges": [],
             "incomeChanges": -500,
@@ -679,7 +679,7 @@
         "rep1": {
             "repText": "Relocaliser les maisons du front de mer dans l'arrière-pays",
             "price": -150000,
-            "happiness": -10,
+            "happiness": -7,
             "mapChanges": [],
             "overlayChanges": [
                 {"i": 2,"j": 12,"newType": "h"},
@@ -694,7 +694,7 @@
         "rep2": {
             "repText": "Relocaliser les maisons du front de mer derrière la roche",
             "price": -200000,
-            "happiness": -10,
+            "happiness": -5,
             "mapChanges": [],
             "overlayChanges": [
                 {"i": 2,"j": 7,"newType": "h"},
@@ -721,7 +721,7 @@
         "rep4": {
             "repText": "Relocaliser deux maisons du bourg et un commerce sur une autre commune",
             "price": -100000,
-            "happiness": -5,
+            "happiness": -7,
             "mapChanges": [],
             "overlayChanges": [
                 {"i": 8,"j": 9,"newType": ""},
@@ -843,7 +843,7 @@
         "rep2": {
             "repText": "Brise-lame",
             "price": -30000,
-            "happiness": -5,
+            "happiness": -3,
             "mapChanges": [
                 {"i": 8,"j": 4,"newType": "stone"},
                 {"i": 9,"j": 4,"newType": "stone"}],
@@ -854,7 +854,7 @@
         "rep3": {
             "repText": "Épi",
             "price": -15000,
-            "happiness": -5,
+            "happiness": -3,
             "mapChanges": [
                 {"i": 8,"j": 5,"newType": "stone"},
                 {"i": 9,"j": 5,"newType": "stone"}],

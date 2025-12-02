@@ -155,27 +155,52 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
     }
   }, [setMapTile, overLayMap]);
   // Change le type de la case batiment (i,j) en 'type' si possible en fonction de la carte sol
-  const ChangeOverlayTile = useCallback((i: number, j: number, type: string) => {
-    const prevType = overLayMap[i][j];
-    if (type !== '' && prevType !== type) {
-      // Construction
-      playSoundEffect(require('../assets/CONSTRUIRE.mp3'));
-    } else if (type === '' && prevType !== '') {
-      // Destruction
-      playSoundEffect(require('../assets/TOUTCASSER.mp3'));
-    }
-    if (map[i][j] === "sea" && type === 'l'){
-      setOverlayTile(i, j, type);
-    } else if (map[i][j] !== "sea" && type !== 'l'){
-      if (type === 's'){
-        if (overLayMap[i][j]===''){
-          setOverlayTile(i, j, type);
-        }
-      } else {
-        setOverlayTile(i, j, type);
+  const ChangeOverlayTile = useCallback(
+    (i: number, j: number, type: string) => {
+      const prevType = overLayMap[i][j];
+      let shouldPlaySound = false;
+      let soundToPlay: any = null;
+
+      // Déterminer quel son jouer (mais ne pas encore le jouer)
+      if (type !== '' && prevType !== type) {
+        soundToPlay = require('../assets/CONSTRUIRE.mp3');
+        shouldPlaySound = true;
+      } else if (type === '' && prevType !== '') {
+        soundToPlay = require('../assets/TOUTCASSER.mp3');
+        shouldPlaySound = true;
       }
-    }
-  }, [map, setOverlayTile]);
+
+      // Vérifier si le changement est autorisé
+      let changeApplied = false;
+
+      // Cas 1: Placer un 'l' (pont) sur une case "sea"
+      if (map[i][j] === "sea" && type === 'l') {
+        setOverlayTile(i, j, type);
+        changeApplied = true;
+      }
+      // Cas 2: Placer un 's' (service) sur une case non-"sea" et vide
+      else if (map[i][j] !== "sea" && type === 's' && overLayMap[i][j] === '') {
+        setOverlayTile(i, j, type);
+        changeApplied = true;
+      }
+      // Cas 3: Placer un autre type de bâtiment (non-'l', non-'s') sur une case non-"sea"
+      else if (map[i][j] !== "sea" && type !== 'l' && type !== '') {
+        setOverlayTile(i, j, type);
+        changeApplied = true;
+      }
+      // Cas 4: Supprimer un bâtiment (type === '')
+      else if (type === '' && prevType !== '') {
+        setOverlayTile(i, j, type);
+        changeApplied = true;
+      }
+
+      // Jouer le son UNIQUEMENT si le changement a été appliqué
+      if (changeApplied && shouldPlaySound && soundToPlay) {
+        playSoundEffect(soundToPlay);
+      }
+    },
+    [map, overLayMap, setOverlayTile, playSoundEffect]
+  );
   // Ajoute incr au budget
   const ChangeBudget = useCallback((bud: number, incr: number) => {
     if (bud + incr>=0){
@@ -210,6 +235,7 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
         ChangeOverlayTile(i, j, oldType);
       });
       await G.delay(300);
+      console.log('Flashing overlay boxes', oldTypes[0]);
       boxes.forEach(([i, j, type]) => {
         ChangeOverlayTile(i, j, type);
       });
@@ -258,6 +284,7 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
     // Appliquer les changements
     await mapFlashingBoxAnimation(rep.mapChanges ? rep.mapChanges.map(c => [c.i, c.j, c.newType] as [number, number, string]) : []);
     await overlayFlashingBoxAnimation(rep.overlayChanges ? rep.overlayChanges.map(c => [c.i, c.j, c.newType] as [number, number, string]) : []);
+    console.log('Applied map and overlay changes');
     setIncome(prevIncome => prevIncome + rep.incomeChanges); // Ajuster les revenus en fonction de la réponse
 
     // Calculer la différence de budget
@@ -280,17 +307,12 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
     }
 
     if (currentQindex + i < Questions.length) {
-      if (budget + income < 0) {
-        await playMusic(require('../assets/Défaite_la_honte.mp3'), false);
-        await G.delay(3000);
-        G.closeActivityWithResult(navigation, 'bankruptcy', 'GameContextL1Activity');
-      }
       // Si la question précédente était un évênement, on passe l'explication
       if (Questions[currentQindex].caracter === 0) {
         setCurrentQindex(currentQindex + i);
         const newQuestion = Questions[currentQindex + i];
         setSpeechText(newQuestion.questionText);
-        setText1(newQuestion.caracter === 0 ? "Suivant" : newQuestion.rep1.repText + " " + G.formatNumber(newQuestion.rep1.price) + " C");
+        setText1(newQuestion.caracter === 0 ? "Suivant" + G.formatNumber(newQuestion.rep1.price) + " C" : newQuestion.rep1.repText + " " + G.formatNumber(newQuestion.rep1.price) + " C");
         setText2(newQuestion.rep2.repText + " " + G.formatNumber(newQuestion.rep2.price) + " C");
         setText3(newQuestion.rep3.repText + " " + G.formatNumber(newQuestion.rep3.price) + " C");
         setText4(newQuestion.rep4.repText + " " + G.formatNumber(newQuestion.rep4.price) + " C");
@@ -300,6 +322,17 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
         setPos4(-newQuestion.rep4.price <= budget + income);
         setCaracter(newQuestion.caracter);
         setSelectedRep(null);
+        if (Questions[currentQindex + i - 1].caracter === 0) {
+          if (budget + income + Questions[currentQindex + i - 2].rep1.price <= 0) {
+            await playMusic(require('../assets/Défaite_la_honte.mp3'), false);
+            G.closeActivityWithResult(navigation, 'bankruptcy', 'GameContextL1Activity');
+          }
+          if ((year + 1 - 2026) % G.periode === 0 && happiness < 50) { //Si la jauge de satisfaction est inferieure à 50% à la fin d'une période, le jeu est perdu
+            playMusic(require('../assets/Défaite_la_honte.mp3'), false).then(async () => {
+              G.closeActivityWithResult(navigation, 'loss', 'GameContextL1Activity');
+            });
+          }
+        }
       } else {// Sinon on affiche l'explication des consequences de la réponse donnée
         setCurrentQindex(currentQindex + i);
         setSpeechText(rep.explConseq);
@@ -316,7 +349,6 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
       }
     } else { // S'il n'y a plus d'autres questions, le jeu est gagné
       await playMusic(require('../assets/Victoire_Jeu.mp3'), false);
-      await G.delay(3000);
       G.closeActivityWithResult(navigation, 'win', 'GameContextL1Activity');
     }
     NextYear();
@@ -333,7 +365,7 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
       setCurrentQindex(currentQindex + i);
       const newQuestion = Questions[currentQindex + i];
       setSpeechText(newQuestion.questionText);
-      setText1(newQuestion.caracter === 0 ? "Suivant" : newQuestion.rep1.repText + " " + G.formatNumber(newQuestion.rep1.price) + " C");
+      setText1(newQuestion.caracter === 0 ? "Suivant " + G.formatNumber(newQuestion.rep1.price) + " C" : newQuestion.rep1.repText + " " + G.formatNumber(newQuestion.rep1.price) + " C");
       setText2(newQuestion.rep2.repText + " " + G.formatNumber(newQuestion.rep2.price) + " C");
       setText3(newQuestion.rep3.repText + " " + G.formatNumber(newQuestion.rep3.price) + " C");
       setText4(newQuestion.rep4.repText + " " + G.formatNumber(newQuestion.rep4.price) + " C");
@@ -342,15 +374,23 @@ export default function GameL1Activity({ navigation }: G.NavigationProps) {
       setPos3(-newQuestion.rep3.price <= budget + income);
       setPos4(-newQuestion.rep4.price <= budget + income);
       setCaracter(newQuestion.caracter);
+      if (Questions[currentQindex].caracter === 0) {
+        if (budget <= 0) {
+          await playMusic(require('../assets/Défaite_la_honte.mp3'), false);
+          G.closeActivityWithResult(navigation, 'bankruptcy', 'GameContextL1Activity');
+        }
+      } else {
+        if (budget - newQuestion.rep1.price <= 0) {
+          await playMusic(require('../assets/Défaite_la_honte.mp3'), false);
+          G.closeActivityWithResult(navigation, 'bankruptcy', 'GameContextL1Activity');
+        }
+      }
     } else {// S'il n'y a plus d'autres questions, le jeu est gagné
       await playMusic(require('../assets/Victoire_Jeu.mp3'), false);
-      await G.delay(3000);
       G.closeActivityWithResult(navigation, 'win', 'GameContextL1Activity');
     }
-
     if ((year - 2026) % G.periode === 0 && happiness < 50) { //Si la jauge de satisfaction est inferieure à 50% à la fin d'une période, le jeu est perdu
       playMusic(require('../assets/Défaite_la_honte.mp3'), false).then(async () => {
-        await G.delay(3000);
         G.closeActivityWithResult(navigation, 'loss', 'GameContextL1Activity');
       });
     }

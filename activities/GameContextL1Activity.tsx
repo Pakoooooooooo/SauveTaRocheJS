@@ -1,8 +1,8 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Dimensions, Image } from 'react-native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useRoute } from '@react-navigation/native';
-
+import { useAudio} from '../model/AudioContext';
 type RootStackParamList = {
   Home: undefined;
   Game: undefined;
@@ -93,7 +93,7 @@ function ButtonBack({ navigation }: NavigationProps) {
 
 export default function GameContextL1Activity({ navigation }: NavigationProps) {
   const route = useRoute();
-  
+  const { playMusic, stopMusic } = useAudio();
   // Récupérer le résultat du jeu (avec assertion de type)
   const gameResult = (route.params as any)?.gameResult;
   if (gameResult==='win') {
@@ -106,6 +106,23 @@ export default function GameContextL1Activity({ navigation }: NavigationProps) {
     wins = 0;
   }
 
+useEffect(() => {
+    (async () => {
+      await stopMusic(); // couper la musique précédente si elle tourne encore
+
+      if (wins === -1) {
+        await playMusic(require('../assets/Défaite_la_honte.mp3'), false);
+      }
+
+      if (wins === -2) {
+        await playMusic(require('../assets/Défaite_la_honte.mp3'), false);
+      }
+
+      if (wins === 1) {
+        await playMusic(require('../assets/Victoire_Jeu.mp3'), false);
+      }
+    })();
+  }, [wins]);
   return (
     <View style={{ flex: 1 }}>
       {/* Bouton retour en premier, en dehors du conteneur principal */}
