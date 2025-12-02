@@ -56,8 +56,8 @@ SAUVETAROCHE est une application mobile interactive compatible <strong>Android</
 <p><strong>Défis :</strong></p>
 <div style="display: flex; justify-content: center; gap: 20px; margin-bottom: 15px;">
   <img src="Challenge.jpg" alt="Page Défis 1" width="250">
-  <img src="URL_IMAGE_PAGE_DEFIS_2" alt="Page Défi réussi" width="250">
-  <img src="URL_IMAGE_PAGE_DEFIS_3" alt="Page Défi échoué" width="250">
+  <img src="Défi_victoire" alt="Page Défi réussi" width="250">
+  <img src="Défi_défaite" alt="Page Défi échoué" width="250">
 </div>
 
 <p><strong>Données :</strong></p>
