@@ -16,7 +16,7 @@
 
 </div>
 
-## 📑 Table des matières
+##  Table des matières
 
 - [À propos](#-à-propos)
 - [Fonctionnalités principales](#-fonctionnalités-principales)
@@ -36,24 +36,24 @@
 
 ---
 
-## 📱 À propos
+##  À propos
 
 **SAUVETAROCHE** est une application mobile interactive développée pour sensibiliser le grand public aux enjeux de **l'érosion côtière** et de la **montée des eaux** liée au changement climatique.
 
 À travers un **jeu décisionnel**, des **défis quotidiens** et des **cartes prévisionnelles**, l'utilisateur découvre l'impact concret de ces phénomènes sur les zones côtières françaises, avec des données scientifiques réelles du **BRGM** (Bureau de Recherches Géologiques et Minières).
 
-### 🎯 Objectifs pédagogiques
+###  Objectifs pédagogiques
 
-- 📚 **Sensibiliser** aux conséquences du changement climatique sur le littoral
-- 🎮 **Apprendre** par le jeu, défi et la simulation
-- 🗺️ **Visualiser** les projections à 50, 100 et 200 ans
-- 💡 **Comprendre** l'importance des décisions politiques et environnementales
+-  **Sensibiliser** aux conséquences du changement climatique sur le littoral
+-  **Apprendre** par le jeu, défi et la simulation
+-  **Visualiser** les projections à 50, 100 et 200 ans
+-  **Comprendre** l'importance des décisions politiques et environnementales
 
 ---
 
-## ✨ Fonctionnalités principales
+##  Fonctionnalités principales
 
-### 🎮 Mode Jeu
+###  Mode Jeu
 
 - **Jeu décisionnel interactif** où vous incarnez un gestionnaire de circonscription
 - **Deux niveaux de difficulté** (Niveau 2 en développement)
@@ -62,14 +62,14 @@
 - **Jauge de satisfaction** pour mesurer l'acceptabilité de vos choix et le ressenti de la population que vous administrez
 - **Questions-réponses** avec explications scientifiques après chaque décision
 
-### 🏆 Défis quotidiens
+###  Défis quotidiens
 
 - **Quiz thématiques** sur l'érosion côtière et le changement climatique aisin que les politiques associées
 - **4 réponses possibles** avec correction
 - **Feedback immédiat** : victoire ou défaite avec explications
 - **Questions basées sur des données réelles**
 
-### 🗺️ Données prévisionnelles
+###  Données prévisionnelles
 
 Visualisez l'impact de la montée des eaux avec **4 cartes interactives** :
 
@@ -87,7 +87,7 @@ Visualisez l'impact de la montée des eaux avec **4 cartes interactives** :
 
 ---
 
-## 🎮 Captures d'écran
+##  Captures d'écran
 
 <p align="center">
   <img src="Page principale.jpg" alt="Page principale" width="250" />
@@ -103,7 +103,7 @@ Visualisez l'impact de la montée des eaux avec **4 cartes interactives** :
 
 <br>
 
-### 🏆 Module Défis
+###  Module Défis
 
 <p align="center">
   <img src="Challenge.jpg" alt="Page Défis" width="240" />
@@ -116,7 +116,7 @@ Visualisez l'impact de la montée des eaux avec **4 cartes interactives** :
 
 <br>
 
-### 🗺️ Module Données
+###  Module Données
 
 <p align="center">
   <img src="Data50.jpg" alt="Projection +50 ans" width="240" />
@@ -129,7 +129,7 @@ Visualisez l'impact de la montée des eaux avec **4 cartes interactives** :
 
 ---
 
-## 🛠️ Technologies utilisées
+##  Technologies utilisées
 
 ### Frontend
 - **React Native 0.74** - Framework mobile cross-platform
@@ -156,7 +156,7 @@ Visualisez l'impact de la montée des eaux avec **4 cartes interactives** :
 
 ---
 
-## 📋 Prérequis
+##  Prérequis
 
 Avant de commencer, assurez-vous d'avoir installé :
 
@@ -182,7 +182,7 @@ Avant de commencer, assurez-vous d'avoir installé :
 
 ---
 
-## 🚀 Installation
+##  Installation
 
 ### Étape 1 : Cloner le projet
 
@@ -349,7 +349,7 @@ SauveTaRoche/
 
 ---
 
-## 🗺️ Données géographiques
+##  Données géographiques
 
 ### Source des données
 
@@ -372,7 +372,7 @@ Les **zones inondables** affichées dans l'application proviennent du **BRGM** (
 
 ---
 
-## 💡 Utilisation
+##  Utilisation
 
 ### Navigation dans l'application
 
@@ -407,7 +407,7 @@ Les **zones inondables** affichées dans l'application proviennent du **BRGM** (
 
 ---
 
-## 🐛 Dépannage
+##  Dépannage
 
 ### Problème : L'application ne se lance pas
 
@@ -464,7 +464,7 @@ latitude: 6179406.5  // ❌ Mauvais système
 
 ---
 
-## 🤝 Contribution
+##  Contribution
 
 Les contributions sont les bienvenues ! Voici comment participer :
 
@@ -510,14 +510,14 @@ Ce projet a été développé par l'**équipe CAILLOUX** dans le cadre d'un proj
 | Membre | Rôle | Contact |
 |--------|------|---------|
 | **Pako Justin** | Développeur Full-Stack | [GitHub](https://github.com/Pakoooooooooo) |
-| **Jamgotchian Clémence** |  Designer UX/UI| [GitHub](https://github.com/clemencej) |
-| **Berry Coline** | Designer UX/UI | [GitHub](https://github.com/colineberry) |
+| **Jamgotchian Clémence** |  Designer UX/UI| [GitHub](https://github.com/cj542) |
+| **Berry Coline** | Designer UX/UI | [GitHub](https://github.com/berrycoline) |
 | **Kouassi Emmanuel** | Développeur Back-End / Données | [GitHub](https://github.com/Rachidjunior) |
-| **Guillot Flavien** | Développeur Back-End / Son | [GitHub](https://github.com/flang) |
+| **Guillot Flavien** | Développeur Back-End / Son | [GitHub](https://github.com/flan44) |
 
 ---
 
-## 📝 Licence
+##  Licence
 
 Ce projet est sous licence **MIT** - voir le fichier [LICENSE](LICENSE) pour plus de détails.
 
@@ -533,7 +533,7 @@ Sous conditions de :
 
 ---
 
-## 🙏 Remerciements
+##  Remerciements
 
 Nous tenons à remercier chaleureusement :
 
@@ -559,15 +559,15 @@ Nous tenons à remercier chaleureusement :
 
 ---
 
-## 📞 Contact & Documentation
+##  Contact & Documentation
 
-### 📚 Documentation complète
+###  Documentation complète
 
 Accédez à notre documentation détaillée (User Stories, Personas, Enquêtes de terrain, Blog, État de l'art) :
 
 🔗 **[Documentation Google Drive](https://drive.google.com/drive/u/2/folders/1-6Zyo5Eqjw6-DlHBN8UDSrhlZlRopb-F)**
 
-### 🐛 Signaler un bug
+###  Signaler un bug
 
 Ouvrez une [Issue sur GitHub](https://github.com/Pakoooooooooo/SauveTaRoche/issues) en décrivant :
 - Le comportement observé
@@ -575,14 +575,14 @@ Ouvrez une [Issue sur GitHub](https://github.com/Pakoooooooooo/SauveTaRoche/issu
 - Les étapes pour reproduire le bug
 - Votre environnement (OS, version de Node.js, etc.)
 
-### 💬 Nous contacter
+###  Nous contacter
 
 - **Email** : emmanuelrjkouassi1908@example.com
 - **GitHub** : https://github.com/Pakoooooooooo/SauveTaRoche
 
 ---
 
-## 🗺️ Roadmap
+##  Roadmap
 
 ### ✅ Version 1.0 (Actuelle)
 
@@ -591,14 +591,10 @@ Ouvrez une [Issue sur GitHub](https://github.com/Pakoooooooooo/SauveTaRoche/issu
 - [x] Cartes prévisionnelles (Actuel, +50, +100, +200 ans)
 - [x] Données BRGM pour toute la France
 
-### 🚧 Version 1.1 (En cours)
+### 🚧 Version 2.0 (Futur)
 
 - [ ] Jeu niveau 2 (complexité augmentée)
 - [ ] Sauvegarde de la progression
-- [ ] Système de scores et classements
-
-### 🔮 Version 2.0 (Futur)
-
 - [ ] Nouveaux défis quotidiens
 - [ ] Ajout de nouvelles régions côtières (DOM-TOM)
 - [ ] Animations 3D des montées des eaux
