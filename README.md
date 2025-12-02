@@ -599,7 +599,6 @@ Ouvrez une [Issue sur GitHub](https://github.com/Pakoooooooooo/SauveTaRoche/issu
 
 ### 🔮 Version 2.0 (Futur)
 
-- [ ] Mode multijoueur
 - [ ] Nouveaux défis quotidiens
 - [ ] Ajout de nouvelles régions côtières (DOM-TOM)
 - [ ] Animations 3D des montées des eaux
