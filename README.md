@@ -353,7 +353,7 @@ SauveTaRoche/
 
 ### Source des données
 
-Les **zones inondables** affichées dans l'application proviennent du **BRGM** (Bureau de Recherches Géologiques et Minières), organisme public français de référence sur les géosciences.
+Les **zones inondables** affichées dans l'application proviennent de données réelles du **BRGM** (Bureau de Recherches Géologiques et Minières), organisme public français de référence sur les géosciences. Elles sont accéssibles via le lien : https://sealevelrise.brgm.fr/slr/#lng=2.76492;lat=46.67299;zoom=4;level=3.5;layer=0
 
 ### Traitement des données
 
